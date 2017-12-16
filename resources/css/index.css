@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Barlow+Condensed:400,500,600,700');
+
+* {
+    margin: 0;
+    padding: 0;
+    float: none;
+}
+
+body {
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    overflow-x:hidden;
+}
+
+h1 {
+    font-weight: 700;
+}
+
+.header-nav {
+    position: absolute;
+    left: 25%;
+    z-index: 1;
+    max-width: 50vw;
+}
+
+.header-pageName {
+    display: inline-block;
+}
+
+.header-loginRegister {
+    display: inline-block;
+    padding-top: 35px;
+    float: right;
+    position: relative;
+}
+
+nav {
+    max-width: 50vw;
+    z-index: 1;
+}
+
+.navbar {
+    background-color: chocolate;
+    border-radius: 0;
+}
+
+.navbar-list {
+    list-style-type: none;
+    padding: 1px;
+}
+
+.navbar-list-element {
+    display: inline;
+    float: left;
+    border-right: 1px solid coral;
+}
+
+.navbar-list-element-link {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+
+.navbar-list-element-link:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.intro {
+    padding: 350px;
+    text-align: center;
+    background: url("../images/index-background.jpeg") no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.intro-text {
+    display: inline-block;
+    font-size: 50px;
+}
+
+.intro-btn {
+    display: block;
+}
+
+.intro-btn-text {
+    background-color: chocolate;
+    padding: 5px;
+    font-size: 40px;
+    font-weight: 700;
+}
