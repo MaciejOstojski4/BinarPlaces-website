@@ -85,9 +85,25 @@ nav {
     display: block;
 }
 
+.intro-btn:hover {
+    color: white;
+}
+
 .intro-btn-text {
     background-color: chocolate;
     padding: 5px;
     font-size: 40px;
     font-weight: 700;
+}
+
+.place-card {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid chocolate;
+}
+
+.place-card:hover {
+    background-color: chocolate;
+    color: white;
 }
