@@ -8,6 +8,11 @@ $(function() {
 
     var categories = [];
 
+    var init = function() {
+        var date = new Date();
+        $("#copyrightInfo").text("Copyright " + date.getFullYear());
+    };
+
     var fetchCategories = function() {
         $.ajax({
             type: "GET",
@@ -133,5 +138,6 @@ $(function() {
         });
     };
 
+    init();
     fetchCategories();
 });
