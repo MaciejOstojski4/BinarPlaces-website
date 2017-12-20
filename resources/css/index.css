@@ -109,8 +109,40 @@ nav {
     color: white;
 }
 
+.content-place-cards {
+    border: 1px solid chocolate;
+    margin-bottom: 30px;
+}
+
 .modal-binar-places {
     background-color: chocolate;
+}
+
+.content-tabs {
+    margin-top: 30px;
+    border: none;
+}
+
+.content-tabs-item {
+    border: none;
+    margin-right: 2px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.content-tabs-item > .content-tabs-item-link {
+    color: chocolate;
+}
+
+.content-tabs-item-active > .content-tabs-item-link {
+    color: white;
+    background-color: chocolate;
+}
+
+.content-tabs-item-link:hover {
+    background-color: chocolate !important;
+    border: 1px solid chocolate !important;
+    color: white;
 }
 
 .footer {
