@@ -11,6 +11,8 @@ $(function() {
     var init = function() {
         var date = new Date();
         $("#copyrightInfo").text("Copyright " + date.getFullYear());
+
+        fetchCategories();
     };
 
     var fetchCategories = function() {
@@ -31,6 +33,8 @@ $(function() {
     };
 
     var addCategoriesToNavbar = function($navbar, categoryList) {
+        const allPlacesCategory = '<li><a href="#main-content"><span>-1</span>Wszystkie</a></li>';
+        $navbar.append(allPlacesCategory);
         categoryList.forEach(function(category) {
             const liElem = '<li><a href="#main-content"><span>'+category.id+'</span>'+ category.name +'</a></li>';
             $navbar.append(liElem);
@@ -66,21 +70,21 @@ $(function() {
     };
 
     var prepareCardsWithPlaces = function($placeContainer, allPlaces, categoryID) {
-        const category = getCategoryById(categoryID);
-        var places = getPlacesByCategoryId(allPlaces, categoryID);
+        var places = getPlacesByCategory(allPlaces, categoryID);
         var $row;
         places.forEach(function(place, index) {
             if((index % CARDS_IN_ROW) === 0) {
-                $row = createRowForPlaces($placeContainer);
+                $row = createRowForCard($placeContainer);
             }
-            const $column = createColumnForPlace($row);
+            const $column = createColumnForCard($row);
             const $placeCard = createPlaceCard($column);
-            addPlaceInfoToCard($placeCard, place, category[0]);
+            addPlaceInfoToCard($placeCard, place);
         });
     };
 
-    var addPlaceInfoToCard = function($card, place, category) {
-        const placeImgSrc = resolveCardImgSrc(category.id);
+    var addPlaceInfoToCard = function($card, place) {
+        const placeImgSrc = resolveCardImgSrc(place.category_id);
+        const category = getCategoryById(place.category_id);
         $("<img>", {src: placeImgSrc, width: "100px", height: "100px"})
             .addClass("img-circle").appendTo($card);
         $("<h2>").text(place.name).appendTo($card);
@@ -104,11 +108,11 @@ $(function() {
         }
     };
 
-    var createRowForPlaces = function($container) {
+    var createRowForCard = function($container) {
         return $("<div/>").addClass("row").appendTo($container);
     };
 
-    var createColumnForPlace = function($row) {
+    var createColumnForCard = function($row) {
         return $("<div>").addClass("col-md-4").appendTo($row);
     };
 
@@ -122,7 +126,10 @@ $(function() {
         return $placeContainer;
     };
 
-    var getPlacesByCategoryId = function(places, categoryID) {
+    var getPlacesByCategory = function(places, categoryID) {
+        if(categoryID == -1) {
+            return places;
+        }
         return places.filter(function(place) {
             if(place.category_id == categoryID) {
                 return place;
@@ -131,13 +138,13 @@ $(function() {
     };
 
     var getCategoryById = function(categoryID) {
-        return categories.filter(function(cat) {
+        const category = categories.filter(function(cat) {
             if(cat.id == categoryID){
                 return cat;
             }
         });
+        return category[0];
     };
 
     init();
-    fetchCategories();
 });
