@@ -145,6 +145,10 @@ nav {
     color: white;
 }
 
+.content-loader {
+    padding: 20px;
+}
+
 .footer {
     background-color: chocolate;
     padding: 30px;

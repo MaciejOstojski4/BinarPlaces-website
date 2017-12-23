@@ -1,18 +1,28 @@
 $(function() {
 
     const API_URL = "http://www.mocky.io/v2/";
-    const CATEGORIES_PATH = "5a35174c2f00002a0ce251d2";
+    const CATEGORIES_PATH = "5a3e7f602f0000b714171398";
     const PLACES_PATH = "5a3786243200008600eb6963";
 
     const CARDS_IN_ROW = 3;
+    const CATEGORIES_IN_NAVBAR = 5;
 
     var categories = [];
 
     var init = function() {
+        setDateInFooter();
+        hideElementOnStart();
+        fetchCategories();
+    };
+
+    var setDateInFooter = function() {
         var date = new Date();
         $("#copyrightInfo").text("Copyright " + date.getFullYear());
+    };
 
-        fetchCategories();
+    var hideElementOnStart = function() {
+        $("#content").hide();
+        $("#loader").hide();
     };
 
     var fetchCategories = function() {
@@ -20,7 +30,7 @@ $(function() {
             type: "GET",
             url: API_URL + CATEGORIES_PATH,
             success: function(res) {
-                categories = res;
+                categories = res.sort(sortCategoriesByCount);
                 const $navbar = $(".navbar-list");
                 addCategoriesToNavbar($navbar, categories);
                 addCssToNavbarElem($navbar);
@@ -32,13 +42,24 @@ $(function() {
         })
     };
 
+    var sortCategoriesByCount = function(first, second) {
+        if(first.count > second.count) {
+            return -1;
+        } else if(first.count < second.count) {
+            return 1;
+        } else {
+            return 0;
+        }
+    };
+
     var addCategoriesToNavbar = function($navbar, categoryList) {
         const allPlacesCategory = '<li><a href="#main-content"><span>-1</span>Wszystkie</a></li>';
         $navbar.append(allPlacesCategory);
-        categoryList.forEach(function(category) {
+        for(var i=0; i<CATEGORIES_IN_NAVBAR; i++) {
+            const category = categories[i];
             const liElem = '<li><a href="#main-content"><span>'+category.id+'</span>'+ category.name +'</a></li>';
             $navbar.append(liElem);
-        });
+        }
     };
 
     var addCssToNavbarElem = function($navbar) {
@@ -50,6 +71,7 @@ $(function() {
     var addOnClickToNavbarElem = function($navbar) {
         $navbar.find("li").on("click", "*", function(e) {
             e.preventDefault();
+            $("#loader").show();
             fetchPlaces($(this).children().text());
             window.location = "#main-content";
         })
@@ -62,6 +84,8 @@ $(function() {
             url: API_URL + PLACES_PATH,
             success: function(res) {
                 prepareCardsWithPlaces($placesContainer, res, categoryID);
+                $("#loader").hide();
+                $("#content").show();
             },
             error: function(error) {
               console.log(error);

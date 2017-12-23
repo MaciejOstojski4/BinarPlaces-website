@@ -40,22 +40,27 @@
 </section>
 
 <div id="main-content" class="container" style="color: black">
-    <div class="row">
-        <div class="col-md-8">
-            <ul class="nav nav-tabs content-tabs">
-                <li class="content-tabs-item content-tabs-item-active"><a class="content-tabs-item-link"href="#">Restauracje</a></li>
-                <li class="content-tabs-item"><a class="content-tabs-item-link" href="#">Galeria</a></li>
-                <li class="content-tabs-item"><a class="content-tabs-item-link" href="#">Mapa</a></li>
-            </ul>
-        </div>
+    <div id="loader" class="row text-center content-loader">
+        <img src="images/loader.gif">
     </div>
-    <section class="row">
-        <section id="place-card-container" class="col-md-8 content-place-cards">
+    <div id="content">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="nav nav-tabs content-tabs">
+                    <li class="content-tabs-item content-tabs-item-active"><a class="content-tabs-item-link"href="#">Restauracje</a></li>
+                    <li class="content-tabs-item"><a class="content-tabs-item-link" href="#">Galeria</a></li>
+                    <li class="content-tabs-item"><a class="content-tabs-item-link" href="#">Mapa</a></li>
+                </ul>
+            </div>
+        </div>
+        <section class="row">
+            <section id="place-card-container" class="col-md-8 content-place-cards">
+            </section>
+            <aside class="col-md-4">
+                Aside section
+            </aside>
         </section>
-        <aside class="col-md-4">
-            Aside section
-        </aside>
-    </section>
+    </div>
 </div>
 
 <div class="container-fluid text-center">
