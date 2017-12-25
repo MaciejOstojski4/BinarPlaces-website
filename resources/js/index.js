@@ -4,6 +4,8 @@ $(function() {
     const CATEGORIES_PATH = "5a3e7f602f0000b714171398";
     const PLACES_PATH = "5a3786243200008600eb6963";
 
+    const MAIN_CONTENT_ANCHOR = "#main-content";
+
     const CARDS_IN_ROW = 3;
     const CATEGORIES_IN_NAVBAR = 5;
 
@@ -32,7 +34,7 @@ $(function() {
             success: function(res) {
                 categories = res.sort(sortCategoriesByCount);
                 const $navbar = $(".navbar-list");
-                addCategoriesToNavbar($navbar, categories);
+                addCategoriesToNavbar($navbar);
                 addCssToNavbarElem($navbar);
                 addOnClickToNavbarElem($navbar);
             },
@@ -52,13 +54,33 @@ $(function() {
         }
     };
 
-    var addCategoriesToNavbar = function($navbar, categoryList) {
-        const allPlacesCategory = '<li><a href="#main-content"><span>-1</span>Wszystkie</a></li>';
+    var addCategoriesToNavbar = function($navbar) {
+        addDefaultCategory($navbar);
+        addMostPopularCategory($navbar);
+        addCategoryInDropdown($navbar);
+    };
+
+    var addDefaultCategory = function($navbar) {
+        const allPlacesCategory = '<li><a href=MAIN_CONTENT_ANCHOR><span>-1</span>Wszystkie</a></li>';
         $navbar.append(allPlacesCategory);
+    };
+
+    var addMostPopularCategory = function($navbar) {
         for(var i=0; i<CATEGORIES_IN_NAVBAR; i++) {
             const category = categories[i];
-            const liElem = '<li><a href="#main-content"><span>'+category.id+'</span>'+ category.name +'</a></li>';
+            const liElem = '<li><a href=MAIN_CONTENT_ANCHOR><span>'+category.id+'</span>'+ category.name +'</a></li>';
             $navbar.append(liElem);
+        }
+    };
+
+    var addCategoryInDropdown = function($navbar) {
+        const $selectLi = $('<li class="dropdown show"><a href="#" data-toggle="dropdown">Inne</a></li>');
+        $navbar.append($selectLi);
+        const $dropDownList = $("<div>").addClass("dropdown-menu navbar-dropdown-category").appendTo($selectLi);
+        for(var j=CATEGORIES_IN_NAVBAR; j<categories.length; j++) {
+            const category = categories[j];
+            const categoryOp = '<a href="MAIN_CONTENT_ANCHOR"><span>'+category.id+'</span>'+ category.name +'</a>';
+            $dropDownList.append(categoryOp);
         }
     };
 
@@ -69,7 +91,7 @@ $(function() {
     };
 
     var addOnClickToNavbarElem = function($navbar) {
-        $navbar.find("li").on("click", "*", function(e) {
+        $navbar.find("li:not(last)").on("click", "*", function(e) {
             e.preventDefault();
             $("#loader").show();
             fetchPlaces($(this).children().text());
