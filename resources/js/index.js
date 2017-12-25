@@ -54,6 +54,16 @@ $(function() {
         }
     };
 
+    var sortPlacesByRate = function(first, second) {
+        if(first.location.rate > second.location.rate) {
+            return -1;
+        } else if(first.location.rate < second.location.rate) {
+            return 1;
+        } else {
+            return 0;
+        }
+    };
+
     var addCategoriesToNavbar = function($navbar) {
         addDefaultCategory($navbar);
         addMostPopularCategory($navbar);
@@ -105,6 +115,7 @@ $(function() {
             type: "GET",
             url: API_URL + PLACES_PATH,
             success: function(res) {
+                const places = res.sort(sortPlacesByRate);
                 prepareCardsWithPlaces($placesContainer, res, categoryID);
                 $("#loader").hide();
                 $("#content").show();
