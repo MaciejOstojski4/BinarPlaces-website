@@ -147,7 +147,19 @@ $(function() {
         $("<h2>").text(place.name).appendTo($card);
         $("<small>").text(category.name).appendTo($card);
         $("<h4>").text(place.location.address).appendTo($card);
-        $("<h4>").text("Ocena: " + place.location.rate).appendTo($card);
+        addRateHolder($card, place);
+    };
+
+    var addRateHolder = function($card, place) {
+        const $rateHolder= $('<select id="rates">').appendTo($card);
+        for(var i=0; i<5; i++) {
+            $('<option value=' + (i+1) + '>').text(i+1).appendTo($rateHolder);
+        }
+        $rateHolder.barrating({
+            theme: 'fontawesome-stars-o',
+            initialRating: place.location.rate,
+            readonly: true
+        });
     };
 
     var resolveCardImgSrc = function(categoryID) {

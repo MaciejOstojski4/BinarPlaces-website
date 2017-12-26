@@ -113,10 +113,19 @@ nav {
     color: white;
 }
 
+.place-card:hover .br-theme-fontawesome-stars-o .br-widget a::after {
+    background-color: chocolate;
+    color: white !important;
+}
+
 .content-place-cards {
     border: 1px solid chocolate;
     margin-bottom: 30px;
 }
+
+.br-theme-fontawesome-stars-o .br-widget a::after {
+     color: chocolate !important;
+ }
 
 .modal-binar-places {
     background-color: chocolate;
