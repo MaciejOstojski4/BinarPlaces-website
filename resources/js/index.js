@@ -7,27 +7,24 @@ let apiClient = (function() {
     const PLACE_REVIEWS = "5a425ea5300000f21a709ded";
 
     let fetchCategories = async function() {
-        const result = await $.ajax({
+        return await $.ajax({
             type: "GET",
             url: API_URL + CATEGORIES_PATH
         });
-        return result;
     };
 
     let fetchPlaces = async function(categoryID) {
-        const result = await $.ajax({
+        return await $.ajax({
             type: "GET",
             url: API_URL + PLACES_PATH,
         });
-        return result
     };
 
     let fetchPlaceReviews = async function(placeID) {
-        const result = await $.ajax({
+        return await $.ajax({
             type: "GET",
             url: API_URL + PLACE_REVIEWS,
         });
-        return result;
     };
 
     return {
@@ -106,9 +103,9 @@ let placesContainer = (function() {
     };
 
     let _displayPlaceReviews = function(event) {
-        apiClient.fetchPlaceReviews(1).then(data => {
-            console.log(data);
-        })
+        apiClient.fetchPlaceReviews(1)
+            .then(data => console.log(data))
+            .catch(error => console.log(error))
     };
 
     let _resolveCardImgSrc = function(categoryID) {
@@ -196,18 +193,22 @@ let navbar = (function() {
         $navbar.find("span").addClass("hidden");
     };
 
+    let _displayPlaces = function(data, categoryID) {
+        var $placesContainer = placesContainer.removeCardsWithPlaces();
+        const places = data.sort(placesContainer.sortPlacesByRate);
+        placesContainer.prepareCardsWithPlaces($placesContainer, places, categoryID);
+        $("#loader").hide();
+        $("#content").show();
+    };
+
     let _addOnClickToNavbarElem = function($navbar) {
         $navbar.find("li:not(last)").click(function(e) {
             e.preventDefault();
             $("#loader").show();
             const categoryID = $(this).find("span").text();
-            apiClient.fetchPlaces(categoryID).then(data => {
-                var $placesContainer = placesContainer.removeCardsWithPlaces();
-                const places = data.sort(placesContainer.sortPlacesByRate);
-                placesContainer.prepareCardsWithPlaces($placesContainer, places, categoryID);
-                $("#loader").hide();
-                $("#content").show();
-            });
+            apiClient.fetchPlaces(categoryID)
+                .then(data => _displayPlaces(data, categoryID))
+                .catch(error => console.log(error));
             window.location = "#main-content";
         })
     };
@@ -262,7 +263,9 @@ let app = (function() {
     let init = function() {
         _setDateInFooter();
         _hideElementOnStart();
-        apiClient.fetchCategories().then(data => navbar.prepareNavbar(data))
+        apiClient.fetchCategories()
+            .then(data => navbar.prepareNavbar(data))
+            .catch(error => console.log(error));
     };
 
     return {
