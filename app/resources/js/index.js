@@ -111,15 +111,15 @@ let placesContainer = (function() {
     let _resolveCardImgSrc = function(categoryID) {
         switch(categoryID) {
             case 1:
-                return "images/pizza-food.jpeg";
+                return "resources/images/pizza-food.jpeg";
             case 2:
-                return "images/chinese-food.jpeg";
+                return "resources/images/chinese-food.jpeg";
             case 3:
-                return "images/indian-food.jpeg";
+                return "resources/images/indian-food.jpeg";
             case 4:
-                return "images/cafe-food.jpeg";
+                return "resources/images/cafe-food.jpeg";
             default:
-                return "images/default-food.jpeg";
+                return "resources/images/default-food.jpeg";
         }
     };
 

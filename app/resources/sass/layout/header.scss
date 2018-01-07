@@ -1,0 +1,16 @@
+.header-nav {
+  position: absolute;
+  left: 25%;
+  z-index: 1;
+  max-width: 50vw;
+}
+
+.header-pageName {
+  display: inline-block;
+}
+
+.header-loginRegister {
+  display: inline-block;
+  padding-top: 35px;
+  float: right;
+}

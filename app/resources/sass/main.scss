@@ -1,0 +1,21 @@
+@import "base/reset";
+@import "components/modal.scss";
+@import "components/placeCard.scss";
+@import "components/navbar.scss";
+@import "components/loader.scss";
+@import "layout/footer.scss";
+@import "layout/header.scss";
+@import "layout/intro.scss";
+@import "layout/tabs.scss";
+
+@import url('https://fonts.googleapis.com/css?family=Barlow+Condensed:400,500,600,700');
+
+body {
+  color: white;
+  font-family: 'Barlow Condensed', sans-serif;
+  overflow-x:hidden;
+}
+
+h1 {
+  font-weight: 700;
+}

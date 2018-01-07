@@ -1,0 +1,27 @@
+.intro {
+  padding: 350px;
+  text-align: center;
+  background: url("../images/index-background.jpeg") no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.intro-text {
+  display: inline-block;
+  font-size: 50px;
+}
+
+.intro-btn {
+  display: block;
+}
+
+.intro-btn:hover {
+  color: white;
+}
+
+.intro-btn-text {
+  background-color: chocolate;
+  padding: 5px;
+  font-size: 40px;
+  font-weight: 700;
+}

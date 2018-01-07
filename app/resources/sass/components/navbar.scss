@@ -1,0 +1,37 @@
+nav {
+  max-width: 50vw;
+  z-index: 1;
+}
+
+.navbar {
+  background-color: chocolate;
+  border-radius: 0;
+}
+
+.navbar-list {
+  list-style-type: none;
+  padding: 1px;
+}
+
+.navbar-list-element {
+  display: inline;
+  float: left;
+  border-right: 1px solid coral;
+}
+
+.navbar-list-element-link {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+.navbar-list-element-link:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.navbar-dropdown-category {
+  background-color: chocolate;
+}
