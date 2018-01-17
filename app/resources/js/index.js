@@ -1,29 +1,29 @@
-let apiClient = (function() {
+const apiClient = (function() {
 
     const API_URL = "http://www.mocky.io/v2/";
 
-    const CATEGORIES_PATH = "5a3e7f602f0000b714171398";
-    const PLACES_PATH = "5a3786243200008600eb6963";
-    const PLACE_REVIEWS = "5a425ea5300000f21a709ded";
+    const CATEGORIES_PATH = "5a3e7f602f0000b714171398",
+        PLACES_PATH = "5a3786243200008600eb6963",
+        PLACE_REVIEWS = "5a425ea5300000f21a709ded";
 
-    let fetchCategories = async function() {
-        return await $.ajax({
+    const fetchCategories = function() {
+        return $.ajax({
             type: "GET",
             url: API_URL + CATEGORIES_PATH
         });
     };
 
-    let fetchPlaces = async function(categoryID) {
-        return await $.ajax({
+    const fetchPlaces =  function(categoryID) {
+        return $.ajax({
             type: "GET",
-            url: API_URL + PLACES_PATH,
+            url: API_URL + PLACES_PATH
         });
     };
 
-    let fetchPlaceReviews = async function(placeID) {
-        return await $.ajax({
+    const fetchPlaceReviews =  function(placeID) {
+        return $.ajax({
             type: "GET",
-            url: API_URL + PLACE_REVIEWS,
+            url: API_URL + PLACE_REVIEWS
         });
     };
 
@@ -34,27 +34,27 @@ let apiClient = (function() {
     }
 })();
 
-let placesContainer = (function() {
+const placesContainer = (function() {
 
-    let CARDS_IN_ROW = 3;
+    const CARDS_IN_ROW = 3;
 
-    let categories = [];
+    var categories = [];
 
-    let setCategories = function(data) {
+    const setCategories = function(data) {
         categories = data;
     };
 
-    let getCategories = function() {
+    const getCategories = function() {
         return categories;
     };
 
-    let removeCardsWithPlaces = function() {
-        let $placeContainer = $("#place-card-container");
+    const removeCardsWithPlaces = function() {
+        var $placeContainer = $("#place-card-container");
         $placeContainer.children().remove();
         return $placeContainer;
     };
 
-    let sortPlacesByRate = function(first, second) {
+    const sortPlacesByRate = function(first, second) {
         if(first.location.rate > second.location.rate) {
             return -1;
         } else if(first.location.rate < second.location.rate) {
@@ -64,34 +64,34 @@ let placesContainer = (function() {
         }
     };
 
-    let prepareCardsWithPlaces = function($placeContainer, allPlaces, categoryID) {
-        let places = _getPlacesByCategory(allPlaces, categoryID);
-        let $row;
+    const prepareCardsWithPlaces = function($placeContainer, allPlaces, categoryID) {
+        var places = getPlacesByCategory(allPlaces, categoryID);
+        var $row;
         places.forEach(function(place, index) {
             if((index % CARDS_IN_ROW) === 0) {
-                $row = _createRowForCard($placeContainer);
+                $row = createRowForCard($placeContainer);
             }
-            const $column = _createColumnForCard($row);
-            const $placeCard = _createPlaceCard($column);
-            _addPlaceInfoToCard($placeCard, place);
+            const $column = createColumnForCard($row);
+            const $placeCard = createPlaceCard($column);
+            addPlaceInfoToCard($placeCard, place);
         });
     };
 
-    let _addPlaceInfoToCard = function($card, place) {
-        const placeImgSrc = _resolveCardImgSrc(place.category_id);
-        const category = _getCategoryById(place.category_id);
+    const addPlaceInfoToCard = function($card, place) {
+        const placeImgSrc = resolveCardImgSrc(place.category_id);
+        const category = getCategoryById(place.category_id);
         $("<img>", {src: placeImgSrc, width: "100px", height: "100px"})
             .addClass("img-circle").appendTo($card);
         $("<h2>").text(place.name).appendTo($card);
         $("<small>").text(category.name).appendTo($card);
         $("<h4>").text(place.location.address).appendTo($card);
-        _addRateHolder($card, place);
+        addRateHolder($card, place);
     };
 
-    let _addRateHolder = function($card, place) {
+    const addRateHolder = function($card, place) {
         const $rateHolder = $('<div data-toggle="modal" data-target="#ratesModal">').appendTo($card);
         const $rates= $('<select id="rates">').appendTo($rateHolder);
-        for(let i=0; i<5; i++) {
+        for(var i=0; i<5; i++) {
             $('<option value=' + (i+1) + '>').text(i+1).appendTo($rates);
         }
         $rates.barrating({
@@ -99,16 +99,20 @@ let placesContainer = (function() {
             initialRating: place.location.rate,
             readonly: true
         });
-        $rateHolder.click(_displayPlaceReviews);
+        $rateHolder.click(displayPlaceReviews);
     };
 
-    let _displayPlaceReviews = function(event) {
+    const displayPlaceReviews = function(event) {
         apiClient.fetchPlaceReviews(1)
-            .then(data => console.log(data))
-            .catch(error => console.log(error))
+            .then(function(data) {
+                console.log(data)
+            })
+            .catch(function(error) {
+                console.log(error)
+            });
     };
 
-    let _resolveCardImgSrc = function(categoryID) {
+    const resolveCardImgSrc = function(categoryID) {
         switch(categoryID) {
             case 1:
                 return "resources/images/pizza-food.jpeg";
@@ -123,32 +127,32 @@ let placesContainer = (function() {
         }
     };
 
-    let _createRowForCard = function($container) {
+    const createRowForCard = function($container) {
         return $("<div/>").addClass("row").appendTo($container);
     };
 
-    let _createColumnForCard = function($row) {
+    const createColumnForCard = function($row) {
         return $("<div>").addClass("col-md-4").appendTo($row);
     };
 
-    let _createPlaceCard = function($column) {
+    const createPlaceCard = function($column) {
         return $("<div>").addClass("place-card text-center").appendTo($column);
     };
 
-    let _getPlacesByCategory = function(places, categoryID) {
-        if(categoryID == -1) {
+    const getPlacesByCategory = function(places, categoryID) {
+        if(categoryID === -1) {
             return places;
         }
         return places.filter(function(place) {
-            if(place.category_id == categoryID) {
+            if(place.category_id === categoryID) {
                 return place;
             }
         });
     };
 
-    let _getCategoryById = function(categoryID) {
+    const getCategoryById = function(categoryID) {
         const category = categories.filter(function(c) {
-            if(c.id == categoryID){
+            if(c.id === categoryID){
                 return c;
             }
         });
@@ -164,36 +168,36 @@ let placesContainer = (function() {
     }
 })();
 
-let navbar = (function() {
+const navbar = (function() {
 
-    let CATEGORIES_IN_NAVBAR = 5;
+    const CATEGORIES_IN_NAVBAR = 5;
 
-    let _addCategoriesToNavbar = function($navbar) {
-        _addDefaultCategory($navbar);
-        _addMostPopularCategory($navbar);
-        _addCategoryInDropdown($navbar);
+    const addCategoriesToNavbar = function($navbar) {
+        addDefaultCategory($navbar);
+        addMostPopularCategory($navbar);
+        addCategoryInDropdown($navbar);
     };
 
-    let _addDefaultCategory = function($navbar) {
+    const addDefaultCategory = function($navbar) {
         const allPlacesCategory = '<li><a href=MAIN_CONTENT_ANCHOR><span>-1</span>Wszystkie</a></li>';
         $navbar.append(allPlacesCategory);
     };
 
-    let _addMostPopularCategory = function($navbar) {
-        for(let i=0; i<CATEGORIES_IN_NAVBAR; i++) {
+    const addMostPopularCategory = function($navbar) {
+        for(var i=0; i<CATEGORIES_IN_NAVBAR; i++) {
             const category = placesContainer.getCategories()[i];
             const liElem = '<li><a href=MAIN_CONTENT_ANCHOR><span>'+category.id+'</span>'+ category.name +'</a></li>';
             $navbar.append(liElem);
         }
     };
 
-    let _addCssToNavbarElem = function($navbar) {
+    const addCssToNavbarElem = function($navbar) {
         $navbar.children().addClass("navbar-list-element");
         $navbar.find("a").addClass("navbar-list-element-link");
         $navbar.find("span").addClass("hidden");
     };
 
-    let _displayPlaces = function(data, categoryID) {
+    const displayPlaces = function(data, categoryID) {
         var $placesContainer = placesContainer.removeCardsWithPlaces();
         const places = data.sort(placesContainer.sortPlacesByRate);
         placesContainer.prepareCardsWithPlaces($placesContainer, places, categoryID);
@@ -201,19 +205,23 @@ let navbar = (function() {
         $("#content").show();
     };
 
-    let _addOnClickToNavbarElem = function($navbar) {
+    const addOnClickToNavbarElem = function($navbar) {
         $navbar.find("li:not(last)").click(function(e) {
             e.preventDefault();
             $("#loader").show();
-            const categoryID = $(this).find("span").text();
+            const categoryID = parseInt($(this).find("span").text());
             apiClient.fetchPlaces(categoryID)
-                .then(data => _displayPlaces(data, categoryID))
-                .catch(error => console.log(error));
+                .then(function(data) {
+                    displayPlaces(data, categoryID)
+                })
+                .catch(function(error) {
+                    console.log(error)
+                });
             window.location = "#main-content";
         })
     };
 
-    let _addCategoryInDropdown = function($navbar) {
+    const addCategoryInDropdown = function($navbar) {
         const $selectLi = $('<li class="dropdown show"><a href="#" data-toggle="dropdown">Inne</a></li>');
         $navbar.append($selectLi);
         const $dropDownList = $("<div>").addClass("dropdown-menu navbar-dropdown-category").appendTo($selectLi);
@@ -224,7 +232,7 @@ let navbar = (function() {
         }
     };
 
-    let _sortCategoriesByCount = function(first, second) {
+    const sortCategoriesByCount = function(first, second) {
         if(first.count > second.count) {
             return -1;
         } else if(first.count < second.count) {
@@ -234,13 +242,19 @@ let navbar = (function() {
         }
     };
 
-    let prepareNavbar = function(data) {
-        const categories = data.sort(_sortCategoriesByCount);
+    const addNavbarElem = function($container) {
+        const $navbar = $("<nav>").addClass("row navbar").appendTo($container);
+        return $("<ul>").addClass("navbar-list").appendTo($navbar);
+    };
+
+    const prepareNavbar = function(data) {
+        const categories = data.sort(sortCategoriesByCount);
         placesContainer.setCategories(categories);
-        const $navbar = $(".navbar-list");
-        _addCategoriesToNavbar($navbar);
-        _addCssToNavbarElem($navbar);
-        _addOnClickToNavbarElem($navbar);
+        const $header = $("#header");
+        const $navbar = addNavbarElem($header);
+        addCategoriesToNavbar($navbar);
+        addCssToNavbarElem($navbar);
+        addOnClickToNavbarElem($navbar);
     };
 
     return {
@@ -248,24 +262,28 @@ let navbar = (function() {
     }
 })();
 
-let app = (function() {
+const app = (function() {
 
-    let _setDateInFooter = function() {
-        let date = new Date();
+    const setDateInFooter = function() {
+        const date = new Date();
         $("#copyrightInfo").text("Copyright " + date.getFullYear());
     };
 
-    let _hideElementOnStart = function() {
+    const hideElementOnStart = function() {
         $("#content").hide();
         $("#loader").hide();
     };
 
-    let init = function() {
-        _setDateInFooter();
-        _hideElementOnStart();
+    const init = function() {
+        setDateInFooter();
+        hideElementOnStart();
         apiClient.fetchCategories()
-            .then(data => navbar.prepareNavbar(data))
-            .catch(error => console.log(error));
+            .then(function(data) {
+                navbar.prepareNavbar(data)
+            })
+            .catch(function(error) {
+                console.log(error)
+            });
     };
 
     return {

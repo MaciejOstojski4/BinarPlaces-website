@@ -1,6 +1,6 @@
-let gulp = require("gulp");
-let browserSync = require("browser-sync").create();
-let sass = require("gulp-sass");
+const gulp = require("gulp");
+const browserSync = require("browser-sync").create();
+const sass = require("gulp-sass");
 
 gulp.task("server", ["browserSync", "watch"]);
 

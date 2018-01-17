@@ -1,26 +1,26 @@
 .place-card {
-  color: chocolate;
+  color: $orange-main-binar-places;
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 20px;
-  border: 1px solid chocolate;
+  border: 1px solid $orange-main-binar-places;
 }
 
 .place-card:hover {
-  background-color: chocolate;
-  color: white;
+  background-color: $orange-main-binar-places;
+  color: #ffffff;
 }
 
 .place-card:hover .br-theme-fontawesome-stars-o .br-widget a::after {
-  background-color: chocolate;
-  color: white !important;
+  background-color: $orange-main-binar-places;
+  color: #ffffff !important;
 }
 
 .content-place-cards {
-  border: 1px solid chocolate;
+  border: 1px solid $orange-main-binar-places;
   margin-bottom: 30px;
 }
 
 .br-theme-fontawesome-stars-o .br-widget a::after {
-  color: chocolate !important;
+  color: $orange-main-binar-places !important;
 }

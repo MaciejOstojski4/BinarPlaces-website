@@ -11,16 +11,16 @@
 }
 
 .content-tabs-item > .content-tabs-item-link {
-  color: chocolate;
+  color: $orange-main-binar-places;
 }
 
 .content-tabs-item-active > .content-tabs-item-link {
-  color: white;
-  background-color: chocolate;
+  color: #ffffff;
+  background-color: $orange-main-binar-places;
 }
 
 .content-tabs-item-link:hover {
-  background-color: chocolate !important;
-  border: 1px solid chocolate !important;
+  background-color: $orange-main-binar-places;
+  border: 1px solid $orange-main-binar-places;
   color: white;
 }

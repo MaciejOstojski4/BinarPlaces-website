@@ -4,7 +4,7 @@ nav {
 }
 
 .navbar {
-  background-color: chocolate;
+  background-color: $orange-main-binar-places;
   border-radius: 0;
 }
 
@@ -16,12 +16,12 @@ nav {
 .navbar-list-element {
   display: inline;
   float: left;
-  border-right: 1px solid coral;
+  border-right: 1px solid $light-orange-binar-places;
 }
 
 .navbar-list-element-link {
   display: block;
-  color: white;
+  color: #ffffff;
   text-align: center;
   padding: 14px;
   text-decoration: none;
@@ -29,9 +29,9 @@ nav {
 
 .navbar-list-element-link:hover {
   text-decoration: none;
-  color: white;
+  color: #ffffff;
 }
 
 .navbar-dropdown-category {
-  background-color: chocolate;
+  background-color: $orange-main-binar-places;
 }

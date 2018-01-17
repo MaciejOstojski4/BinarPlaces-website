@@ -11,17 +11,12 @@
   font-size: 50px;
 }
 
-.intro-btn {
-  display: block;
-}
-
-.intro-btn:hover {
-  color: white;
-}
-
-.intro-btn-text {
-  background-color: chocolate;
+.intro-link-text {
+  background-color: $orange-main-binar-places;
   padding: 5px;
   font-size: 40px;
   font-weight: 700;
+  display: block;
+  margin: 0 auto;
+  width: 20%;
 }
