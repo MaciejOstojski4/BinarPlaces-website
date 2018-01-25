@@ -141,14 +141,32 @@ const placesContainer = (function () {
       initialRating: place.rate,
       readonly: true
     });
-    $rateHolder.click(displayPlaceReviews);
+    $rateHolder.click(showPlaceReviewsModal);
   };
 
-  const displayPlaceReviews = function (event) {
+  const showReviews = function(reviews) {
+    const $container = $("#reviews-container");
+    $container.empty();
+    reviews.forEach(function (rev) {
+      const $revBox = $("<div>").addClass("review-box").appendTo($container);
+      const $revRate = $("<div>").addClass("review-rate").appendTo($revBox);
+      const $revContent = $("<div>").addClass("review-content").appendTo($revBox);
+      const $revAuthor = $("<div>").addClass("review-author").appendTo($revBox);
+      const $revDate = $("<div>").addClass("review-date").appendTo($revBox);
+
+      $revRate.text(rev.rate);
+      $revContent.text(rev.content);
+      $revAuthor.text(rev.username);
+      $revDate.text(rev.created_at);
+    })
+  };
+
+  const showPlaceReviewsModal = function (event) {
     const placeId = event.currentTarget.id.slice(10);
     apiClient.fetchPlaceReviews(placeId)
       .then(function (data) {
-        console.log(data)
+        console.log(data);
+        showReviews(data);
       })
       .catch(function (error) {
         console.log(error)
@@ -157,8 +175,7 @@ const placesContainer = (function () {
     if(!localStorage.user) {
       $("#rateFormPlaceId").attr("val", placeId);
       const $modalFooter = ("#ratesModalFooter");
-      const $addRateBtn = $('<button class="btn btn-default">');
-      setAddRateBtnAttr($addRateBtn);
+      setAddRateBtnAttr();
       $addRateBtn.appendTo($modalFooter);
 
       const $createReviewForm = $("#createRateForm");
@@ -179,11 +196,8 @@ const placesContainer = (function () {
     apiClient.addReview(review);
   };
 
-  const setAddRateBtnAttr = function($addRateBtn){
-    $addRateBtn.attr("type", "button");
-    $addRateBtn.attr("data-toggle", "modal");
-    $addRateBtn.attr("data-target", "#createRateModal");
-    $addRateBtn.html("Dodaj opinię");
+  const setAddRateBtnAttr = function(){
+    $("#create-review-modal").css("display", "block").removeClass("hidden");
   };
 
   const resolveCardImgSrc = function (categoryID) {

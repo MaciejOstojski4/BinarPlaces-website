@@ -6,8 +6,14 @@ body {
 h1 {
   font-weight: 700; }
 
+.hidden {
+  display: none; }
+
 .modal-binar-places {
   background-color: #D2691E; }
+
+.modal-btn {
+  float: right; }
 
 .place-card {
   color: #D2691E;
@@ -124,3 +130,15 @@ nav {
   background-color: #D2691E;
   border: 1px solid #D2691E;
   color: white; }
+
+.review-box {
+  border: 1px solid #ffffff;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px; }
+
+.review-author {
+  text-align: right; }
+
+.review-date {
+  text-align: right; }
