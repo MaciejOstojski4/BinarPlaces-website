@@ -114,8 +114,17 @@ const placesContainer = (function () {
       }
       const $column = createColumnForCard($row);
       const $placeCard = createPlaceCard($column);
+      setClickListenerPlaceCard($placeCard);
       addPlaceInfoToCard($placeCard, place);
     });
+  };
+
+  const setClickListenerPlaceCard = function($placeCard) {
+    $placeCard.attr("data-toggle", "tab");
+    $placeCard.attr("href", "#place-gallery");
+    /*TODO
+    * Pobranie zdjęć restauracji i wyświetlenie ich
+    * */
   };
 
   const addPlaceInfoToCard = function ($card, place) {
