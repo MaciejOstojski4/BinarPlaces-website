@@ -49,15 +49,21 @@
       <div class="col-md-8">
         <ul class="nav nav-tabs content-tabs">
           <li class="content-tabs-item content-tabs-item-active"><a class="content-tabs-item-link"
-                                                                    href="#">Restauracje</a></li>
-          <li class="content-tabs-item"><a class="content-tabs-item-link" href="#">Galeria</a></li>
-          <li class="content-tabs-item"><a class="content-tabs-item-link" href="#">Mapa</a></li>
+                                                                    data-toggle="tab"
+                                                                    href="#place-card-container">Restauracje</a></li>
+          <li class="content-tabs-item"><a class="content-tabs-item-link" data-toggle="tab" href="#place-gallery">Galeria</a></li>
+          <li class="content-tabs-item"><a class="content-tabs-item-link" data-toggle="tab" href="#">Mapa</a></li>
         </ul>
+        <div class="tab-content">
+          <section id="place-card-container" class="tab-pane active content-place-cards">
+          </section>
+          <section id="place-gallery" class="tab-pane content-place-cards">
+            Galeria
+          </section>
+        </div>
       </div>
     </div>
     <section class="row">
-      <section id="place-card-container" class="col-md-8 content-place-cards">
-      </section>
       <aside class="col-md-4">
         Aside section
       </aside>
