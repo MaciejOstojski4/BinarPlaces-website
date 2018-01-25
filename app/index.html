@@ -1,143 +1,182 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <title>Binar Places</title>
+  <meta charset="UTF-8">
+  <title>Binar Places</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,500,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,500,600,700" rel="stylesheet">
 
-    <link rel="stylesheet" href="resources/css/reset.css" >
+  <link rel="stylesheet" href="resources/css/reset.css">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-    <script src="http://antenna.io/demo/jquery-bar-rating/jquery.barrating.js"></script>
-    <link href="http://antenna.io/demo/jquery-bar-rating/dist/themes/fontawesome-stars-o.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <script src="http://antenna.io/demo/jquery-bar-rating/jquery.barrating.js"></script>
+  <link href="http://antenna.io/demo/jquery-bar-rating/dist/themes/fontawesome-stars-o.css" rel="stylesheet"/>
 
-    <link rel="stylesheet" href="resources/css/main.css" />
-    <script src="resources/js/index.js"></script>
+  <link rel="stylesheet" href="resources/css/main.css"/>
+  <script src="resources/js/index.js"></script>
 </head>
 <body>
 <div id="header" class="container header-nav">
-    <header class="row ">
-        <h1 class="header-pageName">Binar Places</h1>
-        <span class="header-loginRegister">
+  <header class="row ">
+    <h1 class="header-pageName">Binar Places</h1>
+    <span class="header-loginRegister">
             <a href="" data-toggle="modal" data-target="#loginModal">Zaloguj</a>
             /
             <a href="" data-toggle="modal" data-target="#registerModal">Zarejestruj</a>
         </span>
-    </header>
+  </header>
 </div>
 
 <section class="container-fluid intro">
-    <h1 class="intro-text">
-        Katalog restauracji Binar Places
-    </h1>
-        <h3 class="intro-text intro-link-text">
-            Binar::Apps
-        </h3>
+  <h1 class="intro-text">
+    Katalog restauracji Binar Places
+  </h1>
+  <h3 class="intro-text intro-link-text">
+    Binar::Apps
+  </h3>
 </section>
 
 <div id="main-content" class="container" style="color: black">
-    <div id="loader" class="row text-center content-loader">
-        <img src="resources/images/loader.gif">
+  <div id="loader" class="row text-center content-loader">
+    <img src="resources/images/loader.gif">
+  </div>
+  <div id="content">
+    <div class="row">
+      <div class="col-md-8">
+        <ul class="nav nav-tabs content-tabs">
+          <li class="content-tabs-item content-tabs-item-active"><a class="content-tabs-item-link"
+                                                                    href="#">Restauracje</a></li>
+          <li class="content-tabs-item"><a class="content-tabs-item-link" href="#">Galeria</a></li>
+          <li class="content-tabs-item"><a class="content-tabs-item-link" href="#">Mapa</a></li>
+        </ul>
+      </div>
     </div>
-    <div id="content">
-        <div class="row">
-            <div class="col-md-8">
-                <ul class="nav nav-tabs content-tabs">
-                    <li class="content-tabs-item content-tabs-item-active"><a class="content-tabs-item-link"href="#">Restauracje</a></li>
-                    <li class="content-tabs-item"><a class="content-tabs-item-link" href="#">Galeria</a></li>
-                    <li class="content-tabs-item"><a class="content-tabs-item-link" href="#">Mapa</a></li>
-                </ul>
-            </div>
-        </div>
-        <section class="row">
-            <section id="place-card-container" class="col-md-8 content-place-cards">
-            </section>
-            <aside class="col-md-4">
-                Aside section
-            </aside>
-        </section>
-    </div>
+    <section class="row">
+      <section id="place-card-container" class="col-md-8 content-place-cards">
+      </section>
+      <aside class="col-md-4">
+        Aside section
+      </aside>
+    </section>
+  </div>
 </div>
 
 <div class="container-fluid text-center">
-    <footer class="row footer">
-        <span id="copyrightInfo">Footer</span>
-    </footer>
+  <footer class="row footer">
+    <span id="copyrightInfo">Footer</span>
+  </footer>
 </div>
 
 <div id="loginModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <section class="modal-content modal-binar-places">
-            <header class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">Zamknij</button>
-                <h1>Zaloguj się</h1>
-            </header>
-            <section class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="emailLoginInput">Email:</label>
-                        <input id="emailLoginInput" class="form-control" type="text" />
-                    </div>
-                    <div class="form-group">
-                        <label for="passwordLoginInput">Hasło:</label>
-                        <input id="passwordLoginInput" class="form-control" type="password" />
-                    </div>
-                    <button type="submit" class="btn">Zatwierdź</button>
-                </form>
-            </section>
-        </section>
-    </div>
+  <div class="modal-dialog">
+    <section class="modal-content modal-binar-places">
+      <header class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">Zamknij</button>
+        <h1>Zaloguj się</h1>
+      </header>
+      <section class="modal-body">
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="emailLoginInput">Email:</label>
+            <input id="emailLoginInput" name="email" class="form-control" type="text"/>
+          </div>
+          <div class="form-group">
+            <label for="passwordLoginInput">Hasło:</label>
+            <input id="passwordLoginInput" name="password" class="form-control" type="password"/>
+          </div>
+          <button id="loginSubmitBtn" type="submit" class="btn">Zatwierdź</button>
+        </form>
+      </section>
+    </section>
+  </div>
 </div>
 
 <div id="registerModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <section class="modal-content modal-binar-places">
-            <header class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">Zamknij</button>
-                <h1>Zarejestruj się</h1>
-            </header>
-            <section class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="emailInput">Email:</label>
-                        <input id="emailInput" class="form-control" type="text" />
-                    </div>
-                    <div class="form-group">
-                        <label for="loginInput">Login:</label>
-                        <input id="loginInput" class="form-control" type="text" />
-                    </div>
-                    <div class="form-group">
-                        <label for="passwordInput">Hasło:</label>
-                        <input id="passwordInput" class="form-control" type="password" />
-                    </div>
-                    <div class="form-group">
-                        <label for="passwordConfirmedInput">Powtórz hasło:</label>
-                        <input id="passwordConfirmedInput" class="form-control" type="password" />
-                    </div>
-                    <button type="submit" class="btn">Zatwierdź</button>
-                </form>
-            </section>
-        </section>
-    </div>
+  <div class="modal-dialog">
+    <section class="modal-content modal-binar-places">
+      <header class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">Zamknij</button>
+        <h1>Zarejestruj się</h1>
+      </header>
+      <section class="modal-body">
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="emailInput">Email:</label>
+            <input id="emailInput" name="email" class="form-control" type="text"/>
+          </div>
+          <div class="form-group">
+            <label for="loginInput">Login:</label>
+            <input id="loginInput" name="name" class="form-control" type="text"/>
+          </div>
+          <div class="form-group">
+            <label for="passwordInput">Hasło:</label>
+            <input id="passwordInput" name="password" class="form-control" type="password"/>
+          </div>
+          <div class="form-group">
+            <label for="passwordConfirmedInput">Powtórz hasło:</label>
+            <input id="passwordConfirmedInput" name="password_confirmation" class="form-control" type="password"/>
+          </div>
+          <button type="submit" class="btn">Zatwierdź</button>
+        </form>
+      </section>
+    </section>
+  </div>
 </div>
 
 <div id="ratesModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <section class="modal-content modal-binar-places">
-            <header class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">Zamknij</button>
-                <h1>Oceny</h1>
-            </header>
-            <section class="modal-body">
+  <div class="modal-dialog">
+    <section class="modal-content modal-binar-places">
+      <header class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">Zamknij</button>
+        <h1>Oceny</h1>
+      </header>
+      <section class="modal-body">
 
-            </section>
-        </section>
-    </div>
+      </section>
+      <footer id="ratesModalFooter" class="modal-footer">
+
+      </footer>
+    </section>
+  </div>
+</div>
+
+<div id="createRateModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <section class="modal-content modal-binar-places">
+      <header class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">Zamknij</button>
+        <h2>Dodaj ocenę</h2>
+      </header>
+      <section class="modal-body">
+        <form id="createRateForm">
+          <input id="rateFormPlaceId" style="display: none">
+          <div class="form-group">
+            <label for="rateContent">Treść</label>
+            <input style="color: black" type="text" id="rateContent"/>
+          </div>
+          <div class="form-group">
+            <label for="rateMark1">1</label>
+            <input id="rateMark1" type="radio" name="rateMark" value="1">
+            <label for="rateMark2">2</label>
+            <input id="rateMark2" type="radio" name="rateMark" value="2">
+            <label for="rateMark3">3</label>
+            <input id="rateMark3" type="radio" name="rateMark" value="3">
+            <label for="rateMark4">4</label>
+            <input id="rateMark4" type="radio" name="rateMark" value="4">
+            <label for="rateMark5">5</label>
+            <input id="rateMark5" type="radio" name="rateMark" value="5">
+          </div>
+          <div class="form-group">
+            <input type="submit" id="createRateSubmit" value="Potwierdź"/>
+          </div>
+        </form>
+      </section>
+    </section>
+  </div>
 </div>
 </body>
 </html>
