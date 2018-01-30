@@ -17,6 +17,7 @@
   <link href="http://antenna.io/demo/jquery-bar-rating/dist/themes/fontawesome-stars-o.css" rel="stylesheet"/>
 
   <link rel="stylesheet" href="resources/css/main.css"/>
+  <script src="resources/js/api-client.js"></script>
   <script src="resources/js/index.js"></script>
 
   <style>
@@ -55,13 +56,15 @@
     <div class="row">
       <div class="col-md-8">
         <ul class="nav nav-tabs content-tabs">
-          <li class="content-tabs-item content-tabs-item-active"><a class="content-tabs-item-link"
-                                                                    data-toggle="tab"
-                                                                    href="#place-card-container">Restauracje</a></li>
-          <li class="content-tabs-item"><a class="content-tabs-item-link"
-                                           data-toggle="tab" href="#place-gallery">Galeria</a></li>
-          <li class="content-tabs-item"><a id="gallery-tab" class="content-tabs-item-link"
-                                           data-toggle="tab" href="#place-map">Mapa</a></li>
+          <li class="content-tabs-item content-tabs-item-active">
+            <a class="content-tabs-item-link" data-toggle="tab" href="#place-card-container">Restauracje</a>
+          </li>
+          <li class="content-tabs-item">
+            <a id="gallery-tab" class="content-tabs-item-link" data-toggle="tab" href="#place-gallery">Galeria</a>
+          </li>
+          <li class="content-tabs-item">
+            <a id="map-tab" class="content-tabs-item-link" data-toggle="tab" href="#place-map">Mapa</a>
+          </li>
         </ul>
         <div class="tab-content">
           <section id="place-card-container" class="tab-pane active content-place-cards">
@@ -79,7 +82,13 @@
     </div>
     <section class="row">
       <aside class="col-md-4">
-        Aside section
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div id="add-new-place"  data-toggle="modal" data-target="#newPlaceModal">
+              Dodaj miejsce
+            </div>
+          </div>
+        </div>
       </aside>
     </section>
   </div>
@@ -89,6 +98,48 @@
   <footer class="row footer">
     <span id="copyrightInfo">Footer</span>
   </footer>
+</div>
+
+<div id="newPlaceModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <section class="modal-content modal-binar-places">
+      <header class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">Zamknij</button>
+        <h1>Dodaj nowe miejsce</h1>
+      </header>
+      <section class="modal-body">
+        <form id="newPlaceForm">
+          <div class="form-group">
+            <label for="placeName">Nazwa</label>
+            <input name="placeName" type="text" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="placeAddress">Adres</label>
+            <input name="placeAddress" type="text" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="placeCategories">Kategoria</label>
+            <select id="placeCategoriesSelect" name="placeCategories" class="form-control">
+
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="placeImage">Zdjęcia</label>
+            <input name="placeImage" type="file" accept="image/*" />
+          </div>
+          <div class="form-group">
+            <label for="placeLat">Długość geograficzna</label>
+            <input name="placeLat" type="text" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="placeLon">Szerokość geograficzna</label>
+            <input name="placeLon" type="text" class="form-control" />
+          </div>
+          <button id="newPlaceSubmitBtn" type="submit" class="btn">Zatwierdź</button>
+        </form>
+      </section>
+    </section>
+  </div>
 </div>
 
 <div id="loginModal" class="modal fade" role="dialog">

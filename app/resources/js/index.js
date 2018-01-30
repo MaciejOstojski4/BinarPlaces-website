@@ -1,85 +1,10 @@
-const apiClient = (function () {
-
-  const API_URL = "http://taste-api.binarlab.com/api/v1/";
-
-  const CATEGORIES_PATH = "categories",
-    PLACES_PATH = "places/",
-    LOGIN_PATH = "user/sign_in/",
-    REGISTER_PATH = "user/sign_up/",
-    REVIEWS_PATH = "/reviews/",
-    CREATE_REVIEW_PATH = "/reviews#create";
-
-  const fetchCategories = function () {
-    return $.ajax({
-      type: "GET",
-      url: API_URL + CATEGORIES_PATH
-    });
-  };
-
-  const fetchPlaces = function (categoryID) {
-    return $.ajax({
-      type: "GET",
-      url: API_URL + PLACES_PATH
-    });
-  };
-
-  const fetchPlaceReviews = function (placeID) {
-    return $.ajax({
-      type: "GET",
-      url: API_URL + PLACES_PATH + placeID + REVIEWS_PATH
-    });
-  };
-
-  const login = function (user) {
-    return $.ajax({
-      type: "POST",
-      url: API_URL + LOGIN_PATH,
-      data: user
-    })
-  };
-
-  const register = function (user) {
-    return $.ajax({
-      type: "POST",
-      url: API_URL + REGISTER_PATH,
-      data: user
-    })
-  };
-
-  const addReview = function(review) {
-    const rev = {
-      content: review.content,
-      rate: review.rate
-    };
-
-    console.log(rev);
-
-    return $.ajax({
-      type: "POST",
-      url: API_URL + PLACES_PATH + review.placeId + CREATE_REVIEW_PATH,
-      data: rev,
-      headers: {
-        "X-User-Token": "4WqKT3yVdYwq7NKe6Tym",
-        "X-User-Email": "binar_taste@example.com"
-      }
-    })
-  };
-
-  return {
-    fetchCategories: fetchCategories,
-    fetchPlaces: fetchPlaces,
-    fetchPlaceReviews: fetchPlaceReviews,
-    login: login,
-    register: register,
-    addReview: addReview,
-  }
-})();
-
 const placesContainer = (function () {
 
   const CARDS_IN_ROW = 3;
 
   var categories = [];
+
+  var choosenCategoryId = -1;
 
   const setCategories = function (data) {
     categories = data;
@@ -87,6 +12,44 @@ const placesContainer = (function () {
 
   const getCategories = function () {
     return categories;
+  };
+
+  const preparePlaceObject = function(imgBase64) {
+    const place = {
+      name: $("input[name=placeName]").val(),
+      address: $("input[name=placeAddress]").val(),
+      lat: parseInt($("input[name=placeLat]").val()),
+      lon: parseInt($("input[name=placeLon]").val()),
+      category_id: parseInt($("#placeCategoriesSelect option:selected").val()),
+      picture: imgBase64
+    };
+    return  $.param(place);
+  };
+
+  const setOnClickListeners = function() {
+    $("#add-new-place").click(function() {
+      const $selectCategories = $("#placeCategoriesSelect");
+      categories.forEach(function(category) {
+        const $categoryOption = $("<option>").html(category.name).attr("value", category.id);
+        $categoryOption.appendTo($selectCategories);
+      })
+    });
+
+    $("#newPlaceForm").submit(function(e) {
+      e.preventDefault();
+      const fileReader = new FileReader();
+      fileReader.addEventListener("load", function () {
+        const place = preparePlaceObject(fileReader.result);
+        apiClient.uploadNewPlace(place)
+          .then(function(response) {
+            console.log(response);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }, false);
+      fileReader.readAsDataURL($("input[name=placeImage]").get(0).files[0])
+    })
   };
 
   const removeCardsWithPlaces = function () {
@@ -106,6 +69,7 @@ const placesContainer = (function () {
   };
 
   const prepareCardsWithPlaces = function ($placeContainer, allPlaces, categoryID) {
+    choosenCategoryId = categoryID;
     var places = getPlacesByCategory(allPlaces, categoryID);
     var $row;
     places.forEach(function (place, index) {
@@ -114,17 +78,8 @@ const placesContainer = (function () {
       }
       const $column = createColumnForCard($row);
       const $placeCard = createPlaceCard($column);
-      setClickListenerPlaceCard($placeCard);
       addPlaceInfoToCard($placeCard, place);
     });
-  };
-
-  const setClickListenerPlaceCard = function($placeCard) {
-    $placeCard.attr("data-toggle", "tab");
-    $placeCard.attr("href", "#place-gallery");
-    /*TODO
-    * Pobranie zdjęć restauracji i wyświetlenie ich
-    * */
   };
 
   const addPlaceInfoToCard = function ($card, place) {
@@ -196,7 +151,6 @@ const placesContainer = (function () {
     e.preventDefault();
     const rateContent = $("#rateContent").val();
     const mark = $("input[name=rateMark]:checked").val();
-    console.log($("#rateFormPlaceId").attr("val"));
     const review = {
       content: rateContent,
       rate: mark,
@@ -256,12 +210,17 @@ const placesContainer = (function () {
     return category[0];
   };
 
+  const init = function() {
+    setOnClickListeners();
+  };
+
   return {
     removeCardsWithPlaces: removeCardsWithPlaces,
     sortPlacesByRate: sortPlacesByRate,
     prepareCardsWithPlaces: prepareCardsWithPlaces,
     setCategories: setCategories,
     getCategories: getCategories,
+    init: init,
   }
 })();
 
@@ -372,6 +331,8 @@ const app = (function () {
   };
 
   const init = function () {
+    placesContainer.init();
+
     const loginForm = $("#loginForm");
     loginForm.submit(login);
 
