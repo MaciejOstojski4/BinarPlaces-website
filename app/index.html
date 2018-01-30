@@ -18,6 +18,13 @@
 
   <link rel="stylesheet" href="resources/css/main.css"/>
   <script src="resources/js/index.js"></script>
+
+  <style>
+    #map {
+      height: 200px;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
 <div id="header" class="container header-nav">
@@ -51,14 +58,21 @@
           <li class="content-tabs-item content-tabs-item-active"><a class="content-tabs-item-link"
                                                                     data-toggle="tab"
                                                                     href="#place-card-container">Restauracje</a></li>
-          <li class="content-tabs-item"><a class="content-tabs-item-link" data-toggle="tab" href="#place-gallery">Galeria</a></li>
-          <li class="content-tabs-item"><a class="content-tabs-item-link" data-toggle="tab" href="#">Mapa</a></li>
+          <li class="content-tabs-item"><a class="content-tabs-item-link"
+                                           data-toggle="tab" href="#place-gallery">Galeria</a></li>
+          <li class="content-tabs-item"><a id="gallery-tab" class="content-tabs-item-link"
+                                           data-toggle="tab" href="#place-map">Mapa</a></li>
         </ul>
         <div class="tab-content">
           <section id="place-card-container" class="tab-pane active content-place-cards">
           </section>
           <section id="place-gallery" class="tab-pane content-place-cards">
             Galeria
+          </section>
+          <section id="place-map" class="tab-pane content-place-cards">
+            <div id="map">
+
+            </div>
           </section>
         </div>
       </div>
@@ -187,5 +201,32 @@
     </section>
   </div>
 </div>
+
+<script>
+  function initMap() {
+    var uluru = {lat: -25.363, lng: 131.044};
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 4,
+      center: uluru
+    });
+    var marker = new google.maps.Marker({
+      position: uluru,
+      map: map
+    });
+    google.maps.event.addListener(map, "idle", function(){
+      google.maps.event.trigger(map, 'resize');
+    });  }
+</script>
+<script>
+  $(function() {
+    $("#gallery-tab").on("click", function() {
+      initMap();
+
+    })
+  })
+</script>
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo2nzz0NxEixW89wBU7dD0Cm134QAJvwo&callback=initMap">
+</script>
 </body>
 </html>
