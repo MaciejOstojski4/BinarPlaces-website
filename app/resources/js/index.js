@@ -11,6 +11,8 @@ const app = (function () {
   };
 
   const init = function () {
+    changeLoginState();
+    setOnClickListeners();
     placesContainer.init();
 
     const loginForm = $("#loginForm");
@@ -36,12 +38,30 @@ const app = (function () {
     const email = $("#emailLoginInput").val();
     apiClient.login(data)
       .then(function (response) {
-        console.log(response);
         userSession.setUser(email, response.auth_token);
+        changeLoginState();
       })
       .catch(function (error) {
         console.log(error);
       });
+  };
+
+  const changeLoginState = function() {
+    if(localStorage.getItem("email") !== null) {
+      showLogout();
+    } else {
+      showLogin();
+    }
+  };
+
+  const showLogout = function() {
+    $("#logout").css("display", "block");
+    $("#login-register").css("display", "none");
+  };
+
+  const showLogin = function() {
+    $("#logout").css("display", "none");
+    $("#login-register").css("display", "block");
   };
 
   const register = function (e) {
@@ -54,6 +74,19 @@ const app = (function () {
       .catch(function (error) {
         console.log(error);
       });
+  };
+
+  const setOnClickListeners = function() {
+    setLogoutClickListner();
+  };
+
+  const setLogoutClickListner = function() {
+    $("#logout").click(logout);
+  };
+
+  const logout = function() {
+    userSession.clearSession();
+    changeLoginState();
   };
 
   return {

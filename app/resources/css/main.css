@@ -88,6 +88,10 @@ h1 {
   background-color: #D2691E;
   padding: 30px; }
 
+#login-register,
+#logout {
+  display: none; }
+
 .header-pageName {
   display: inline-block; }
 
