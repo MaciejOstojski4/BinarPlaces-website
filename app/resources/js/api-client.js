@@ -69,7 +69,7 @@ const apiClient = (function () {
     })
   };
 
-  const addReview = function(review) {
+  const addReview = function(review, user) {
     const rev = {
       content: review.content,
       rate: review.rate
@@ -80,8 +80,8 @@ const apiClient = (function () {
       url: API_URL + PLACES_PATH + review.placeId + CREATE_REVIEW_PATH,
       data: rev,
       headers: {
-        "X-User-Token": "4WqKT3yVdYwq7NKe6Tym",
-        "X-User-Email": "binar_taste@example.com"
+        "X-User-Token": user.auth_token,
+        "X-User-Email": user.email
       }
     })
   };

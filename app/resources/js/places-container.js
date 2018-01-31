@@ -194,11 +194,10 @@ const placesContainer = (function () {
         console.log(error)
       });
 
-    if(!localStorage.user) {
+    console.log(localStorage.getItem("email"));
+    if(localStorage.getItem("email") !== null) {
       $("#rateFormPlaceId").attr("val", placeId);
-      const $modalFooter = ("#ratesModalFooter");
-      setAddRateBtnAttr();
-      $addRateBtn.appendTo($modalFooter);
+      showAddRateBtnAttr();
 
       const $createReviewForm = $("#createRateForm");
       $createReviewForm.submit(sendReview);
@@ -207,6 +206,7 @@ const placesContainer = (function () {
 
   const sendReview = function(e) {
     e.preventDefault();
+
     const rateContent = $("#rateContent").val();
     const mark = $("input[name=rateMark]:checked").val();
     const review = {
@@ -214,10 +214,16 @@ const placesContainer = (function () {
       rate: mark,
       placeId: $("#rateFormPlaceId").attr("val")
     };
-    apiClient.addReview(review);
+    apiClient.addReview(review, userSession.obtainUser())
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 
-  const setAddRateBtnAttr = function(){
+  const showAddRateBtnAttr = function(){
     $("#create-review-modal").css("display", "block").removeClass("hidden");
   };
 

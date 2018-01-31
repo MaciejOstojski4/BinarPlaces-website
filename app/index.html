@@ -69,51 +69,53 @@
     </h3>
   </section>
 
-  <div id="main-content" class="container" style="color: black">
-    <div id="loader" class="row text-center content-loader">
-      <img src="resources/images/loader.gif">
-    </div>
-    <div id="content">
-      <div class="row">
-        <div class="col-md-8">
-          <ul class="nav nav-tabs content-tabs">
-            <li class="content-tabs-item content-tabs-item-active">
-              <a class="content-tabs-item-link" data-toggle="tab" href="#place-card-container">Restauracje</a>
-            </li>
-            <li class="content-tabs-item">
-              <a id="gallery-tab" class="content-tabs-item-link" data-toggle="tab" href="#place-gallery">Galeria</a>
-            </li>
-            <li class="content-tabs-item">
-              <a id="map-tab" class="content-tabs-item-link" data-toggle="tab" href="#place-map">Mapa</a>
-            </li>
-          </ul>
-          <div class="tab-content">
-            <section id="place-card-container" class="tab-pane active content-place-cards">
-            </section>
-            <section id="place-gallery" class="tab-pane content-place-cards">
-              Galeria
-            </section>
-            <section id="place-map" class="tab-pane content-place-cards">
-              <div id="map">
-
-              </div>
-            </section>
+  <section id="main-content" class="container" style="color: black">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-8">
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+            <div id="loader" class="content-loader">
+              <img src="resources/images/loader.gif">
+            </div>
           </div>
         </div>
-      </div>
-      <section class="row">
-        <aside class="col-md-4">
+        <div id="content">
           <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
-              <div id="add-new-place"  data-toggle="modal" data-target="#newPlaceModal">
-                Dodaj miejsce
+              <ul class="nav nav-tabs content-tabs">
+                <li>
+                  <a class="tabs-link-active" data-toggle="tab" href="#place-card-container">Restauracje</a>
+                </li>
+                <li>
+                  <a id="gallery-tab" class="content-tabs-item-link" data-toggle="tab" href="#place-gallery">Galeria</a>
+                </li>
+                <li>
+                  <a id="map-tab" class="content-tabs-item-link" data-toggle="tab" href="#place-map">Mapa</a>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <section id="place-card-container" class="tab-pane active content-place-cards">
+                </section>
+                <section id="place-gallery" class="tab-pane content-place-cards">
+                  Galeria
+                </section>
+                <section id="place-map" class="tab-pane content-place-cards">
+                  <div id="map">
+
+                  </div>
+                </section>
               </div>
             </div>
           </div>
-        </aside>
-      </section>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-4">
+        <div id="add-new-place"  data-toggle="modal" data-target="#newPlaceModal">
+          Dodaj miejsce
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
   <div class="container-fluid text-center">
     <footer class="row footer">
@@ -121,7 +123,7 @@
     </footer>
   </div>
 
-</div>
+</section>
 
 <div id="newPlaceModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -282,6 +284,7 @@
 </script>
 
 <script src="resources/js/api-client.js"></script>
+<script src="resources/js/user-session.js"></script>
 <script src="resources/js/navbar.js"></script>
 <script src="resources/js/places-container.js"></script>
 <script src="resources/js/index.js"></script>

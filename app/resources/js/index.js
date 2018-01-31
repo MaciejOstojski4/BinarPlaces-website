@@ -26,16 +26,18 @@ const app = (function () {
         navbar.prepareNavbar(data)
       })
       .catch(function (error) {
-        console.log(error)
+        console.log(error);
       });
   };
 
   const login = function (e) {
     e.preventDefault();
     const data = $("#loginForm").serialize();
+    const email = $("#emailLoginInput").val();
     apiClient.login(data)
       .then(function (response) {
         console.log(response);
+        userSession.setUser(email, response.auth_token);
       })
       .catch(function (error) {
         console.log(error);

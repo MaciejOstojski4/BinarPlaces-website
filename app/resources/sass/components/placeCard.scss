@@ -4,6 +4,7 @@
   margin-bottom: 20px;
   padding: 20px;
   border: 1px solid $orange-main-binar-places;
+  transition: 0.5s;
 }
 
 .place-card:hover {
@@ -17,7 +18,7 @@
 }
 
 .content-place-cards {
-  border: 1px solid $orange-main-binar-places;
+  border-top: 1px solid $orange-main-binar-places;
   margin-bottom: 30px;
 }
 

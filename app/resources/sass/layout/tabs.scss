@@ -10,17 +10,17 @@
   border-top-left-radius: 5px;
 }
 
-.content-tabs-item > .content-tabs-item-link {
+.nav-tabs > li > a {
   color: $orange-main-binar-places;
 }
 
-.content-tabs-item-active > .content-tabs-item-link {
-  color: #ffffff;
+.nav-tabs > li > a:hover {
   background-color: $orange-main-binar-places;
+  color: #ffffff;
 }
 
-.content-tabs-item-link:hover {
+.nav-tabs > li.active > a,
+.nav-tabs > li > .tabs-link-active {
   background-color: $orange-main-binar-places;
-  border: 1px solid $orange-main-binar-places;
   color: white;
 }

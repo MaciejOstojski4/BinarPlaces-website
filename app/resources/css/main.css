@@ -20,7 +20,8 @@ h1 {
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 20px;
-  border: 1px solid #D2691E; }
+  border: 1px solid #D2691E;
+  transition: 0.5s; }
 
 .place-card:hover {
   background-color: #D2691E;
@@ -31,7 +32,7 @@ h1 {
   color: #ffffff !important; }
 
 .content-place-cards {
-  border: 1px solid #D2691E;
+  border-top: 1px solid #D2691E;
   margin-bottom: 30px; }
 
 .br-theme-fontawesome-stars-o .br-widget a::after {
@@ -127,16 +128,16 @@ h1 {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px; }
 
-.content-tabs-item > .content-tabs-item-link {
+.nav-tabs > li > a {
   color: #D2691E; }
 
-.content-tabs-item-active > .content-tabs-item-link {
-  color: #ffffff;
-  background-color: #D2691E; }
-
-.content-tabs-item-link:hover {
+.nav-tabs > li > a:hover {
   background-color: #D2691E;
-  border: 1px solid #D2691E;
+  color: #ffffff; }
+
+.nav-tabs > li.active > a,
+.nav-tabs > li > .tabs-link-active {
+  background-color: #D2691E;
   color: white; }
 
 .review-box {
