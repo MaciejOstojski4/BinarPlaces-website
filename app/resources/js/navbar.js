@@ -31,6 +31,7 @@ const navbar = (function () {
     var $placesContainer = placesContainer.removeCardsWithPlaces();
     const places = data.sort(placesContainer.sortPlacesByRate);
     placesContainer.prepareCardsWithPlaces($placesContainer, places, categoryID);
+    charts.initCategoriesChart([]);
     $("#loader").hide();
     $("#content").show();
   };

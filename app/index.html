@@ -115,6 +115,11 @@
         </div>
       </div>
       <div class="col-sm-12 col-md-12 col-lg-4">
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <canvas id="categoriesChart" height="400"></canvas>
+          </div>
+        </div>
         <div id="add-new-place"  data-toggle="modal" data-target="#newPlaceModal">
           Dodaj miejsce
         </div>
@@ -128,167 +133,168 @@
     </footer>
   </div>
 
-</section>
+  <div id="newPlaceModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <section class="modal-content modal-binar-places">
+        <header class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">Zamknij</button>
+          <h1>Dodaj nowe miejsce</h1>
+        </header>
+        <section class="modal-body">
+          <form id="newPlaceForm">
+            <div class="form-group">
+              <label for="placeName">Nazwa</label>
+              <input name="placeName" type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="placeAddress">Adres</label>
+              <input name="placeAddress" type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="placeCategories">Kategoria</label>
+              <select id="placeCategoriesSelect" name="placeCategories" class="form-control">
 
-<div id="newPlaceModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <section class="modal-content modal-binar-places">
-      <header class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">Zamknij</button>
-        <h1>Dodaj nowe miejsce</h1>
-      </header>
-      <section class="modal-body">
-        <form id="newPlaceForm">
-          <div class="form-group">
-            <label for="placeName">Nazwa</label>
-            <input name="placeName" type="text" class="form-control" />
-          </div>
-          <div class="form-group">
-            <label for="placeAddress">Adres</label>
-            <input name="placeAddress" type="text" class="form-control" />
-          </div>
-          <div class="form-group">
-            <label for="placeCategories">Kategoria</label>
-            <select id="placeCategoriesSelect" name="placeCategories" class="form-control">
-
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="placeImage">Zdjęcia</label>
-            <input name="placeImage" type="file" accept="image/*" />
-          </div>
-          <div class="form-group">
-            <label for="placeLat">Długość geograficzna</label>
-            <input name="placeLat" type="text" class="form-control" />
-          </div>
-          <div class="form-group">
-            <label for="placeLon">Szerokość geograficzna</label>
-            <input name="placeLon" type="text" class="form-control" />
-          </div>
-          <button id="newPlaceSubmitBtn" type="submit" class="btn">Zatwierdź</button>
-        </form>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="placeImage">Zdjęcia</label>
+              <input name="placeImage" type="file" accept="image/*" />
+            </div>
+            <div class="form-group">
+              <label for="placeLat">Długość geograficzna</label>
+              <input name="placeLat" type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="placeLon">Szerokość geograficzna</label>
+              <input name="placeLon" type="text" class="form-control" />
+            </div>
+            <button id="newPlaceSubmitBtn" type="submit" class="btn">Zatwierdź</button>
+          </form>
+        </section>
       </section>
-    </section>
+    </div>
   </div>
-</div>
 
-<div id="loginModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <section class="modal-content modal-binar-places">
-      <header class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">Zamknij</button>
-        <h1>Zaloguj się</h1>
-      </header>
-      <section class="modal-body">
-        <form id="loginForm">
-          <div class="form-group">
-            <label for="emailLoginInput">Email:</label>
-            <input id="emailLoginInput" name="email" class="form-control" type="text"/>
-          </div>
-          <div class="form-group">
-            <label for="passwordLoginInput">Hasło:</label>
-            <input id="passwordLoginInput" name="password" class="form-control" type="password"/>
-          </div>
-          <button id="loginSubmitBtn" type="submit" class="btn">Zatwierdź</button>
-        </form>
+  <div id="loginModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <section class="modal-content modal-binar-places">
+        <header class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">Zamknij</button>
+          <h1>Zaloguj się</h1>
+        </header>
+        <section class="modal-body">
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="emailLoginInput">Email:</label>
+              <input id="emailLoginInput" name="email" class="form-control" type="text"/>
+            </div>
+            <div class="form-group">
+              <label for="passwordLoginInput">Hasło:</label>
+              <input id="passwordLoginInput" name="password" class="form-control" type="password"/>
+            </div>
+            <button id="loginSubmitBtn" type="submit" class="btn">Zatwierdź</button>
+          </form>
+        </section>
       </section>
-    </section>
+    </div>
   </div>
-</div>
 
-<div id="registerModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <section class="modal-content modal-binar-places">
-      <header class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">Zamknij</button>
-        <h1>Zarejestruj się</h1>
-      </header>
-      <section class="modal-body">
-        <form id="registerForm">
-          <div class="form-group">
-            <label for="emailInput">Email:</label>
-            <input id="emailInput" name="email" class="form-control" type="text"/>
-          </div>
-          <div class="form-group">
-            <label for="loginInput">Login:</label>
-            <input id="loginInput" name="name" class="form-control" type="text"/>
-          </div>
-          <div class="form-group">
-            <label for="passwordInput">Hasło:</label>
-            <input id="passwordInput" name="password" class="form-control" type="password"/>
-          </div>
-          <div class="form-group">
-            <label for="passwordConfirmedInput">Powtórz hasło:</label>
-            <input id="passwordConfirmedInput" name="password_confirmation" class="form-control" type="password"/>
-          </div>
-          <button type="submit" class="btn">Zatwierdź</button>
-        </form>
+  <div id="registerModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <section class="modal-content modal-binar-places">
+        <header class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">Zamknij</button>
+          <h1>Zarejestruj się</h1>
+        </header>
+        <section class="modal-body">
+          <form id="registerForm">
+            <div class="form-group">
+              <label for="emailInput">Email:</label>
+              <input id="emailInput" name="email" class="form-control" type="text"/>
+            </div>
+            <div class="form-group">
+              <label for="loginInput">Login:</label>
+              <input id="loginInput" name="name" class="form-control" type="text"/>
+            </div>
+            <div class="form-group">
+              <label for="passwordInput">Hasło:</label>
+              <input id="passwordInput" name="password" class="form-control" type="password"/>
+            </div>
+            <div class="form-group">
+              <label for="passwordConfirmedInput">Powtórz hasło:</label>
+              <input id="passwordConfirmedInput" name="password_confirmation" class="form-control" type="password"/>
+            </div>
+            <button type="submit" class="btn">Zatwierdź</button>
+          </form>
+        </section>
       </section>
-    </section>
+    </div>
   </div>
-</div>
 
-<div id="ratesModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <section class="modal-content modal-binar-places">
-      <header class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">Zamknij</button>
-        <h1>Oceny</h1>
-      </header>
-      <section class="modal-body">
-        <div id="reviews-container">
+  <div id="ratesModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <section class="modal-content modal-binar-places">
+        <header class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">Zamknij</button>
+          <h1>Oceny</h1>
+        </header>
+        <section class="modal-body">
+          <div id="reviews-container">
 
-        </div>
+          </div>
+        </section>
+        <footer id="ratesModalFooter" class="modal-footer">
+          <button id="create-review-modal" class="btn btn-default modal-btn hidden"
+                  type="button" data-toggle="modal" data-target="#createRateModal">Dodaj opinię</button>
+        </footer>
       </section>
-      <footer id="ratesModalFooter" class="modal-footer">
-        <button id="create-review-modal" class="btn btn-default modal-btn hidden"
-                type="button" data-toggle="modal" data-target="#createRateModal">Dodaj opinię</button>
-      </footer>
-    </section>
+    </div>
   </div>
-</div>
 
-<div id="createRateModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <section class="modal-content modal-binar-places">
-      <header class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">Zamknij</button>
-        <h2>Dodaj ocenę</h2>
-      </header>
-      <section class="modal-body">
-        <form id="createRateForm">
-          <input id="rateFormPlaceId" style="display: none">
-          <div class="form-group">
-            <label for="rateContent">Treść</label>
-            <input style="color: black" type="text" id="rateContent"/>
-          </div>
-          <div class="form-group">
-            <label for="rateMark1">1</label>
-            <input id="rateMark1" type="radio" name="rateMark" value="1">
-            <label for="rateMark2">2</label>
-            <input id="rateMark2" type="radio" name="rateMark" value="2">
-            <label for="rateMark3">3</label>
-            <input id="rateMark3" type="radio" name="rateMark" value="3">
-            <label for="rateMark4">4</label>
-            <input id="rateMark4" type="radio" name="rateMark" value="4">
-            <label for="rateMark5">5</label>
-            <input id="rateMark5" type="radio" name="rateMark" value="5">
-          </div>
-          <div class="form-group">
-            <input type="submit" id="createRateSubmit" value="Potwierdź"/>
-          </div>
-        </form>
+  <div id="createRateModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <section class="modal-content modal-binar-places">
+        <header class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">Zamknij</button>
+          <h2>Dodaj ocenę</h2>
+        </header>
+        <section class="modal-body">
+          <form id="createRateForm">
+            <input id="rateFormPlaceId" style="display: none">
+            <div class="form-group">
+              <label for="rateContent">Treść</label>
+              <input style="color: black" type="text" id="rateContent"/>
+            </div>
+            <div class="form-group">
+              <label for="rateMark1">1</label>
+              <input id="rateMark1" type="radio" name="rateMark" value="1">
+              <label for="rateMark2">2</label>
+              <input id="rateMark2" type="radio" name="rateMark" value="2">
+              <label for="rateMark3">3</label>
+              <input id="rateMark3" type="radio" name="rateMark" value="3">
+              <label for="rateMark4">4</label>
+              <input id="rateMark4" type="radio" name="rateMark" value="4">
+              <label for="rateMark5">5</label>
+              <input id="rateMark5" type="radio" name="rateMark" value="5">
+            </div>
+            <div class="form-group">
+              <input type="submit" id="createRateSubmit" value="Potwierdź"/>
+            </div>
+          </form>
+        </section>
       </section>
-    </section>
+    </div>
   </div>
 </div>
 <script src="http://antenna.io/demo/jquery-bar-rating/jquery.barrating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 
 <script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo2nzz0NxEixW89wBU7dD0Cm134QAJvwo">
 </script>
 
 <script src="resources/js/api-client.js"></script>
+<script src="resources/js/charts.js"></script>
 <script src="resources/js/user-session.js"></script>
 <script src="resources/js/navbar.js"></script>
 <script src="resources/js/places-container.js"></script>
