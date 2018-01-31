@@ -13,89 +13,114 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-  <script src="http://antenna.io/demo/jquery-bar-rating/jquery.barrating.js"></script>
   <link href="http://antenna.io/demo/jquery-bar-rating/dist/themes/fontawesome-stars-o.css" rel="stylesheet"/>
 
   <link rel="stylesheet" href="resources/css/main.css"/>
 
-  <style>
-    #map {
-      height: 400px;
-      width: 100%;
-    }
-  </style>
 </head>
 <body>
-<div id="header" class="container header-nav">
-  <header class="row ">
-    <h1 class="header-pageName">Binar Places</h1>
-    <span class="header-loginRegister">
-            <a href="" data-toggle="modal" data-target="#loginModal">Zaloguj</a>
-            /
-            <a href="" data-toggle="modal" data-target="#registerModal">Zarejestruj</a>
-        </span>
-  </header>
-</div>
-
-<section class="container-fluid intro">
-  <h1 class="intro-text">
-    Katalog restauracji Binar Places
-  </h1>
-  <h3 class="intro-text intro-link-text">
-    Binar::Apps
-  </h3>
-</section>
-
-<div id="main-content" class="container" style="color: black">
-  <div id="loader" class="row text-center content-loader">
-    <img src="resources/images/loader.gif">
-  </div>
-  <div id="content">
-    <div class="row">
-      <div class="col-md-8">
-        <ul class="nav nav-tabs content-tabs">
-          <li class="content-tabs-item content-tabs-item-active">
-            <a class="content-tabs-item-link" data-toggle="tab" href="#place-card-container">Restauracje</a>
-          </li>
-          <li class="content-tabs-item">
-            <a id="gallery-tab" class="content-tabs-item-link" data-toggle="tab" href="#place-gallery">Galeria</a>
-          </li>
-          <li class="content-tabs-item">
-            <a id="map-tab" class="content-tabs-item-link" data-toggle="tab" href="#place-map">Mapa</a>
-          </li>
-        </ul>
-        <div class="tab-content">
-          <section id="place-card-container" class="tab-pane active content-place-cards">
-          </section>
-          <section id="place-gallery" class="tab-pane content-place-cards">
-            Galeria
-          </section>
-          <section id="place-map" class="tab-pane content-place-cards">
-            <div id="map">
-
+<div id="home">
+  <section class="intro">
+    <section class="container">
+      <header>
+        <div class="container">
+          <div class="navbar">
+            <div class="navbar-header">
+              <div class="navbar-logo">
+                <h1 class="header-pageName">Binar Places</h1>
+              </div>
             </div>
-          </section>
-        </div>
-      </div>
-    </div>
-    <section class="row">
-      <aside class="col-md-4">
-        <div class="row">
-          <div class="col-sm-12 col-md-12 col-lg-12">
-            <div id="add-new-place"  data-toggle="modal" data-target="#newPlaceModal">
-              Dodaj miejsce
+            <div class="nav navbar-nav navbar-right">
+              <span class="header-loginRegister">
+                <a href="" data-toggle="modal" data-target="#loginModal">Zaloguj</a>
+                /
+                <a href="" data-toggle="modal" data-target="#registerModal">Zarejestruj</a>
+              </span>
             </div>
           </div>
         </div>
-      </aside>
-    </section>
-  </div>
-</div>
+      </header>
+      <nav>
+        <div class="container">
+          <div class="navbar header-nav" role="navigation">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed navbar-burger"
+                        data-toggle="collapse" data-target="#navbar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
+              <nav id="navbar" class="navbar-left collapse navbar-collapse">
 
-<div class="container-fluid text-center">
-  <footer class="row footer">
-    <span id="copyrightInfo">Footer</span>
-  </footer>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </section>
+
+    <h1 class="intro-text">
+      Katalog restauracji Binar Places
+    </h1>
+    <h3 class="intro-text intro-link-text">
+      Binar::Apps
+    </h3>
+  </section>
+
+  <div id="main-content" class="container" style="color: black">
+    <div id="loader" class="row text-center content-loader">
+      <img src="resources/images/loader.gif">
+    </div>
+    <div id="content">
+      <div class="row">
+        <div class="col-md-8">
+          <ul class="nav nav-tabs content-tabs">
+            <li class="content-tabs-item content-tabs-item-active">
+              <a class="content-tabs-item-link" data-toggle="tab" href="#place-card-container">Restauracje</a>
+            </li>
+            <li class="content-tabs-item">
+              <a id="gallery-tab" class="content-tabs-item-link" data-toggle="tab" href="#place-gallery">Galeria</a>
+            </li>
+            <li class="content-tabs-item">
+              <a id="map-tab" class="content-tabs-item-link" data-toggle="tab" href="#place-map">Mapa</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <section id="place-card-container" class="tab-pane active content-place-cards">
+            </section>
+            <section id="place-gallery" class="tab-pane content-place-cards">
+              Galeria
+            </section>
+            <section id="place-map" class="tab-pane content-place-cards">
+              <div id="map">
+
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <section class="row">
+        <aside class="col-md-4">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <div id="add-new-place"  data-toggle="modal" data-target="#newPlaceModal">
+                Dodaj miejsce
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </div>
+  </div>
+
+  <div class="container-fluid text-center">
+    <footer class="row footer">
+      <span id="copyrightInfo">Footer</span>
+    </footer>
+  </div>
+
 </div>
 
 <div id="newPlaceModal" class="modal fade" role="dialog">
@@ -250,6 +275,8 @@
     </section>
   </div>
 </div>
+<script src="http://antenna.io/demo/jquery-bar-rating/jquery.barrating.js"></script>
+
 <script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo2nzz0NxEixW89wBU7dD0Cm134QAJvwo">
 </script>

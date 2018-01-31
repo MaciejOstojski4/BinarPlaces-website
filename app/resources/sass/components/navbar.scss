@@ -1,11 +1,20 @@
-nav {
-  max-width: 50vw;
-  z-index: 1;
-}
-
-.navbar {
+.header-nav {
   background-color: $orange-main-binar-places;
   border-radius: 0;
+  height: 55px;
+}
+
+.navbar-burger {
+  border: 1px solid $orange-main-binar-places;
+  border-radius: 23px;
+  float: none;
+  margin-left: 15px;
+  margin-top: 20px;
+  color: $orange-main-binar-places;
+}
+
+.navbar-toggle .icon-bar {
+  background-color: $orange-main-binar-places;
 }
 
 .navbar-list {
@@ -34,4 +43,10 @@ nav {
 
 .navbar-dropdown-category {
   background-color: $orange-main-binar-places;
+}
+
+@media (max-width: $screen-xs-max) {
+    .header-nav {
+      background-color: transparent;
+    }
 }

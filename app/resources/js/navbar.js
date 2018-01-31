@@ -80,7 +80,7 @@ const navbar = (function () {
   const prepareNavbar = function (data) {
     const categories = data.sort(sortCategoriesByCount);
     placesContainer.setCategories(categories);
-    const $header = $("#header");
+    const $header = $("#navbar");
     const $navbar = addNavbarElem($header);
     addCategoriesToNavbar($navbar);
     addCssToNavbarElem($navbar);

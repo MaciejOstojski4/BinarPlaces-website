@@ -37,13 +37,21 @@ h1 {
 .br-theme-fontawesome-stars-o .br-widget a::after {
   color: #D2691E !important; }
 
-nav {
-  max-width: 50vw;
-  z-index: 1; }
-
-.navbar {
+.header-nav {
   background-color: #D2691E;
-  border-radius: 0; }
+  border-radius: 0;
+  height: 55px; }
+
+.navbar-burger {
+  border: 1px solid #D2691E;
+  border-radius: 23px;
+  float: none;
+  margin-left: 15px;
+  margin-top: 20px;
+  color: #D2691E; }
+
+.navbar-toggle .icon-bar {
+  background-color: #D2691E; }
 
 .navbar-list {
   list-style-type: none;
@@ -68,18 +76,16 @@ nav {
 .navbar-dropdown-category {
   background-color: #D2691E; }
 
+@media (max-width: 767px) {
+  .header-nav {
+    background-color: transparent; } }
+
 .content-loader {
   padding: 20px; }
 
 .footer {
   background-color: #D2691E;
   padding: 30px; }
-
-.header-nav {
-  position: absolute;
-  left: 25%;
-  z-index: 1;
-  max-width: 50vw; }
 
 .header-pageName {
   display: inline-block; }
@@ -89,8 +95,12 @@ nav {
   padding-top: 35px;
   float: right; }
 
+@media (max-width: 767px) {
+  .header-loginRegister {
+    float: none;
+    padding-top: 0px; } }
+
 .intro {
-  padding: 350px;
   text-align: center;
   background: url("../images/index-background.jpeg") no-repeat;
   background-size: cover;
@@ -142,3 +152,7 @@ nav {
 
 .review-date {
   text-align: right; }
+
+#map {
+  height: 400px;
+  width: 100%; }
