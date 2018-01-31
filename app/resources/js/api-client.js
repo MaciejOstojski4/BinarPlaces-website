@@ -1,5 +1,7 @@
 const apiClient = (function () {
 
+  const ROOT_URL = "http://taste-api.binarlab.com";
+
   const API_URL = "http://taste-api.binarlab.com/api/v1/";
 
   const CATEGORIES_PATH = "categories",
@@ -29,7 +31,7 @@ const apiClient = (function () {
     });
   };
 
-  const fetchPlaces = function (categoryID) {
+  const fetchPlaces = function () {
     return $.ajax({
       type: "GET",
       url: API_URL + PLACES_PATH
@@ -46,7 +48,7 @@ const apiClient = (function () {
   const fetchPlaceImage = function (imgUrl) {
     return $.ajax({
       type: "GET",
-      url: API_URL
+      url: ROOT_URL + imgUrl
     })
   };
 

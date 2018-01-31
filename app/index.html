@@ -17,12 +17,10 @@
   <link href="http://antenna.io/demo/jquery-bar-rating/dist/themes/fontawesome-stars-o.css" rel="stylesheet"/>
 
   <link rel="stylesheet" href="resources/css/main.css"/>
-  <script src="resources/js/api-client.js"></script>
-  <script src="resources/js/index.js"></script>
 
   <style>
     #map {
-      height: 200px;
+      height: 400px;
       width: 100%;
     }
   </style>
@@ -252,32 +250,13 @@
     </section>
   </div>
 </div>
-
-<script>
-  function initMap() {
-    var uluru = {lat: -25.363, lng: 131.044};
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 4,
-      center: uluru
-    });
-    var marker = new google.maps.Marker({
-      position: uluru,
-      map: map
-    });
-    google.maps.event.addListener(map, "idle", function(){
-      google.maps.event.trigger(map, 'resize');
-    });  }
-</script>
-<script>
-  $(function() {
-    $("#gallery-tab").on("click", function() {
-      initMap();
-
-    })
-  })
-</script>
 <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo2nzz0NxEixW89wBU7dD0Cm134QAJvwo&callback=initMap">
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo2nzz0NxEixW89wBU7dD0Cm134QAJvwo">
 </script>
+
+<script src="resources/js/api-client.js"></script>
+<script src="resources/js/navbar.js"></script>
+<script src="resources/js/places-container.js"></script>
+<script src="resources/js/index.js"></script>
 </body>
 </html>
