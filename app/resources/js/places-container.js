@@ -185,14 +185,12 @@ const placesContainer = (function () {
     const placeId = event.currentTarget.id.slice(10);
     apiClient.fetchPlaceReviews(placeId)
       .then(function (data) {
-        console.log(data);
         showReviews(data);
       })
       .catch(function (error) {
         console.log(error)
       });
 
-    console.log(localStorage.getItem("email"));
     if(localStorage.getItem("email") !== null) {
       $("#rateFormPlaceId").attr("val", placeId);
       showAddRateBtnAttr();
@@ -214,7 +212,11 @@ const placesContainer = (function () {
     };
     apiClient.addReview(review, userSession.obtainUser())
       .then(function(response) {
-        console.log(response);
+        $("#createRateModal").modal("hide");
+        apiClient.fetchPlaceReviews(review.placeId)
+          .then(function(response) {
+            showReviews(response);
+          })
       })
       .catch(function(error) {
         console.log(error);

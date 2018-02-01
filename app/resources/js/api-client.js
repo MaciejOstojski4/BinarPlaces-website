@@ -24,18 +24,22 @@ const apiClient = (function () {
     });
   };
 
-  const fetchCategories = function () {
-    return $.ajax({
+  const fetchCategories = function (callback, errCallback) {
+    $.ajax({
       type: "GET",
       url: API_URL + CATEGORIES_PATH
-    });
+    })
+      .then(callback)
+      .catch(errCallback);;
   };
 
-  const fetchPlaces = function () {
-    return $.ajax({
+  const fetchPlaces = function (callback, errCallback) {
+    $.ajax({
       type: "GET",
       url: API_URL + PLACES_PATH
-    });
+    })
+      .then(callback)
+      .catch(errCallback);
   };
 
   const fetchPlaceReviews = function (placeID) {
@@ -52,21 +56,24 @@ const apiClient = (function () {
     })
   };
 
-  const login = function (user) {
-    console.log(user);
-    return $.ajax({
+  const login = function (user, callback, errCallback) {
+    $.ajax({
       type: "POST",
       url: API_URL + LOGIN_PATH,
       data: user
     })
+      .then(callback)
+      .catch(errCallback);
   };
 
-  const register = function (user) {
+  const register = function (user, callback, errCallback) {
     return $.ajax({
       type: "POST",
       url: API_URL + REGISTER_PATH,
       data: user
     })
+      .then(callback)
+      .catch(errCallback);
   };
 
   const addReview = function(review, user) {

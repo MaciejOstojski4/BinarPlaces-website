@@ -1,80 +1,76 @@
 const app = (function () {
 
+  const logError = function(error) {
+    console.log(error);
+  };
+
   const setDateInFooter = function () {
     const date = new Date();
     $("#copyrightInfo").text("Copyright " + date.getFullYear());
   };
 
   const hideElementOnStart = function () {
-    $("#content").hide();
-    $("#loader").hide();
+    $("#main-content").hide();
+    $("#loader-section").hide();
   };
 
-  const initLocalStorage = function() {
-    apiClient.fetchPlaces()
-      .then(function(response) {
-        userSession.saveObject(response, "places");
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+  const savePlacesInStorage = function(response) {
+    userSession.saveObject(response, "places");
+  };
 
-    apiClient.fetchCategories()
-      .then(function(response) {
-        userSession.saveObject(response, "categories")
-        console.log(response);
-      })
-      .catch(function(error) {
-        console.log(error);
-      })
+  const saveCategoriesInStorage = function(response) {
+    userSession.saveObject(response, "categories");
+  };
+
+  const initLocalStorage = function(callback) {
+    apiClient.fetchPlaces(savePlacesInStorage, logError);
+    apiClient.fetchCategories(callback, logError);
+  };
+
+  const initUI = function(response) {
+    saveCategoriesInStorage(response);
+    hideElementOnStart();
+    showUserSessionElem();
+    setOnClickListeners();
+    setDateInFooter();
+    navbar.init();
+    placesContainer.init();
   };
 
   const init = function () {
-    changeLoginState();
-    initLocalStorage();
-    setOnClickListeners();
-    placesContainer.init();
+    initLocalStorage(initUI);
+  };
 
-    const loginForm = $("#loginForm");
-    loginForm.submit(login);
-
-    const registerForm = $("#registerForm");
-    registerForm.submit(register);
-
-    setDateInFooter();
-    hideElementOnStart();
-    const categories = userSession.getObject("categories");
-    navbar.prepareNavbar(categories);
+  const processAfterLogin = function(email, response) {
+    userSession.setUser(email, response.auth_token);
+    showUserSessionElem();
+    hideModal("#loginModal")
   };
 
   const login = function (e) {
     e.preventDefault();
     const data = $("#loginForm").serialize();
     const email = $("#emailLoginInput").val();
-    apiClient.login(data)
-      .then(function (response) {
-        userSession.setUser(email, response.auth_token);
-        changeLoginState();
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    apiClient.login(data, function(response) {
+      processAfterLogin(email, response);
+    }, logError)
   };
 
-  const changeLoginState = function() {
-    if(localStorage.getItem("email") !== null) {
-      showLogout();
+  const showUserSessionElem = function() {
+    if(userSession.isUserLogged()) {
+      showLoggedInUserElem();
     } else {
-      showLogin();
+      showLoggedOutUserElem();
     }
   };
 
-  const showLogout = function() {
+  const showLoggedInUserElem = function() {
     $("#logout").css("display", "block");
     $("#login-register").css("display", "none");
+    $("#add-new-place").css("display", "block");
   };
 
-  const showLogin = function() {
+  const showLoggedOutUserElem = function() {
     $("#logout").css("display", "none");
     $("#login-register").css("display", "block");
   };
@@ -82,30 +78,40 @@ const app = (function () {
   const register = function (e) {
     e.preventDefault();
     const data = $("#registerForm").serialize();
-    apiClient.register(data)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    apiClient.register(data, function(response) {
+      hideModal("#registerModal")
+    }, logError)
+  };
+
+  const hideModal = function(id) {
+    $(id).modal("hide");
   };
 
   const setOnClickListeners = function() {
     setLogoutClickListner();
+    setLoginClickListener();
+    setRegisterClickListener();
   };
 
   const setLogoutClickListner = function() {
     $("#logout").click(logout);
   };
 
+  const setLoginClickListener = function() {
+    $("#loginForm").submit(login);
+  };
+
+  const setRegisterClickListener = function() {
+    $("#registerForm").submit(register);
+  };
+
   const logout = function() {
     userSession.clearSession();
-    changeLoginState();
+    showUserSessionElem();
   };
 
   return {
-    init: init,
+    init: init
   }
 })();
 

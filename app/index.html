@@ -74,16 +74,22 @@
     </h3>
   </section>
 
+  <section id="loader-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+          <div id="loader" class="content-loader">
+            <img src="resources/images/loader.gif">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="main-content" class="container" style="color: black">
     <div class="row">
       <div class="col-sm-12 col-md-12 col-lg-8">
-        <div class="row">
-          <div class="col-sm-12 col-md-12 col-lg-12 text-center">
-            <div id="loader" class="content-loader">
-              <img src="resources/images/loader.gif">
-            </div>
-          </div>
-        </div>
+
         <div id="content">
           <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -125,8 +131,12 @@
             <canvas id="placesChart" height="400"></canvas>
           </div>
         </div>
-        <div id="add-new-place"  data-toggle="modal" data-target="#newPlaceModal">
-          Dodaj miejsce
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div id="add-new-place" class="new-place-button" data-toggle="modal" data-target="#newPlaceModal">
+              Dodaj miejsce
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -173,7 +183,7 @@
               <label for="placeLon">Szerokość geograficzna</label>
               <input name="placeLon" type="text" class="form-control" />
             </div>
-            <button id="newPlaceSubmitBtn" type="submit" class="btn">Zatwierdź</button>
+            <button id="newPlaceSubmitBtn" type="submit" data-dismiss="modal" class="btn">Zatwierdź</button>
           </form>
         </section>
       </section>

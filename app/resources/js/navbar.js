@@ -93,14 +93,14 @@ const navbar = (function () {
     charts.initCategoriesChart(categoriesChartData);
     const placesChartData = prepareDataForPlacesChart();
     charts.initPlacesChart(placesChartData);
-    $("#loader").hide();
-    $("#content").show();
+    $("#loader-section").hide();
   };
 
   const addOnClickToNavbarElem = function ($navbar) {
     $navbar.find("li:not(last)").click(function (e) {
       e.preventDefault();
-      $("#loader").show();
+      $("#main-content").show();
+      $("#loader-section").show();
       const categoryID = parseInt($(this).find("span").text());
       const places = userSession.getPlaces();
       displayPlaces(places, categoryID);
@@ -134,17 +134,18 @@ const navbar = (function () {
     return $("<ul>").addClass("navbar-list").appendTo($navbar);
   };
 
-  const prepareNavbar = function (data) {
-    const categories = data.sort(sortCategoriesByCount);
-    placesContainer.setCategories(categories);
-    const $header = $("#navbar");
-    const $navbar = addNavbarElem($header);
+  const init = function () {
+    const categories = userSession.getObject("categories");
+    const categoriesSorted = categories.sort(sortCategoriesByCount);
+    placesContainer.setCategories(categoriesSorted);
+    // const $header = $("#navbar");
+    const $navbar = $("#navbar");
     addCategoriesToNavbar($navbar);
     addCssToNavbarElem($navbar);
     addOnClickToNavbarElem($navbar);
   };
 
   return {
-    prepareNavbar: prepareNavbar
+    init: init
   }
 })();

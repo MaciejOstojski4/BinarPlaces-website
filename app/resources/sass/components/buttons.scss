@@ -1,0 +1,16 @@
+#add-new-place {
+  display: none;
+}
+
+.new-place-button {
+  text-align: center;
+  margin-top: 50px;
+  padding: 10px 0;
+  background-color: $orange-main-binar-places;
+  color: #ffffff;
+  border-radius: 20px;
+}
+
+.new-place-button:hover {
+  cursor: pointer;
+}
