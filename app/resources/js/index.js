@@ -15,11 +15,33 @@ const app = (function () {
   };
 
   const savePlacesInStorage = function(response) {
-    userSession.saveObject(response, "places");
+    const sortedPlaces = response.sort(sortPlacesByRate);
+    userSession.saveObject(sortedPlaces, "places");
   };
 
   const saveCategoriesInStorage = function(response) {
-    userSession.saveObject(response, "categories");
+    const sortedCategories = response.sort(sortCategoriesByCount);
+    userSession.saveObject(sortedCategories, "categories");
+  };
+
+  const sortCategoriesByCount = function (first, second) {
+    if (first.count > second.count) {
+      return -1;
+    } else if (first.count < second.count) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
+
+  const sortPlacesByRate = function (first, second) {
+    if (first.rate > second.rate) {
+      return -1;
+    } else if (first.rate < second.rate) {
+      return 1;
+    } else {
+      return 0;
+    }
   };
 
   const initLocalStorage = function(callback) {
@@ -111,7 +133,11 @@ const app = (function () {
   };
 
   return {
-    init: init
+    init: init,
+    savePlacesInStorage: savePlacesInStorage,
+    saveCategoriesInStorage: saveCategoriesInStorage,
+    logError: logError,
+    hideModal: hideModal
   }
 })();
 

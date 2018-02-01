@@ -12,16 +12,18 @@ const apiClient = (function () {
     CREATE_REVIEW_PATH = "/reviews#create",
     CREATE_PLACE_PATH = "places#create";
 
-  const uploadNewPlace = function(place) {
+  const uploadNewPlace = function(place, callback, errCallback) {
     return $.ajax({
       type: "POST",
       url: API_URL + CREATE_PLACE_PATH,
       data: place,
       headers: {
-        "X-User-Token": "4WqKT3yVdYwq7NKe6Tym",
-        "X-User-Email": "binar_taste@example.com",
+        "X-User-Token": userSession.getUser().auth_token,
+        "X-User-Email": userSession.getUser().email
       }
-    });
+    })
+      .then(callback)
+      .catch(errCallback);
   };
 
   const fetchCategories = function (callback, errCallback) {
@@ -30,7 +32,7 @@ const apiClient = (function () {
       url: API_URL + CATEGORIES_PATH
     })
       .then(callback)
-      .catch(errCallback);;
+      .catch(errCallback);
   };
 
   const fetchPlaces = function (callback, errCallback) {

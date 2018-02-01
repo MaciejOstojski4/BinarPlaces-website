@@ -2,17 +2,7 @@ const placesContainer = (function () {
 
   const CARDS_IN_ROW = 3;
 
-  var categories = [];
-
   var choosenCategoryId = -1;
-
-  const setCategories = function (data) {
-    categories = data;
-  };
-
-  const getCategories = function () {
-    return categories;
-  };
 
   const preparePlaceObject = function(imgBase64) {
     const place = {
@@ -23,34 +13,56 @@ const placesContainer = (function () {
       category_id: parseInt($("#placeCategoriesSelect option:selected").val()),
       picture: imgBase64
     };
-    return  $.param(place);
+    return $.param(place);
   };
 
-  const setOnClickListeners = function() {
-    $("#add-new-place").click(function() {
-      const $selectCategories = $("#placeCategoriesSelect");
-      categories.forEach(function(category) {
-        const $categoryOption = $("<option>").html(category.name).attr("value", category.id);
-        $categoryOption.appendTo($selectCategories);
-      })
-    });
+  const initPlaceForm = function() {
+    const $selectCategories = $("#placeCategoriesSelect");
+    const categories = userSession.getObject("categories");
+    categories.forEach(function(category) {
+      const $categoryOption = $("<option>").html(category.name).attr("value", category.id);
+      $categoryOption.appendTo($selectCategories);
+    })
+  };
 
-    $("#newPlaceForm").submit(function(e) {
-      e.preventDefault();
-      const fileReader = new FileReader();
-      fileReader.addEventListener("load", function () {
-        const place = preparePlaceObject(fileReader.result);
-        apiClient.uploadNewPlace(place)
-          .then(function(response) {
-            console.log(response);
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-      }, false);
-      fileReader.readAsDataURL($("input[name=placeImage]").get(0).files[0])
-    });
+  const setNewPlaceModalClickListener = function() {
+    $("#add-new-place").click(initPlaceForm);
+  };
 
+  const refreshPlacesContainer = function(response) {
+    app.saveCategoriesInStorage(response);
+    const choosenCategoryId = userSession.getObject("choosenCategory");
+    navbar.displayPlaces(response, choosenCategoryId);
+  };
+
+  const refreshContent = function(callback) {
+    apiClient.fetchPlaces(app.savePlacesInStorage, app.logError);
+    apiClient.fetchCategories(callback, app.logError)
+  };
+
+  const uploadNewPlace = function(imgB64){
+    const place = preparePlaceObject(imgB64);
+    apiClient.uploadNewPlace(place, app.logError, function(response) {
+      console.log(response);
+      app.hideModal("#newPlaceModal");
+      refreshContent(refreshPlacesContainer);
+    });
+  };
+
+  const submitNewPlace = function(event) {
+    event.preventDefault();
+    const fileReader = new FileReader();
+    fileReader.addEventListener("load", function() {
+      uploadNewPlace(fileReader.result);
+    }, false);
+    fileReader.readAsDataURL($("input[name=placeImage]").get(0).files[0]);
+  };
+
+  const setNewPlaceSubmitClickListener = function() {
+    $("#newPlaceForm").submit(submitNewPlace);
+  };
+
+  const setGaleryTabClickListener = function() {
     $("#gallery-tab").click(function() {
       apiClient.fetchPlaces()
         .then(function(response) {
@@ -70,10 +82,19 @@ const placesContainer = (function () {
           console.log(error);
         })
     });
+  };
 
+  const setMapTabClickListener = function() {
     $("#map-tab").click(function() {
       initMap();
-    })
+    });
+  };
+
+  const setOnClickListeners = function() {
+    setNewPlaceModalClickListener();
+    setNewPlaceSubmitClickListener();
+    setGaleryTabClickListener();
+    setMapTabClickListener();
   };
 
   const initMap =  function() {
@@ -109,19 +130,7 @@ const placesContainer = (function () {
   };
 
   const removeCardsWithPlaces = function () {
-    var $placeContainer = $("#place-card-container");
-    $placeContainer.children().remove();
-    return $placeContainer;
-  };
-
-  const sortPlacesByRate = function (first, second) {
-    if (first.rate > second.rate) {
-      return -1;
-    } else if (first.rate < second.rate) {
-      return 1;
-    } else {
-      return 0;
-    }
+    $("#place-card-container").children().remove();
   };
 
   const prepareCardsWithPlaces = function ($placeContainer, allPlaces, categoryID) {
@@ -210,7 +219,7 @@ const placesContainer = (function () {
       rate: mark,
       placeId: $("#rateFormPlaceId").attr("val")
     };
-    apiClient.addReview(review, userSession.obtainUser())
+    apiClient.addReview(review, userSession.getUser())
       .then(function(response) {
         $("#createRateModal").modal("hide");
         apiClient.fetchPlaceReviews(review.placeId)
@@ -266,12 +275,12 @@ const placesContainer = (function () {
   };
 
   const getCategoryById = function (categoryID) {
-    const category = categories.filter(function (c) {
+    const categories = userSession.getObject("categories");
+    return categories.filter(function (c) {
       if (c.id === categoryID) {
         return c;
       }
-    });
-    return category[0];
+    })[0];
   };
 
   const init = function() {
@@ -280,10 +289,7 @@ const placesContainer = (function () {
 
   return {
     removeCardsWithPlaces: removeCardsWithPlaces,
-    sortPlacesByRate: sortPlacesByRate,
     prepareCardsWithPlaces: prepareCardsWithPlaces,
-    setCategories: setCategories,
-    getCategories: getCategories,
-    init: init,
+    init: init
   }
 })();

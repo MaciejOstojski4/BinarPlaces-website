@@ -9,14 +9,16 @@ const navbar = (function () {
   };
 
   const addDefaultCategory = function ($navbar) {
-    const allPlacesCategory = '<li><a href=MAIN_CONTENT_ANCHOR><span>-1</span>Wszystkie</a></li>';
+    const allPlacesCategory =
+      '<li><a href=MAIN_CONTENT_ANCHOR><span>-1</span>Wszystkie</a></li>';
     $navbar.append(allPlacesCategory);
   };
 
   const addMostPopularCategory = function ($navbar) {
+    const categories = userSession.getObject("categories");
     for (var i = 0; i < CATEGORIES_IN_NAVBAR; i++) {
-      const category = placesContainer.getCategories()[i];
-      const liElem = '<li><a href=MAIN_CONTENT_ANCHOR><span>' + category.id + '</span>' + category.name + '</a></li>';
+      const liElem = '<li><a href=MAIN_CONTENT_ANCHOR><span>'
+        + categories[i].id + '</span>' + categories[i].name + '</a></li>';
       $navbar.append(liElem);
     }
   };
@@ -25,6 +27,14 @@ const navbar = (function () {
     $navbar.children().addClass("navbar-list-element");
     $navbar.find("a").addClass("navbar-list-element-link");
     $navbar.find("span").addClass("hidden");
+  };
+
+  const createColor = function() {
+    return {
+      red: parseInt(Math.random() * (255 - 160) + 160),
+      green: parseInt(Math.random() * (155 - 55) + 55),
+      blue: parseInt(Math.random() * 80)
+    }
   };
 
   const prepareDataForCategoriesChart = function() {
@@ -39,11 +49,9 @@ const navbar = (function () {
     });
 
     const colors = categories.map(function(category) {
-      const red = parseInt(Math.random() * (255 - 0));
-      const green = parseInt(Math.random() * (255 - 0));
-      const blue = parseInt(Math.random() * (255 - 0));
+      const color = createColor();
 
-      return "rgba(" + red + "," + green + "," + blue + ", 0.5)";
+      return "rgba(" + color.red + "," + color.green + "," + color.blue + ", 0.5)";
     });
 
     return {
@@ -56,13 +64,11 @@ const navbar = (function () {
   const prepareDataForPlacesChart = function() {
     const places = userSession.getObject("places");
 
-    console.log(places);
-    const labels = ["brak", "1", "2", "3", "4", "5"]
+    const labels = ["brak", "1", "2", "3", "4", "5"];
 
     var numbers = [0, 0, 0, 0, 0];
     places.forEach(function(place) {
       const rate = parseInt(place.rate);
-      console.log(rate);
       if(Number.isNaN(rate)) {
         numbers[0] += 1;
       } else {
@@ -71,11 +77,9 @@ const navbar = (function () {
     });
 
     const colors = places.map(function(places) {
-      const red = parseInt(Math.random() * (255 - 0));
-      const green = parseInt(Math.random() * (255 - 0));
-      const blue = parseInt(Math.random() * (255 - 0));
+      const color = createColor();
 
-      return "rgba(" + red + "," + green + "," + blue + ", 0.5)";
+      return "rgba(" + color.red + "," + color.green + "," + color.blue + ", 0.5)";
     });
 
     return {
@@ -86,9 +90,11 @@ const navbar = (function () {
   };
 
   const displayPlaces = function (data, categoryID) {
-    var $placesContainer = placesContainer.removeCardsWithPlaces();
-    const places = data.sort(placesContainer.sortPlacesByRate);
-    placesContainer.prepareCardsWithPlaces($placesContainer, places, categoryID);
+    console.log(data);
+    console.log(categoryID);
+    placesContainer.removeCardsWithPlaces();
+    const places = userSession.getObject("places");
+    placesContainer.prepareCardsWithPlaces($("#place-card-container"), places, categoryID);
     const categoriesChartData = prepareDataForCategoriesChart();
     charts.initCategoriesChart(categoriesChartData);
     const placesChartData = prepareDataForPlacesChart();
@@ -102,7 +108,8 @@ const navbar = (function () {
       $("#main-content").show();
       $("#loader-section").show();
       const categoryID = parseInt($(this).find("span").text());
-      const places = userSession.getPlaces();
+      userSession.saveObject(categoryID, "choosenCategory");
+      const places = userSession.getObject("places");
       displayPlaces(places, categoryID);
       window.location = "#main-content";
     })
@@ -110,35 +117,17 @@ const navbar = (function () {
 
   const addCategoryInDropdown = function ($navbar) {
     const $selectLi = $('<li class="dropdown show"><a href="#" data-toggle="dropdown">Inne</a></li>');
-    $navbar.append($selectLi);
     const $dropDownList = $("<div>").addClass("dropdown-menu navbar-dropdown-category").appendTo($selectLi);
-    for (var j = CATEGORIES_IN_NAVBAR; j < placesContainer.getCategories().length; j++) {
-      const category = placesContainer.getCategories()[j];
-      const categoryOp = '<a href="MAIN_CONTENT_ANCHOR"><span>' + category.id + '</span>' + category.name + '</a>';
+    const categories = userSession.getObject("categories");
+    for (var i = CATEGORIES_IN_NAVBAR; i < categories.length; i++) {
+      const categoryOp = '<a href="MAIN_CONTENT_ANCHOR"><span>'
+        + categories[i].id + '</span>' + categories[i].name + '</a>';
       $dropDownList.append(categoryOp);
     }
-  };
-
-  const sortCategoriesByCount = function (first, second) {
-    if (first.count > second.count) {
-      return -1;
-    } else if (first.count < second.count) {
-      return 1;
-    } else {
-      return 0;
-    }
-  };
-
-  const addNavbarElem = function ($container) {
-    const $navbar = $("<nav>").addClass("row navbar").appendTo($container);
-    return $("<ul>").addClass("navbar-list").appendTo($navbar);
+    $navbar.append($selectLi);
   };
 
   const init = function () {
-    const categories = userSession.getObject("categories");
-    const categoriesSorted = categories.sort(sortCategoriesByCount);
-    placesContainer.setCategories(categoriesSorted);
-    // const $header = $("#navbar");
     const $navbar = $("#navbar");
     addCategoriesToNavbar($navbar);
     addCssToNavbarElem($navbar);
@@ -146,6 +135,7 @@ const navbar = (function () {
   };
 
   return {
-    init: init
+    init: init,
+    displayPlaces: displayPlaces
   }
 })();
