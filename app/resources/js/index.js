@@ -10,8 +10,28 @@ const app = (function () {
     $("#loader").hide();
   };
 
+  const initLocalStorage = function() {
+    apiClient.fetchPlaces()
+      .then(function(response) {
+        userSession.saveObject(response, "places");
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+    apiClient.fetchCategories()
+      .then(function(response) {
+        userSession.saveObject(response, "categories")
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      })
+  };
+
   const init = function () {
     changeLoginState();
+    initLocalStorage();
     setOnClickListeners();
     placesContainer.init();
 
@@ -23,13 +43,8 @@ const app = (function () {
 
     setDateInFooter();
     hideElementOnStart();
-    apiClient.fetchCategories()
-      .then(function (data) {
-        navbar.prepareNavbar(data)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    const categories = userSession.getObject("categories");
+    navbar.prepareNavbar(categories);
   };
 
   const login = function (e) {

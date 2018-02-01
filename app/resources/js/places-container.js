@@ -82,22 +82,20 @@ const placesContainer = (function () {
       zoom: 10,
       center: lodz
     });
-    apiClient.fetchPlaces()
-      .then(function(places) {
-        places.forEach(function(place) {
-          const marker = new google.maps.Marker({
-            position: {lat: parseInt(place.location.lat), lng: parseInt(place.location.lon)},
-            map: map,
-            title: place.name
-          });
-          const infowindow = new google.maps.InfoWindow({
-            content: prepareInfoWindowContent(place)
-          });
-          marker.addListener("click", function() {
-            infowindow.open(map, marker);
-          })
-        });
+    const places = userSession.getObject("places");
+    places.forEach(function(place) {
+      const marker = new google.maps.Marker({
+        position: {lat: parseInt(place.location.lat), lng: parseInt(place.location.lon)},
+        map: map,
+        title: place.name
       });
+      const infowindow = new google.maps.InfoWindow({
+        content: prepareInfoWindowContent(place)
+      });
+      marker.addListener("click", function() {
+        infowindow.open(map, marker);
+      })
+    });
 
     google.maps.event.addListener(map, "idle", function(){
       google.maps.event.trigger(map, 'resize');

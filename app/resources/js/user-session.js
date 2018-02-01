@@ -20,10 +20,35 @@ const userSession = (function() {
     localStorage.clear();
   };
 
+  const setPlaces = function(places) {
+    if(localStorage.getItem("places") !== null) {
+      localStorage.removeItem("places");
+    }
+    localStorage.setItem("places", JSON.stringify(places));
+  };
+
+  const getPlaces = function() {
+    return JSON.parse(localStorage.getItem("places"));
+  };
+
+  const saveObject = function(object, key) {
+    if(localStorage.getItem(key) !== null) {
+      localStorage.removeItem(key);
+    }
+    localStorage.setItem(key, JSON.stringify(object));
+  };
+
+  const getObject = function(key) {
+    return JSON.parse(localStorage.getItem(key));
+  };
+
   return {
     setUser: setUser,
     obtainUser: obtainUser,
     isUserLogged: isUserLogged,
-    clearSession: clearSession
+    clearSession: clearSession,
+    saveObject: saveObject,
+    getObject: getObject,
+    getPlaces: getPlaces
   }
 })();

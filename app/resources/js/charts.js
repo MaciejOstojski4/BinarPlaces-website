@@ -1,20 +1,39 @@
 const charts = (function() {
 
-  const initCategoriesChart = function(labels) {
+  const initCategoriesChart = function(data) {
     const context = $("#categoriesChart").get(0).getContext("2d");
+    console.log(data);
     const chart = new Chart(context, {
       type: "pie",
       data: {
-        labels: ["Mexican", "Polish", "British"],
+        labels: data.labels,
         datasets: [{
           label: "categories",
-          data: [1, 5, 3]
+          data: data.numbers,
+          backgroundColor: data.colors
+        }]
+      }
+    })
+  };
+
+  const initPlacesChart = function(data) {
+    const context = $("#placesChart").get(0).getContext("2d");
+    console.log(data);
+    const chart = new Chart(context, {
+      type: "bar",
+      data: {
+        labels: data.labels,
+        datasets: [{
+          label: "places",
+          data: data.numbers,
+          backgroundColor: data.colors
         }]
       }
     })
   };
 
   return {
-    initCategoriesChart: initCategoriesChart
+    initCategoriesChart: initCategoriesChart,
+    initPlacesChart: initPlacesChart
   }
 })();

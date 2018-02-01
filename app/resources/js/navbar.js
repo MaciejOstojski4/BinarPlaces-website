@@ -27,11 +27,72 @@ const navbar = (function () {
     $navbar.find("span").addClass("hidden");
   };
 
+  const prepareDataForCategoriesChart = function() {
+    const categories = userSession.getObject("categories");
+
+    const labels = categories.map(function(category) {
+      return category.name
+    });
+
+    const numbers =  categories.map(function(category) {
+      return category.places_count;
+    });
+
+    const colors = categories.map(function(category) {
+      const red = parseInt(Math.random() * (255 - 0));
+      const green = parseInt(Math.random() * (255 - 0));
+      const blue = parseInt(Math.random() * (255 - 0));
+
+      return "rgba(" + red + "," + green + "," + blue + ", 0.5)";
+    });
+
+    return {
+      labels: labels,
+      numbers: numbers,
+      colors: colors
+    }
+  };
+
+  const prepareDataForPlacesChart = function() {
+    const places = userSession.getObject("places");
+
+    console.log(places);
+    const labels = ["brak", "1", "2", "3", "4", "5"]
+
+    var numbers = [0, 0, 0, 0, 0];
+    places.forEach(function(place) {
+      const rate = parseInt(place.rate);
+      console.log(rate);
+      if(Number.isNaN(rate)) {
+        numbers[0] += 1;
+      } else {
+        numbers[rate] += 1;
+      }
+    });
+
+    const colors = places.map(function(places) {
+      const red = parseInt(Math.random() * (255 - 0));
+      const green = parseInt(Math.random() * (255 - 0));
+      const blue = parseInt(Math.random() * (255 - 0));
+
+      return "rgba(" + red + "," + green + "," + blue + ", 0.5)";
+    });
+
+    return {
+      labels: labels,
+      numbers: numbers,
+      colors: colors
+    }
+  };
+
   const displayPlaces = function (data, categoryID) {
     var $placesContainer = placesContainer.removeCardsWithPlaces();
     const places = data.sort(placesContainer.sortPlacesByRate);
     placesContainer.prepareCardsWithPlaces($placesContainer, places, categoryID);
-    charts.initCategoriesChart([]);
+    const categoriesChartData = prepareDataForCategoriesChart();
+    charts.initCategoriesChart(categoriesChartData);
+    const placesChartData = prepareDataForPlacesChart();
+    charts.initPlacesChart(placesChartData);
     $("#loader").hide();
     $("#content").show();
   };
@@ -41,13 +102,8 @@ const navbar = (function () {
       e.preventDefault();
       $("#loader").show();
       const categoryID = parseInt($(this).find("span").text());
-      apiClient.fetchPlaces(categoryID)
-        .then(function (data) {
-          displayPlaces(data, categoryID)
-        })
-        .catch(function (error) {
-          console.log(error)
-        });
+      const places = userSession.getPlaces();
+      displayPlaces(places, categoryID);
       window.location = "#main-content";
     })
   };
