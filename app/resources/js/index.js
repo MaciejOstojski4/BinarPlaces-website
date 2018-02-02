@@ -63,10 +63,17 @@ const app = (function () {
     initLocalStorage(initUI);
   };
 
+  const saveUserData = function(response) {
+    userSession.saveObject(response.name, "username");
+    userSession.saveObject(response.id, "userID");
+  };
+
   const processAfterLogin = function(email, response) {
     userSession.setUser(email, response.auth_token);
     showUserSessionElem();
-    hideModal("#loginModal")
+    const user = userSession.getUser();
+    apiClient.getUserData(user, saveUserData, logError);
+    hideModal("#loginModal");
   };
 
   const login = function (e) {

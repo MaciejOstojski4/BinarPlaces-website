@@ -6,9 +6,10 @@ const apiClient = (function () {
 
   const CATEGORIES_PATH = "categories",
     PLACES_PATH = "places/",
+    USER_PATH = "user/",
     LOGIN_PATH = "user/sign_in/",
     REGISTER_PATH = "user/sign_up/",
-    REVIEWS_PATH = "/reviews/",
+    REVIEWS_PATH = "reviews/",
     CREATE_REVIEW_PATH = "/reviews#create",
     CREATE_PLACE_PATH = "places#create";
 
@@ -44,11 +45,26 @@ const apiClient = (function () {
       .catch(errCallback);
   };
 
-  const fetchPlaceReviews = function (placeID) {
-    return $.ajax({
+  const fetchPlaceReviews = function (placeID, callback, errCallback) {
+    $.ajax({
       type: "GET",
-      url: API_URL + PLACES_PATH + placeID + REVIEWS_PATH
-    });
+      url: API_URL + PLACES_PATH + placeID + "/" + REVIEWS_PATH
+    })
+      .then(callback)
+      .catch(errCallback);
+  };
+
+  const removeReview = function(id, user, callback, errCallback) {
+    $.ajax({
+      type: "DELETE",
+      url: API_URL + REVIEWS_PATH + id + "#destroy",
+      headers: {
+        "X-User-Token": user.auth_token,
+        "X-User-Email": user.email
+      }
+    })
+      .then(callback)
+      .catch(errCallback);
   };
 
   const fetchPlaceImage = function (imgUrl) {
@@ -68,6 +84,19 @@ const apiClient = (function () {
       .catch(errCallback);
   };
 
+  const getUserData = function(user, callback, errCallback) {
+    $.ajax({
+      type: "GET",
+      url: API_URL + USER_PATH,
+      headers: {
+        "X-User-Token": user.auth_token,
+        "X-User-Email": user.email
+      }
+    })
+      .then(callback)
+      .catch(errCallback);
+  };
+
   const register = function (user, callback, errCallback) {
     return $.ajax({
       type: "POST",
@@ -78,11 +107,13 @@ const apiClient = (function () {
       .catch(errCallback);
   };
 
-  const addReview = function(review, user) {
+  const addReview = function(review, user, callback, errCallback) {
     const rev = {
       content: review.content,
       rate: review.rate
     };
+
+    console.log(review);
 
     return $.ajax({
       type: "POST",
@@ -93,6 +124,27 @@ const apiClient = (function () {
         "X-User-Email": user.email
       }
     })
+      .then(callback)
+      .catch(errCallback);
+  };
+
+  const editReview = function(review, user, callback, errCallback) {
+    const rev = {
+      content: review.content,
+      rate: review.rate
+    };
+
+    $.ajax({
+      type: "PUT",
+      url: API_URL + REVIEWS_PATH + review.id + "#update",
+      data: rev,
+      headers: {
+        "X-User-Token": user.auth_token,
+        "X-User-Email": user.email
+      }
+    })
+      .then(callback)
+      .catch(errCallback);
   };
 
   return {
@@ -103,6 +155,9 @@ const apiClient = (function () {
     register: register,
     addReview: addReview,
     fetchPlaceImage: fetchPlaceImage,
-    uploadNewPlace: uploadNewPlace
+    uploadNewPlace: uploadNewPlace,
+    getUserData: getUserData,
+    removeReview: removeReview,
+    editReview: editReview
   }
 })();

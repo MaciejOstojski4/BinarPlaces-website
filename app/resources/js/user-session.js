@@ -20,10 +20,6 @@ const userSession = (function() {
     localStorage.clear();
   };
 
-  const getPlaces = function() {
-    return JSON.parse(localStorage.getItem("places"));
-  };
-
   const saveObject = function(object, key) {
     if(localStorage.getItem(key) !== null) {
       localStorage.removeItem(key);
@@ -41,7 +37,6 @@ const userSession = (function() {
     isUserLogged: isUserLogged,
     clearSession: clearSession,
     saveObject: saveObject,
-    getObject: getObject,
-    getPlaces: getPlaces
+    getObject: getObject
   }
 })();

@@ -11,6 +11,11 @@
   border-radius: 20px;
 }
 
+.rev-btn:hover,
 .new-place-button:hover {
   cursor: pointer;
+}
+
+.rev-btn {
+  color: $orange-main-binar-places;
 }

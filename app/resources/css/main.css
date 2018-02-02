@@ -148,7 +148,9 @@ h1 {
   border: 1px solid #ffffff;
   padding: 10px;
   border-radius: 8px;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  color: #D2691E; }
 
 .review-author {
   text-align: right; }
@@ -171,5 +173,9 @@ h1 {
   color: #ffffff;
   border-radius: 20px; }
 
+.rev-btn:hover,
 .new-place-button:hover {
   cursor: pointer; }
+
+.rev-btn {
+  color: #D2691E; }

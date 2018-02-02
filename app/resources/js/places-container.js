@@ -139,11 +139,14 @@ const placesContainer = (function () {
     var $row;
     places.forEach(function (place, index) {
       if ((index % CARDS_IN_ROW) === 0) {
-        $row = createRowForCard($placeContainer);
+        $row = createRowForCard();
       }
-      const $column = createColumnForCard($row);
-      const $placeCard = createPlaceCard($column);
+      const $column = createColumnForCard();
+      const $placeCard = createPlaceCard();
       addPlaceInfoToCard($placeCard, place);
+      $column.appendTo($row);
+      $placeCard.appendTo($column);
+      $row.appendTo($placeContainer);
     });
   };
 
@@ -159,7 +162,7 @@ const placesContainer = (function () {
   };
 
   const addRateHolder = function ($card, place) {
-    const $rateHolder = $('<div data-toggle="modal" data-target="#ratesModal">').appendTo($card);
+    const $rateHolder = $('<div data-toggle="modal" data-target="#ratesModal">');
     $rateHolder.attr("id", "rateHolder" + place.id);
     const $rates = $('<select>').appendTo($rateHolder);
     for (var i = 0; i < 5; i++) {
@@ -170,14 +173,14 @@ const placesContainer = (function () {
       initialRating: place.rate,
       readonly: true
     });
-    $rateHolder.click(showPlaceReviewsModal);
+    $rateHolder.click(showPlaceReviewsModal).appendTo($card);
   };
 
   const showReviews = function(reviews) {
     const $container = $("#reviews-container");
     $container.empty();
     reviews.forEach(function (rev) {
-      const $revBox = $("<div>").addClass("review-box").appendTo($container);
+      const $revBox = $("<div>").addClass("review-box");
       const $revRate = $("<div>").addClass("review-rate").appendTo($revBox);
       const $revContent = $("<div>").addClass("review-content").appendTo($revBox);
       const $revAuthor = $("<div>").addClass("review-author").appendTo($revBox);
@@ -187,49 +190,101 @@ const placesContainer = (function () {
       $revContent.text(rev.content);
       $revAuthor.text(rev.username);
       $revDate.text(rev.created_at);
+
+      const currentUsername = userSession.getObject("username");
+      if(currentUsername === rev.username) {
+        const $revRemove = $("<div>").addClass("rev-btn").appendTo($revBox);
+        $revRemove.text("Usuń");
+        $revRemove.click(function() {
+          removeReview(rev.id);
+        });
+
+        const $revEdit = $("<div>").addClass("rev-btn").appendTo($revBox);
+        $revEdit.text("Edytuj");
+        $revEdit.attr("data-toggle", "modal");
+        $revEdit.attr("data-target", "#createRateModal");
+        $revEdit.click(function() {
+          editReview(rev);
+        })
+      }
+      $revBox.appendTo($container);
     })
+  };
+
+  const editReview = function(review) {
+    $("#rateContent").val(review.content);
+    $("#rateSelect").find("input").each(function() {
+      if(parseInt($(this).val()) === parseInt(review.rate)) {
+        $(this).attr("checked", true);
+      }
+    });
+    const $rateForm = $("#createRateForm");
+    $rateForm.unbind("submit");
+    $rateForm.submit(function(e) {
+      e.preventDefault();
+      const rev = prepareReviewForEdit(review.id);
+      console.log(rev);
+      sendReview(rev, false);
+    })
+  };
+
+  const removeReview = function(id) {
+    const user = userSession.getUser();
+    apiClient.removeReview(id, user, app.logError, refreshReviews);
+  };
+
+  const refreshReviews = function() {
+    const placeId = userSession.getObject("placeId");
+    apiClient.fetchPlaceReviews(placeId, showReviews, app.logError);
   };
 
   const showPlaceReviewsModal = function (event) {
     const placeId = event.currentTarget.id.slice(10);
-    apiClient.fetchPlaceReviews(placeId)
-      .then(function (data) {
-        showReviews(data);
-      })
-      .catch(function (error) {
-        console.log(error)
-      });
+    userSession.saveObject(placeId, "placeId");
+    apiClient.fetchPlaceReviews(placeId, showReviews, app.logError);
 
-    if(localStorage.getItem("email") !== null) {
+    if(userSession.isUserLogged()) {
       $("#rateFormPlaceId").attr("val", placeId);
       showAddRateBtnAttr();
-
-      const $createReviewForm = $("#createRateForm");
-      $createReviewForm.submit(sendReview);
+      const $rateForm = $("#createRateForm");
+      $rateForm.unbind("submit");
+      $rateForm.submit(function(e) {
+        e.preventDefault();
+        const review = prepareReview();
+        sendReview(review, true);
+      });
     }
   };
 
-  const sendReview = function(e) {
-    e.preventDefault();
-
-    const rateContent = $("#rateContent").val();
-    const mark = $("input[name=rateMark]:checked").val();
-    const review = {
-      content: rateContent,
-      rate: mark,
+  const prepareReview = function() {
+    return {
+      content: $("#rateContent").val(),
+      rate: $("input[name=rateMark]:checked").val(),
       placeId: $("#rateFormPlaceId").attr("val")
     };
-    apiClient.addReview(review, userSession.getUser())
-      .then(function(response) {
-        $("#createRateModal").modal("hide");
-        apiClient.fetchPlaceReviews(review.placeId)
-          .then(function(response) {
-            showReviews(response);
-          })
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+  };
+
+  const prepareReviewForEdit = function(reviewId) {
+    return {
+      content: $("#rateContent").val(),
+      rate: $("input[name=rateMark]:checked").val(),
+      id: reviewId
+    }
+  };
+
+  const processAfterReviewUpload = function() {
+    console.log("test");
+    $("#createRateModal").modal("hide");
+    refreshReviews();
+  };
+
+  const sendReview = function(review, create) {
+    const user = userSession.getUser();
+    if(create) {
+      apiClient.addReview(review, user, processAfterReviewUpload, app.logError);
+    } else {
+      apiClient.editReview(review, user, app.logError, processAfterReviewUpload);
+    }
   };
 
   const showAddRateBtnAttr = function(){
@@ -251,16 +306,16 @@ const placesContainer = (function () {
     }
   };
 
-  const createRowForCard = function ($container) {
-    return $("<div/>").addClass("row").appendTo($container);
+  const createRowForCard = function () {
+    return $("<div/>").addClass("row");
   };
 
-  const createColumnForCard = function ($row) {
-    return $("<div>").addClass("col-md-4").appendTo($row);
+  const createColumnForCard = function () {
+    return $("<div>").addClass("col-md-4");
   };
 
-  const createPlaceCard = function ($column) {
-    return $("<div>").addClass("place-card text-center").appendTo($column);
+  const createPlaceCard = function () {
+    return $("<div>").addClass("place-card text-center");
   };
 
   const getPlacesByCategory = function (places, categoryID) {
