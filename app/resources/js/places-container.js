@@ -22,7 +22,9 @@ const placesContainer = (function () {
     categories.forEach(function(category) {
       const $categoryOption = $("<option>").html(category.name).attr("value", category.id);
       $categoryOption.appendTo($selectCategories);
-    })
+    });
+    $("#newPlaceForm").find("input").val("");
+    formValidator.initForm("#newPlaceForm", submitNewPlace);
   };
 
   const setNewPlaceModalClickListener = function() {
@@ -49,7 +51,7 @@ const placesContainer = (function () {
   };
 
   const submitNewPlace = function(event) {
-    event.preventDefault();
+    // event.preventDefault();
     const fileReader = new FileReader();
     fileReader.addEventListener("load", function() {
       uploadNewPlace(fileReader.result);
@@ -58,35 +60,29 @@ const placesContainer = (function () {
   };
 
   const setNewPlaceSubmitClickListener = function() {
-    $("#newPlaceForm").submit(submitNewPlace);
-  };
-
-  const setGaleryTabClickListener = function() {
-    $("#gallery-tab").click(function() {
-      apiClient.fetchPlaces()
-        .then(function(response) {
-          response.forEach(function(place) {
-            if(place.id === 14) {
-              apiClient.fetchPlaceImage(place.picture_url)
-                .then(function (response) {
-                  console.log(response);
-                })
-                .catch(function (error) {
-                  console.log(error);
-                })
-            }
-          })
-        })
-        .catch(function(error) {
-          console.log(error);
-        })
-    });
+    // $("#newPlaceForm").submit(submitNewPlace);
   };
 
   const setMapTabClickListener = function() {
     $("#tabs-map").click(function() {
       initMap();
     });
+  };
+
+  const setGalleryTabClickListener = function() {
+    $("#tabs-gallery").click(function() {
+      const $gallery = $("#gallery");
+      const places = userSession.getObject("places");
+      places.forEach(function(place) {
+        apiClient.fetchPlaceImage(place, function(response) {
+          addImgToGallery($gallery, response);
+        }, app.logError)
+      });
+    });
+  };
+
+  const addImgToGallery = function($gallery, img) {
+    const $img = $("<img>").attr("src", "data:image/jpeg;base64, " + img).appendTo($gallery);
   };
 
   const setAddRateClickListener = function() {
@@ -99,9 +95,9 @@ const placesContainer = (function () {
   const setOnClickListeners = function() {
     setNewPlaceModalClickListener();
     setNewPlaceSubmitClickListener();
-    setGaleryTabClickListener();
     setMapTabClickListener();
     setAddRateClickListener();
+    setGalleryTabClickListener();
   };
 
   const initMap =  function() {

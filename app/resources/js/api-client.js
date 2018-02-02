@@ -67,11 +67,13 @@ const apiClient = (function () {
       .catch(errCallback);
   };
 
-  const fetchPlaceImage = function (imgUrl) {
+  const fetchPlaceImage = function (place, callback, errCallback) {
     return $.ajax({
       type: "GET",
-      url: ROOT_URL + imgUrl
+      url: ROOT_URL + place.picture_url
     })
+      .then(callback)
+      .catch(errCallback);
   };
 
   const login = function (user, callback, errCallback) {

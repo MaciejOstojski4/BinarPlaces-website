@@ -103,7 +103,9 @@
                 <section id="place-card-container" class="tab-pane active content-place-cards">
                 </section>
                 <section id="place-gallery" class="tab-pane content-place-cards">
-                  Galeria
+                  <div id="gallery">
+
+                  </div>
                 </section>
                 <section id="place-map" class="tab-pane content-place-cards">
                   <div id="map" class="place-map">
@@ -154,15 +156,15 @@
           <form id="newPlaceForm">
             <div class="form-group">
               <label for="placeName">Nazwa</label>
-              <input name="placeName" type="text" class="form-control" />
+              <input name="placeName" type="text" class="form-control" required/>
             </div>
             <div class="form-group">
               <label for="placeAddress">Adres</label>
-              <input name="placeAddress" type="text" class="form-control" />
+              <input name="placeAddress" type="text" class="form-control" required/>
             </div>
             <div class="form-group">
               <label for="placeCategories">Kategoria</label>
-              <select id="placeCategoriesSelect" name="placeCategories" class="form-control">
+              <select id="placeCategoriesSelect" name="placeCategories" class="form-control" required>
 
               </select>
             </div>
