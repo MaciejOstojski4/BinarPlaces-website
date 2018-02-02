@@ -57,6 +57,8 @@ const app = (function () {
     setDateInFooter();
     navbar.init();
     placesContainer.init();
+
+    initLoginForm();
   };
 
   const init = function () {
@@ -76,8 +78,7 @@ const app = (function () {
     hideModal("#loginModal");
   };
 
-  const login = function (e) {
-    e.preventDefault();
+  const login = function () {
     const data = $("#loginForm").serialize();
     const email = $("#emailLoginInput").val();
     apiClient.login(data, function(response) {
@@ -116,9 +117,13 @@ const app = (function () {
     $(id).modal("hide");
   };
 
+  const initLoginForm = function() {
+    formValidator.initForm("#loginForm", login);
+  };
+
   const setOnClickListeners = function() {
     setLogoutClickListner();
-    setLoginClickListener();
+    // setLoginClickListener();
     setRegisterClickListener();
     setTabsClickListener();
   };
