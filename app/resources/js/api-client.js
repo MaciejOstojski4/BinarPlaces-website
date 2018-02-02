@@ -113,8 +113,6 @@ const apiClient = (function () {
       rate: review.rate
     };
 
-    console.log(review);
-
     return $.ajax({
       type: "POST",
       url: API_URL + PLACES_PATH + review.placeId + CREATE_REVIEW_PATH,

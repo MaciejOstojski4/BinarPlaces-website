@@ -273,7 +273,7 @@
             <input id="rateFormPlaceId" style="display: none">
             <div class="form-group">
               <label for="rateContent">Treść</label>
-              <input style="color: black" type="text" id="rateContent"/>
+              <input style="color: black" type="text" id="rateContent" required/>
             </div>
             <div id="rateSelect" class="form-group">
               <label for="rateMark1">1</label>
@@ -285,7 +285,7 @@
               <label for="rateMark4">4</label>
               <input id="rateMark4" type="radio" name="rateMark" value="4">
               <label for="rateMark5">5</label>
-              <input id="rateMark5" type="radio" name="rateMark" value="5">
+              <input id="rateMark5" type="radio" name="rateMark" value="5" required>
             </div>
             <div class="form-group">
               <input type="submit" id="createRateSubmit" value="Potwierdź"/>
@@ -298,12 +298,14 @@
 </div>
 <script src="http://antenna.io/demo/jquery-bar-rating/jquery.barrating.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 
 <script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo2nzz0NxEixW89wBU7dD0Cm134QAJvwo">
 </script>
 
 <script src="resources/js/api-client.js"></script>
+<script src="resources/js/form-validator.js"></script>
 <script src="resources/js/charts.js"></script>
 <script src="resources/js/user-session.js"></script>
 <script src="resources/js/navbar.js"></script>

@@ -43,7 +43,6 @@ const placesContainer = (function () {
   const uploadNewPlace = function(imgB64){
     const place = preparePlaceObject(imgB64);
     apiClient.uploadNewPlace(place, app.logError, function(response) {
-      console.log(response);
       app.hideModal("#newPlaceModal");
       refreshContent(refreshPlacesContainer);
     });
@@ -90,11 +89,19 @@ const placesContainer = (function () {
     });
   };
 
+  const setAddRateClickListener = function() {
+    $("#create-review-modal").click(function() {
+      $("#rateSelect").find("input").attr("checked", false);
+      $("#rateContent").val("");
+    })
+  };
+
   const setOnClickListeners = function() {
     setNewPlaceModalClickListener();
     setNewPlaceSubmitClickListener();
     setGaleryTabClickListener();
     setMapTabClickListener();
+    setAddRateClickListener();
   };
 
   const initMap =  function() {
@@ -218,14 +225,10 @@ const placesContainer = (function () {
         $(this).attr("checked", true);
       }
     });
-    const $rateForm = $("#createRateForm");
-    $rateForm.unbind("submit");
-    $rateForm.submit(function(e) {
-      e.preventDefault();
+    formValidator.initForm("#createRateForm", function() {
       const rev = prepareReviewForEdit(review.id);
-      console.log(rev);
       sendReview(rev, false);
-    })
+    });
   };
 
   const removeReview = function(id) {
@@ -246,10 +249,7 @@ const placesContainer = (function () {
     if(userSession.isUserLogged()) {
       $("#rateFormPlaceId").attr("val", placeId);
       showAddRateBtnAttr();
-      const $rateForm = $("#createRateForm");
-      $rateForm.unbind("submit");
-      $rateForm.submit(function(e) {
-        e.preventDefault();
+      formValidator.initForm("#createRateForm", function() {
         const review = prepareReview();
         sendReview(review, true);
       });
@@ -273,7 +273,6 @@ const placesContainer = (function () {
   };
 
   const processAfterReviewUpload = function() {
-    console.log("test");
     $("#createRateModal").modal("hide");
     refreshReviews();
   };

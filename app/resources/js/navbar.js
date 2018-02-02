@@ -90,8 +90,6 @@ const navbar = (function () {
   };
 
   const displayPlaces = function (data, categoryID) {
-    console.log(data);
-    console.log(categoryID);
     placesContainer.removeCardsWithPlaces();
     const places = userSession.getObject("places");
     placesContainer.prepareCardsWithPlaces($("#place-card-container"), places, categoryID);
