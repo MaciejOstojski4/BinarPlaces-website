@@ -91,8 +91,7 @@ const navbar = (function () {
 
   const displayPlaces = function (data, categoryID) {
     placesContainer.removeCardsWithPlaces();
-    const places = userSession.getObject("places");
-    placesContainer.prepareCardsWithPlaces($("#place-card-container"), places, categoryID);
+    placesContainer.prepareCardsWithPlaces($("#place-card-container"), categoryID);
     const categoriesChartData = prepareDataForCategoriesChart();
     charts.initCategoriesChart(categoriesChartData);
     const placesChartData = prepareDataForPlacesChart();

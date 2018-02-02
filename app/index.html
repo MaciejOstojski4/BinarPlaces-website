@@ -93,7 +93,7 @@
                      data-toggle="tab" href="#place-card-container">Restauracje</a>
                 </li>
                 <li>
-                  <a id="tabs-gallery" class="content-tabs-item-link" data-toggle="tab" href="#place-gallery">Galeria</a>
+                  <a id="tabs-gallery" class="content-tabs-item-link" data-toggle="tab" href="#gallery-card-container">Galeria</a>
                 </li>
                 <li>
                   <a id="tabs-map" class="content-tabs-item-link" data-toggle="tab" href="#place-map">Mapa</a>
@@ -102,10 +102,7 @@
               <div class="tab-content">
                 <section id="place-card-container" class="tab-pane active content-place-cards">
                 </section>
-                <section id="place-gallery" class="tab-pane content-place-cards">
-                  <div id="gallery">
-
-                  </div>
+                <section id="gallery-card-container" class="tab-pane content-place-cards">
                 </section>
                 <section id="place-map" class="tab-pane content-place-cards">
                   <div id="map" class="place-map">
@@ -222,19 +219,19 @@
           <form id="registerForm">
             <div class="form-group">
               <label for="emailInput">Email:</label>
-              <input id="emailInput" name="email" class="form-control" type="text"/>
+              <input id="emailInput" name="email" class="form-control" type="text" required/>
             </div>
             <div class="form-group">
               <label for="loginInput">Login:</label>
-              <input id="loginInput" name="name" class="form-control" type="text"/>
+              <input id="loginInput" name="name" class="form-control" type="text" required/>
             </div>
             <div class="form-group">
               <label for="passwordInput">Hasło:</label>
-              <input id="passwordInput" name="password" class="form-control" type="password"/>
+              <input id="passwordInput" name="password" class="form-control" type="password" required/>
             </div>
             <div class="form-group">
               <label for="passwordConfirmedInput">Powtórz hasło:</label>
-              <input id="passwordConfirmedInput" name="password_confirmation" class="form-control" type="password"/>
+              <input id="passwordConfirmedInput" name="password_confirmation" class="form-control" type="password" required/>
             </div>
             <button type="submit" class="btn">Zatwierdź</button>
           </form>

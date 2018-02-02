@@ -54,11 +54,10 @@ const app = (function () {
     hideElementOnStart();
     showUserSessionElem();
     setOnClickListeners();
+    initFormsValidators();
     setDateInFooter();
     navbar.init();
     placesContainer.init();
-
-    initLoginForm();
   };
 
   const init = function () {
@@ -105,8 +104,7 @@ const app = (function () {
     $("#login-register").css("display", "block");
   };
 
-  const register = function (e) {
-    e.preventDefault();
+  const register = function () {
     const data = $("#registerForm").serialize();
     apiClient.register(data, function(response) {
       hideModal("#registerModal")
@@ -117,14 +115,21 @@ const app = (function () {
     $(id).modal("hide");
   };
 
+  const initFormsValidators = function() {
+    initLoginForm();
+    initRegisterForm();
+  };
+
+  const initRegisterForm = function() {
+    formValidator.initForm("#registerForm", register);
+  };
+
   const initLoginForm = function() {
     formValidator.initForm("#loginForm", login);
   };
 
   const setOnClickListeners = function() {
     setLogoutClickListner();
-    // setLoginClickListener();
-    setRegisterClickListener();
     setTabsClickListener();
   };
 

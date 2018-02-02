@@ -1,5 +1,7 @@
 const placesContainer = (function () {
 
+  const ROOT_URL = "http://taste-api.binarlab.com";
+
   const CARDS_IN_ROW = 3;
 
   var choosenCategoryId = -1;
@@ -50,17 +52,12 @@ const placesContainer = (function () {
     });
   };
 
-  const submitNewPlace = function(event) {
-    // event.preventDefault();
+  const submitNewPlace = function() {
     const fileReader = new FileReader();
     fileReader.addEventListener("load", function() {
       uploadNewPlace(fileReader.result);
     }, false);
     fileReader.readAsDataURL($("input[name=placeImage]").get(0).files[0]);
-  };
-
-  const setNewPlaceSubmitClickListener = function() {
-    // $("#newPlaceForm").submit(submitNewPlace);
   };
 
   const setMapTabClickListener = function() {
@@ -71,18 +68,19 @@ const placesContainer = (function () {
 
   const setGalleryTabClickListener = function() {
     $("#tabs-gallery").click(function() {
-      const $gallery = $("#gallery");
-      const places = userSession.getObject("places");
-      places.forEach(function(place) {
-        apiClient.fetchPlaceImage(place, function(response) {
-          addImgToGallery($gallery, response);
-        }, app.logError)
-      });
+      const $gallery = $("#gallery-card-container");
+      prepareCardsWithImages($gallery);
     });
   };
 
-  const addImgToGallery = function($gallery, img) {
-    const $img = $("<img>").attr("src", "data:image/jpeg;base64, " + img).appendTo($gallery);
+  const addImageToPlaceCard = function($placeCard, place) {
+    apiClient.fetchPlaceImage(place, function(response) {
+      console.log(respnse);
+      const imgURL = ROOT_URL + place.picture_url;
+      const $img = $("<img>").attr("src", imgURL);
+      $img.addClass("gallery-place-img");
+      $img.appendTo($placeCard);
+    }, function(){});
   };
 
   const setAddRateClickListener = function() {
@@ -94,7 +92,6 @@ const placesContainer = (function () {
 
   const setOnClickListeners = function() {
     setNewPlaceModalClickListener();
-    setNewPlaceSubmitClickListener();
     setMapTabClickListener();
     setAddRateClickListener();
     setGalleryTabClickListener();
@@ -136,9 +133,9 @@ const placesContainer = (function () {
     $("#place-card-container").children().remove();
   };
 
-  const prepareCardsWithPlaces = function ($placeContainer, allPlaces, categoryID) {
+  const prepareCardsWithPlaces = function ($placeContainer, categoryID) {
     choosenCategoryId = categoryID;
-    var places = getPlacesByCategory(allPlaces, categoryID);
+    var places = getPlacesByCategory(categoryID);
     var $row;
     places.forEach(function (place, index) {
       if ((index % CARDS_IN_ROW) === 0) {
@@ -150,6 +147,24 @@ const placesContainer = (function () {
       $column.appendTo($row);
       $placeCard.appendTo($column);
       $row.appendTo($placeContainer);
+    });
+  };
+
+  const prepareCardsWithImages = function($imageContainer) {
+    var places = getPlacesByCategory(choosenCategoryId);
+    var $row;
+    console.log(places);
+    places.forEach(function (place, index) {
+      if ((index % CARDS_IN_ROW) === 0) {
+        $row = createRowForCard();
+      }
+      const $column = createColumnForCard();
+      const $placeCard = createPlaceCard();
+      const imgLink = ROOT_URL + place.picture_url;
+      addImageToPlaceCard($placeCard, place);
+      $column.appendTo($row);
+      $placeCard.appendTo($column);
+      $row.appendTo($imageContainer);
     });
   };
 
@@ -313,7 +328,8 @@ const placesContainer = (function () {
     return $("<div>").addClass("place-card text-center");
   };
 
-  const getPlacesByCategory = function (places, categoryID) {
+  const getPlacesByCategory = function (categoryID) {
+    var places = userSession.getObject("places");
     if (categoryID === -1) {
       return places;
     }

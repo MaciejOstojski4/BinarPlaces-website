@@ -158,6 +158,6 @@ const apiClient = (function () {
     uploadNewPlace: uploadNewPlace,
     getUserData: getUserData,
     removeReview: removeReview,
-    editReview: editReview
+    editReview: editReview,
   }
 })();
