@@ -15,6 +15,7 @@
 .place-card:hover .br-theme-fontawesome-stars-o .br-widget a::after {
   background-color: $orange-main-binar-places;
   color: #ffffff !important;
+  transition: 0.5s;
 }
 
 .content-place-cards {
@@ -24,4 +25,14 @@
 
 .br-theme-fontawesome-stars-o .br-widget a::after {
   color: $orange-main-binar-places !important;
+  transition: 0.5s;
+}
+
+.img-circle {
+  transition: 0.5s;
+}
+
+.place-card:hover .img-circle {
+  padding: 7px;
+  background-color: #ffffff;
 }

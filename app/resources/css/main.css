@@ -29,14 +29,23 @@ h1 {
 
 .place-card:hover .br-theme-fontawesome-stars-o .br-widget a::after {
   background-color: #D2691E;
-  color: #ffffff !important; }
+  color: #ffffff !important;
+  transition: 0.5s; }
 
 .content-place-cards {
   border-top: 1px solid #D2691E;
   margin-bottom: 30px; }
 
 .br-theme-fontawesome-stars-o .br-widget a::after {
-  color: #D2691E !important; }
+  color: #D2691E !important;
+  transition: 0.5s; }
+
+.img-circle {
+  transition: 0.5s; }
+
+.place-card:hover .img-circle {
+  padding: 7px;
+  background-color: #ffffff; }
 
 .header-nav {
   background-color: #D2691E;
@@ -123,7 +132,6 @@ h1 {
   margin: 0 auto; }
 
 .content-tabs {
-  margin-top: 30px;
   border: none; }
 
 .content-tabs-item {
@@ -179,3 +187,6 @@ h1 {
 
 .rev-btn {
   color: #D2691E; }
+
+.main-content-container {
+  padding-top: 30px; }
