@@ -2,6 +2,7 @@
   background-color: $orange-main-binar-places;
   border-radius: 0;
   height: 55px;
+  margin-top: 70px;
 }
 
 .navbar-burger {
@@ -46,7 +47,13 @@
 }
 
 @media (max-width: $screen-xs-max) {
-    .header-nav {
-      background-color: transparent;
-    }
+  .header-nav {
+    background-color: transparent;
+  }
+
+  .navbar-list-element {
+    display: block;
+    float: none;
+    border: none;
+  }
 }

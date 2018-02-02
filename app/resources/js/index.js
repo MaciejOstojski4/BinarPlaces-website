@@ -120,6 +120,7 @@ const app = (function () {
     setLogoutClickListner();
     setLoginClickListener();
     setRegisterClickListener();
+    setTabsClickListener();
   };
 
   const setLogoutClickListner = function() {
@@ -132,6 +133,14 @@ const app = (function () {
 
   const setRegisterClickListener = function() {
     $("#registerForm").submit(register);
+  };
+
+  const setTabsClickListener = function() {
+    $(".content-tabs-item-link").click(function() {
+      const $tab = $(this);
+      $tab.closest("ul").find(".tabs-link-active").removeClass("tabs-link-active");
+      $tab.addClass("tabs-link-active");
+    })
   };
 
   const logout = function() {

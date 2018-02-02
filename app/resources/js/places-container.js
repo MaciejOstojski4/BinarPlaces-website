@@ -85,7 +85,7 @@ const placesContainer = (function () {
   };
 
   const setMapTabClickListener = function() {
-    $("#map-tab").click(function() {
+    $("#tabs-map").click(function() {
       initMap();
     });
   };

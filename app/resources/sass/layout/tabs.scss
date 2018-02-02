@@ -14,11 +14,12 @@
 }
 
 .nav-tabs > li > a:hover {
-  background-color: $orange-main-binar-places;
+  background-color: #ffbb83;
   color: #ffffff;
 }
 
 .nav-tabs > li.active > a,
+.nav-tabs>li.active>a:focus,
 .nav-tabs > li > .tabs-link-active {
   background-color: $orange-main-binar-places;
   color: white;

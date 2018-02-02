@@ -50,7 +50,8 @@ h1 {
 .header-nav {
   background-color: #D2691E;
   border-radius: 0;
-  height: 55px; }
+  height: 55px;
+  margin-top: 70px; }
 
 .navbar-burger {
   border: 1px solid #D2691E;
@@ -88,7 +89,11 @@ h1 {
 
 @media (max-width: 767px) {
   .header-nav {
-    background-color: transparent; } }
+    background-color: transparent; }
+  .navbar-list-element {
+    display: block;
+    float: none;
+    border: none; } }
 
 .content-loader {
   padding: 20px; }
@@ -121,6 +126,7 @@ h1 {
   height: 100vh; }
 
 .intro-text {
+  margin-top: 250px;
   display: inline-block;
   font-size: 50px; }
 
@@ -130,6 +136,10 @@ h1 {
   font-weight: 700;
   display: block;
   margin: 0 auto; }
+
+@media (max-width: 767px) {
+  .intro-text {
+    margin-top: 400px; } }
 
 .content-tabs {
   border: none; }
@@ -144,10 +154,11 @@ h1 {
   color: #D2691E; }
 
 .nav-tabs > li > a:hover {
-  background-color: #D2691E;
+  background-color: #ffbb83;
   color: #ffffff; }
 
 .nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
 .nav-tabs > li > .tabs-link-active {
   background-color: #D2691E;
   color: white; }
@@ -166,9 +177,10 @@ h1 {
 .review-date {
   text-align: right; }
 
-#map {
+.place-map {
   height: 400px;
-  width: 100%; }
+  width: 100%;
+  margin-top: 10px; }
 
 #add-new-place {
   display: none; }

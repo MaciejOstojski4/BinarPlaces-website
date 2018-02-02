@@ -129,9 +129,11 @@ const navbar = (function () {
 
   const init = function () {
     const $navbar = $("#navbar");
-    addCategoriesToNavbar($navbar);
-    addCssToNavbarElem($navbar);
-    addOnClickToNavbarElem($navbar);
+    const $ulNav = $("<ul>");
+    addCategoriesToNavbar($ulNav);
+    addCssToNavbarElem($ulNav);
+    addOnClickToNavbarElem($ulNav);
+    $ulNav.appendTo($navbar);
   };
 
   return {

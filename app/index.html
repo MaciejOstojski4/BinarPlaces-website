@@ -22,54 +22,51 @@
 <div id="home">
   <section class="intro">
     <section class="container">
-      <header>
-        <div class="container-fluid">
-          <div class="navbar">
-            <div class="navbar-header">
-              <div class="navbar-logo">
-                <h1 class="header-pageName">Binar Places</h1>
-              </div>
-            </div>
-            <div class="nav navbar-nav navbar-right">
-              <span class="header-loginRegister">
-                <div id="login-register">
-                  <a href="" data-toggle="modal" data-target="#loginModal">Zaloguj</a>
-                  /
-                  <a href="" data-toggle="modal" data-target="#registerModal">Zarejestruj</a>
-                </div>
-                <div id="logout">
-                  <a href="">Wyloguj się</a>
-                </div>
-              </span>
-            </div>
+      <header class="navbar">
+        <div class="navbar-header">
+          <div class="navbar-logo">
+            <h1 class="header-pageName">Binar Places</h1>
           </div>
+        </div>
+        <div class="nav navbar-nav navbar-right">
+          <span class="header-loginRegister">
+            <div id="login-register">
+              <a href="" data-toggle="modal" data-target="#loginModal">Zaloguj</a>
+              /
+              <a href="" data-toggle="modal" data-target="#registerModal">Zarejestruj</a>
+            </div>
+            <div id="logout">
+              <a href="">Wyloguj się</a>
+            </div>
+          </span>
+        </div>
+        <div class="navbar header-nav" role="navigation">
+          <button type="button" class="navbar-toggle collapsed navbar-burger"
+                  data-toggle="collapse" data-target="#navbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <nav id="navbar" class="navbar-left collapse navbar-collapse">
+
+          </nav>
         </div>
       </header>
-      <nav>
-        <div class="container">
-          <div class="navbar header-nav" role="navigation">
-            <div class="container-fluid">
-                <button type="button" class="navbar-toggle collapsed navbar-burger"
-                        data-toggle="collapse" data-target="#navbar">
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-              </div>
-              <nav id="navbar" class="navbar-left collapse navbar-collapse">
 
-              </nav>
-          </div>
-        </div>
-      </nav>
     </section>
 
-    <h1 class="intro-text">
-      Katalog restauracji Binar Places
-    </h1>
-    <h3 class="intro-text intro-link-text">
-      Binar::Apps
-    </h3>
+    <section class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <h1 class="intro-text">
+            Katalog restauracji Binar Places
+          </h1>
+          <h3 class="intro-text intro-link-text">
+            Binar::Apps
+          </h3>
+        </div>
+      </div>
+    </section>
   </section>
 
   <section id="loader-section">
@@ -92,13 +89,14 @@
             <div class="col-sm-12 col-md-12 col-lg-12">
               <ul class="nav nav-tabs content-tabs">
                 <li>
-                  <a class="tabs-link-active" data-toggle="tab" href="#place-card-container">Restauracje</a>
+                  <a id="tabs-restaurant" class="content-tabs-item-link tabs-link-active"
+                     data-toggle="tab" href="#place-card-container">Restauracje</a>
                 </li>
                 <li>
-                  <a id="gallery-tab" class="content-tabs-item-link" data-toggle="tab" href="#place-gallery">Galeria</a>
+                  <a id="tabs-gallery" class="content-tabs-item-link" data-toggle="tab" href="#place-gallery">Galeria</a>
                 </li>
                 <li>
-                  <a id="map-tab" class="content-tabs-item-link" data-toggle="tab" href="#place-map">Mapa</a>
+                  <a id="tabs-map" class="content-tabs-item-link" data-toggle="tab" href="#place-map">Mapa</a>
                 </li>
               </ul>
               <div class="tab-content">
@@ -108,7 +106,7 @@
                   Galeria
                 </section>
                 <section id="place-map" class="tab-pane content-place-cards">
-                  <div id="map">
+                  <div id="map" class="place-map">
 
                   </div>
                 </section>
