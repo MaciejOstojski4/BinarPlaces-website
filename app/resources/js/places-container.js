@@ -126,9 +126,15 @@ const placesContainer = (function () {
 
   const addImageToPlaceCard = function($placeCard, place) {
     const imgURL = "https://img.grouponcdn.com/deal/nhjcKdKnuawjKX427U9F/GK-2048x1229/v1/c700x420.jpg";
+    const $lightBox = $("<a>").attr("href", imgURL);
+    $lightBox.addClass("img-thumbnail");
+    $lightBox.attr("data-lightbox", place.name);
+    $lightBox.attr("data-title", place.name);
+    $lightBox.appendTo($placeCard);
+
     const $img = $("<img>").attr("src", imgURL);
     $img.addClass("gallery-place-img");
-    $img.appendTo($placeCard);
+    $img.appendTo($lightBox);
 
     // apiClient.fetchPlaceImage(place, function(response) {
     //   const imgURL = ROOT_URL + place.picture_url;
