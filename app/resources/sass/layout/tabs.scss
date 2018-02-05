@@ -10,17 +10,17 @@
 }
 
 .nav-tabs > li > a {
-  color: $orange-main-binar-places;
+  color: $orange-main;
 }
 
 .nav-tabs > li > a:hover {
-  background-color: #ffbb83;
-  color: #ffffff;
+  background-color: $bright-orange;
+  color: $white;
 }
 
 .nav-tabs > li.active > a,
 .nav-tabs>li.active>a:focus,
 .nav-tabs > li > .tabs-link-active {
-  background-color: $orange-main-binar-places;
+  background-color: $orange-main;
   color: white;
 }

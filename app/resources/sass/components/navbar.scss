@@ -1,21 +1,21 @@
 .header-nav {
-  background-color: $orange-main-binar-places;
+  background-color: $orange-main;
   border-radius: 0;
   height: 55px;
   margin-top: 70px;
 }
 
 .navbar-burger {
-  border: 1px solid $orange-main-binar-places;
+  border: 1px solid $orange-main;
   border-radius: 23px;
   float: none;
   margin-left: 15px;
   margin-top: 20px;
-  color: $orange-main-binar-places;
+  color: $orange-main;
 }
 
 .navbar-toggle .icon-bar {
-  background-color: $orange-main-binar-places;
+  background-color: $orange-main;
 }
 
 .navbar-list {
@@ -26,12 +26,12 @@
 .navbar-list-element {
   display: inline;
   float: left;
-  border-right: 1px solid $light-orange-binar-places;
+  border-right: 1px solid $light-orange;
 }
 
 .navbar-list-element-link {
   display: block;
-  color: #ffffff;
+  color: $white;
   text-align: center;
   padding: 14px;
   text-decoration: none;
@@ -39,11 +39,11 @@
 
 .navbar-list-element-link:hover {
   text-decoration: none;
-  color: #ffffff;
+  color: $white;
 }
 
 .navbar-dropdown-category {
-  background-color: $orange-main-binar-places;
+  background-color: $orange-main;
 }
 
 @media (max-width: $screen-xs-max) {

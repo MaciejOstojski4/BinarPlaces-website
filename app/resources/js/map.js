@@ -21,7 +21,7 @@ const map = (function() {
       })
     });
 
-    google.maps.event.addListener(map, "idle", function(){
+    google.maps.event.addListener(map, "idle", function() {
       google.maps.event.trigger(map, 'resize');
     });
   };

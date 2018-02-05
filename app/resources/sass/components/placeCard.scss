@@ -1,31 +1,31 @@
 .place-card {
-  color: $orange-main-binar-places;
+  color: $orange-main;
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 10px;
-  border: 1px solid $orange-main-binar-places;
+  border: 1px solid $orange-main;
   transition: 0.5s;
   border-radius: 23px;
 }
 
 .place-card:hover {
-  background-color: $orange-main-binar-places;
-  color: #ffffff;
+  background-color: $orange-main;
+  color: $white;
 }
 
 .place-card:hover .br-theme-fontawesome-stars-o .br-widget a::after {
-  background-color: $orange-main-binar-places;
-  color: #ffffff !important;
+  background-color: $orange-main;
+  color: $white !important;
   transition: 0.5s;
 }
 
 .content-place-cards {
-  border-top: 1px solid $orange-main-binar-places;
+  border-top: 1px solid $orange-main;
   margin-bottom: 30px;
 }
 
 .br-theme-fontawesome-stars-o .br-widget a::after {
-  color: $orange-main-binar-places !important;
+  color: $orange-main !important;
   transition: 0.5s;
 }
 
@@ -35,5 +35,5 @@
 
 .place-card:hover .img-circle {
   padding: 7px;
-  background-color: #ffffff;
+  background-color: $white;
 }
