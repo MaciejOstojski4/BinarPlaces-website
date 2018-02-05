@@ -89,9 +89,11 @@ const navbar = (function () {
     }
   };
 
-  const displayPlaces = function (data, categoryID) {
-    placesContainer.removeCardsWithPlaces();
-    placesContainer.prepareCardsWithPlaces($("#place-card-container"), categoryID);
+  const displayPlaces = function () {
+    placesContainer.removeCardsWithPlaces("#place-card-container");
+    placesContainer.removeCardsWithPlaces("#gallery-card-container");
+    placesContainer.prepareCardsWithPlaces($("#place-card-container"));
+    placesContainer.prepareCardsWithImages($("#gallery-card-container"));
     const categoriesChartData = prepareDataForCategoriesChart();
     charts.initCategoriesChart(categoriesChartData);
     const placesChartData = prepareDataForPlacesChart();
@@ -106,8 +108,7 @@ const navbar = (function () {
       $("#loader-section").show();
       const categoryID = parseInt($(this).find("span").text());
       userSession.saveObject(categoryID, "choosenCategory");
-      const places = userSession.getObject("places");
-      displayPlaces(places, categoryID);
+      displayPlaces();
       window.location = "#main-content";
     })
   };

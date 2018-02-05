@@ -137,14 +137,6 @@ const app = (function () {
     $("#logout").click(logout);
   };
 
-  const setLoginClickListener = function() {
-    $("#loginForm").submit(login);
-  };
-
-  const setRegisterClickListener = function() {
-    $("#registerForm").submit(register);
-  };
-
   const setTabsClickListener = function() {
     $(".content-tabs-item-link").click(function() {
       const $tab = $(this);

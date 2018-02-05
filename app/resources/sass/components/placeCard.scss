@@ -2,9 +2,10 @@
   color: $orange-main-binar-places;
   margin-top: 20px;
   margin-bottom: 20px;
-  padding: 20px;
+  padding: 10px;
   border: 1px solid $orange-main-binar-places;
   transition: 0.5s;
+  border-radius: 23px;
 }
 
 .place-card:hover {

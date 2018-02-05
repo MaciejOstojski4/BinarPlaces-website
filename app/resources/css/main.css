@@ -19,9 +19,10 @@ h1 {
   color: #D2691E;
   margin-top: 20px;
   margin-bottom: 20px;
-  padding: 20px;
+  padding: 10px;
   border: 1px solid #D2691E;
-  transition: 0.5s; }
+  transition: 0.5s;
+  border-radius: 23px; }
 
 .place-card:hover {
   background-color: #D2691E;
@@ -112,6 +113,7 @@ h1 {
 .header-loginRegister {
   display: inline-block;
   padding-top: 35px;
+  padding-right: 17px;
   float: right; }
 
 @media (max-width: 767px) {
@@ -202,3 +204,9 @@ h1 {
 
 .main-content-container {
   padding-top: 30px; }
+
+.gallery-place-img {
+  width: 100%;
+  height: 200%;
+  border-radius: 23px;
+  transition: 0.5s; }

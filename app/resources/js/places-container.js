@@ -4,8 +4,6 @@ const placesContainer = (function () {
 
   const CARDS_IN_ROW = 3;
 
-  var choosenCategoryId = -1;
-
   const preparePlaceObject = function(imgBase64) {
     const place = {
       name: $("input[name=placeName]").val(),
@@ -62,7 +60,7 @@ const placesContainer = (function () {
 
   const setMapTabClickListener = function() {
     $("#tabs-map").click(function() {
-      initMap();
+      map.init();
     });
   };
 
@@ -71,16 +69,6 @@ const placesContainer = (function () {
       const $gallery = $("#gallery-card-container");
       prepareCardsWithImages($gallery);
     });
-  };
-
-  const addImageToPlaceCard = function($placeCard, place) {
-    apiClient.fetchPlaceImage(place, function(response) {
-      console.log(respnse);
-      const imgURL = ROOT_URL + place.picture_url;
-      const $img = $("<img>").attr("src", imgURL);
-      $img.addClass("gallery-place-img");
-      $img.appendTo($placeCard);
-    }, function(){});
   };
 
   const setAddRateClickListener = function() {
@@ -97,45 +85,13 @@ const placesContainer = (function () {
     setGalleryTabClickListener();
   };
 
-  const initMap =  function() {
-    var lodz = {lat: 51.759249, lng: 19.455983};
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 10,
-      center: lodz
-    });
-    const places = userSession.getObject("places");
-    places.forEach(function(place) {
-      const marker = new google.maps.Marker({
-        position: {lat: parseInt(place.location.lat), lng: parseInt(place.location.lon)},
-        map: map,
-        title: place.name
-      });
-      const infowindow = new google.maps.InfoWindow({
-        content: prepareInfoWindowContent(place)
-      });
-      marker.addListener("click", function() {
-        infowindow.open(map, marker);
-      })
-    });
-
-    google.maps.event.addListener(map, "idle", function(){
-      google.maps.event.trigger(map, 'resize');
-    });
+  const removeCardsWithPlaces = function (id) {
+    $(id).children().remove();
   };
 
-  const prepareInfoWindowContent = function(place) {
-    return "<div><div><h3>" + place.name + "</h3></div>" +
-      "<div><p>" + place.location.address + "</p></div>" +
-      "<div><p>Ocena:" + place.rate + "</p></div></div>";
-  };
-
-  const removeCardsWithPlaces = function () {
-    $("#place-card-container").children().remove();
-  };
-
-  const prepareCardsWithPlaces = function ($placeContainer, categoryID) {
-    choosenCategoryId = categoryID;
-    var places = getPlacesByCategory(categoryID);
+  const prepareCardsWithPlaces = function ($placeContainer) {
+    removeCardsWithPlaces("#place-card-container");
+    var places = getPlacesByCategory();
     var $row;
     places.forEach(function (place, index) {
       if ((index % CARDS_IN_ROW) === 0) {
@@ -151,21 +107,35 @@ const placesContainer = (function () {
   };
 
   const prepareCardsWithImages = function($imageContainer) {
-    var places = getPlacesByCategory(choosenCategoryId);
+    removeCardsWithPlaces("#gallery-card-container");
+    var places = getPlacesByCategory();
     var $row;
-    console.log(places);
     places.forEach(function (place, index) {
       if ((index % CARDS_IN_ROW) === 0) {
         $row = createRowForCard();
       }
       const $column = createColumnForCard();
       const $placeCard = createPlaceCard();
-      const imgLink = ROOT_URL + place.picture_url;
+      $("<h4>").text(place.name).appendTo($placeCard);
       addImageToPlaceCard($placeCard, place);
       $column.appendTo($row);
       $placeCard.appendTo($column);
       $row.appendTo($imageContainer);
     });
+  };
+
+  const addImageToPlaceCard = function($placeCard, place) {
+    const imgURL = "https://img.grouponcdn.com/deal/nhjcKdKnuawjKX427U9F/GK-2048x1229/v1/c700x420.jpg";
+    const $img = $("<img>").attr("src", imgURL);
+    $img.addClass("gallery-place-img");
+    $img.appendTo($placeCard);
+
+    // apiClient.fetchPlaceImage(place, function(response) {
+    //   const imgURL = ROOT_URL + place.picture_url;
+    //   const $img = $("<img>").attr("src", imgURL);
+    //   $img.addClass("gallery-place-img");
+    //   $img.appendTo($placeCard);
+    // }, function(){});
   };
 
   const addPlaceInfoToCard = function ($card, place) {
@@ -328,13 +298,14 @@ const placesContainer = (function () {
     return $("<div>").addClass("place-card text-center");
   };
 
-  const getPlacesByCategory = function (categoryID) {
+  const getPlacesByCategory = function() {
     var places = userSession.getObject("places");
-    if (categoryID === -1) {
+    const choosenCategoryId = userSession.getObject("choosenCategory");
+    if (choosenCategoryId === -1) {
       return places;
     }
     return places.filter(function (place) {
-      if (place.category_id === categoryID) {
+      if (place.category_id === choosenCategoryId) {
         return place;
       }
     });
@@ -355,6 +326,7 @@ const placesContainer = (function () {
 
   return {
     removeCardsWithPlaces: removeCardsWithPlaces,
+    prepareCardsWithImages: prepareCardsWithImages,
     prepareCardsWithPlaces: prepareCardsWithPlaces,
     init: init
   }
