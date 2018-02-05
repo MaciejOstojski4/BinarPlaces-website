@@ -25,9 +25,9 @@ const app = (function () {
   };
 
   const sortCategoriesByCount = function (first, second) {
-    if (first.count > second.count) {
+    if (first.places_count > second.places_count) {
       return -1;
-    } else if (first.count < second.count) {
+    } else if (first.places_count < second.places_count) {
       return 1;
     } else {
       return 0;
@@ -155,7 +155,8 @@ const app = (function () {
     savePlacesInStorage: savePlacesInStorage,
     saveCategoriesInStorage: saveCategoriesInStorage,
     logError: logError,
-    hideModal: hideModal
+    hideModal: hideModal,
+    sortCategoriesByCount: sortCategoriesByCount
   }
 })();
 
