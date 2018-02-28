@@ -2,6 +2,7 @@ const app = (function () {
 
   const logError = function(error) {
     console.log(error);
+    alert("Something went wrong, try again");
   };
 
   const setDateInFooter = function () {
