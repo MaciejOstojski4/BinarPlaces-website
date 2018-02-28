@@ -138,10 +138,11 @@ const app = (function () {
   };
 
   const setTabsClickListener = function() {
-    $(".content-tabs-item-link").click(function() {
+    $(".nav-tabs-link").click(function() {
       const $tab = $(this);
-      $tab.closest("ul").find(".tabs-link-active").removeClass("tabs-link-active");
-      $tab.addClass("tabs-link-active");
+      console.log($tab.closest("ul").find(".nav-tabs-link--active"));
+      $tab.closest("ul").find(".nav-tabs-link--active").removeClass("nav-tabs-link--active").addClass("nav-tabs-link");
+      $tab.addClass("nav-tabs-link--active").removeClass("nav-tabs-link");
     })
   };
 

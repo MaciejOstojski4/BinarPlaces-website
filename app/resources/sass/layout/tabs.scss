@@ -9,18 +9,16 @@
   border-top-left-radius: 5px;
 }
 
-.nav-tabs > li > a {
+.nav-tabs-link {
   color: $orange-main;
 }
 
-.nav-tabs > li > a:hover {
-  background-color: $bright-orange;
-  color: $white;
+a.nav-tabs-link:hover {
+  background-color: $bright-orange !important;
+  color: $white !important;
 }
 
-.nav-tabs > li.active > a,
-.nav-tabs>li.active>a:focus,
-.nav-tabs > li > .tabs-link-active {
-  background-color: $orange-main;
-  color: $white;
+.nav-tabs-link--active {
+  background-color: $orange-main !important;
+  color: $white !important;
 }
