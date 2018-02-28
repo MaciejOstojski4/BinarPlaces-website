@@ -1,0 +1,21 @@
+#add-new-place {
+  display: none;
+}
+
+.new-place-button {
+  text-align: center;
+  margin: 50px 0px;
+  padding: 10px 0;
+  background-color: $orange-main;
+  color: $white;
+  border-radius: 20px;
+}
+
+.rev-btn:hover,
+.new-place-button:hover {
+  cursor: pointer;
+}
+
+.rev-btn {
+  color: $orange-main;
+}

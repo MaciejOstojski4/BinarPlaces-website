@@ -1,0 +1,26 @@
+.intro {
+  text-align: center;
+  background: url("../images/index-background.jpeg") no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.intro-text {
+  margin-top: 250px;
+  display: inline-block;
+  font-size: 50px;
+}
+
+.intro-link-text {
+  padding: 5px;
+  font-size: 40px;
+  font-weight: 700;
+  display: block;
+  margin: 0 auto;
+}
+
+@media (max-width: $screen-xs-max) {
+  .intro-text {
+    margin-top: 400px;
+  }
+}

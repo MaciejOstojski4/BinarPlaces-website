@@ -1,0 +1,22 @@
+#login-register,
+#logout {
+  display: none;
+}
+
+.header-pageName {
+  display: inline-block;
+}
+
+.header-loginRegister {
+  display: inline-block;
+  padding-top: 35px;
+  padding-right: 17px;
+  float: right;
+}
+
+@media(max-width: $screen-xs-max) {
+  .header-loginRegister {
+    float: none;
+    padding-top: 0px;
+  }
+}
