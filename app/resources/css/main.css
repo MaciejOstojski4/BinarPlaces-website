@@ -103,10 +103,6 @@ h1 {
   background-color: #D2691E;
   padding: 30px; }
 
-#login-register,
-#logout {
-  display: none; }
-
 .header-pageName {
   display: inline-block; }
 
@@ -181,9 +177,6 @@ a.nav-tabs-link:hover {
   height: 400px;
   width: 100%;
   margin-top: 10px; }
-
-#add-new-place {
-  display: none; }
 
 .new-place-button {
   text-align: center;
