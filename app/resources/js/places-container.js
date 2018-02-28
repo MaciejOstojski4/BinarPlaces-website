@@ -10,20 +10,20 @@ const placesContainer = (function () {
       address: $("input[name=placeAddress]").val(),
       lat: parseInt($("input[name=placeLat]").val()),
       lon: parseInt($("input[name=placeLon]").val()),
-      category_id: parseInt($("#placeCategoriesSelect option:selected").val()),
+      category_id: parseInt($("#place-categories-select option:selected").val()),
       picture: imgBase64
     };
     return $.param(place);
   };
 
   const initPlaceForm = function() {
-    const $selectCategories = $("#placeCategoriesSelect");
+    const $selectCategories = $("#place-categories-select");
     const categories = userSession.getObject("categories");
     categories.forEach(function(category) {
       const $categoryOption = $("<option>").html(category.name).attr("value", category.id);
       $categoryOption.appendTo($selectCategories);
     });
-    $("#newPlaceForm").find("input").val("");
+    $("#new-place-form").find("input").val("");
     formValidator.initForm("#newPlaceForm", submitNewPlace);
   };
 
@@ -45,7 +45,7 @@ const placesContainer = (function () {
   const uploadNewPlace = function(imgB64){
     const place = preparePlaceObject(imgB64);
     apiClient.uploadNewPlace(place, app.logError, function(response) {
-      app.hideModal("#newPlaceModal");
+      app.hideModal("#new-place-modal");
       refreshContent(refreshPlacesContainer);
     });
   };
@@ -73,8 +73,8 @@ const placesContainer = (function () {
 
   const setAddRateClickListener = function() {
     $("#create-review-modal").click(function() {
-      $("#rateSelect").find("input").attr("checked", false);
-      $("#rateContent").val("");
+      $("#rate-select").find("input").attr("checked", false);
+      $("#rate-content").val("");
     })
   };
 
@@ -156,8 +156,8 @@ const placesContainer = (function () {
   };
 
   const addRateHolder = function ($card, place) {
-    const $rateHolder = $('<div data-toggle="modal" data-target="#ratesModal">');
-    $rateHolder.attr("id", "rateHolder" + place.id);
+    const $rateHolder = $('<div data-toggle="modal" data-target="#rates-modal">');
+    $rateHolder.attr("id", "rate-holder" + place.id);
     const $rates = $('<select>').appendTo($rateHolder);
     for (var i = 0; i < 5; i++) {
       $('<option value=' + (i + 1) + '>').text(i + 1).appendTo($rates);
@@ -196,7 +196,7 @@ const placesContainer = (function () {
         const $revEdit = $("<div>").addClass("rev-btn").appendTo($revBox);
         $revEdit.text("Edytuj");
         $revEdit.attr("data-toggle", "modal");
-        $revEdit.attr("data-target", "#createRateModal");
+        $revEdit.attr("data-target", "#create-rate-modal");
         $revEdit.click(function() {
           editReview(rev);
         })
@@ -212,7 +212,7 @@ const placesContainer = (function () {
         $(this).attr("checked", true);
       }
     });
-    formValidator.initForm("#createRateForm", function() {
+    formValidator.initForm("#create-rate-form", function() {
       const rev = prepareReviewForEdit(review.id);
       sendReview(rev, false);
     });
@@ -234,9 +234,9 @@ const placesContainer = (function () {
     apiClient.fetchPlaceReviews(placeId, showReviews, app.logError);
 
     if(userSession.isUserLogged()) {
-      $("#rateFormPlaceId").attr("val", placeId);
+      $("#rate-form-place-id").attr("val", placeId);
       showAddRateBtnAttr();
-      formValidator.initForm("#createRateForm", function() {
+      formValidator.initForm("#create-rate-form", function() {
         const review = prepareReview();
         sendReview(review, true);
       });
@@ -245,22 +245,22 @@ const placesContainer = (function () {
 
   const prepareReview = function() {
     return {
-      content: $("#rateContent").val(),
+      content: $("#rate-content").val(),
       rate: $("input[name=rateMark]:checked").val(),
-      placeId: $("#rateFormPlaceId").attr("val")
+      placeId: $("#rate-form-place-id").attr("val")
     };
   };
 
   const prepareReviewForEdit = function(reviewId) {
     return {
-      content: $("#rateContent").val(),
+      content: $("#rate-content").val(),
       rate: $("input[name=rateMark]:checked").val(),
       id: reviewId
     }
   };
 
   const processAfterReviewUpload = function() {
-    $("#createRateModal").modal("hide");
+    $("#create-rate-modal").modal("hide");
     refreshReviews();
   };
 

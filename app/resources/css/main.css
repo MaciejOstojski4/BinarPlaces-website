@@ -163,7 +163,7 @@ h1 {
 .nav-tabs > li.active > a:focus,
 .nav-tabs > li > .tabs-link-active {
   background-color: #D2691E;
-  color: white; }
+  color: #ffffff; }
 
 .review-box {
   border: 1px solid #ffffff;

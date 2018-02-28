@@ -1,7 +1,7 @@
 const charts = (function() {
 
   const initCategoriesChart = function(data) {
-    const context = $("#categoriesChart").get(0).getContext("2d");
+    const context = $("#categories-chart").get(0).getContext("2d");
     const chart = new Chart(context, {
       type: "pie",
       data: {
@@ -16,7 +16,7 @@ const charts = (function() {
   };
 
   const initPlacesChart = function(data) {
-    const context = $("#placesChart").get(0).getContext("2d");
+    const context = $("#places-chart").get(0).getContext("2d");
     const chart = new Chart(context, {
       type: "bar",
       data: {

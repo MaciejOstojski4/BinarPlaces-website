@@ -32,9 +32,9 @@
         <div class="nav navbar-nav navbar-right">
           <span class="header-loginRegister">
             <div id="login-register">
-              <a href="" data-toggle="modal" data-target="#loginModal">Zaloguj</a>
+              <a href="" data-toggle="modal" data-target="#login-modal">Zaloguj</a>
               /
-              <a href="" data-toggle="modal" data-target="#registerModal">Zarejestruj</a>
+              <a href="" data-toggle="modal" data-target="#register-modal">Zarejestruj</a>
             </div>
             <div id="logout">
               <a href="">Wyloguj się</a>
@@ -117,17 +117,17 @@
       <div class="col-sm-12 col-md-12 col-lg-4">
         <div class="row">
           <div class="col-sm-12 col-md-12 col-lg-12">
-            <canvas id="categoriesChart" height="400"></canvas>
+            <canvas id="categories-chart" height="400"></canvas>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-12 col-md-12 col-lg-12">
-            <canvas id="placesChart" height="400"></canvas>
+            <canvas id="places-chart" height="400"></canvas>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-12 col-md-12 col-lg-12">
-            <div id="add-new-place" class="new-place-button" data-toggle="modal" data-target="#newPlaceModal">
+            <div id="add-new-place" class="new-place-button" data-toggle="modal" data-target="#new-place-modal">
               Dodaj miejsce
             </div>
           </div>
@@ -138,11 +138,11 @@
 
   <div class="container-fluid text-center">
     <footer class="row footer">
-      <span id="copyrightInfo">Footer</span>
+      <span id="copyright-info">Footer</span>
     </footer>
   </div>
 
-  <div id="newPlaceModal" class="modal fade" role="dialog">
+  <div id="new-place-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <section class="modal-content modal-binar-places">
         <header class="modal-header">
@@ -150,7 +150,7 @@
           <h1>Dodaj nowe miejsce</h1>
         </header>
         <section class="modal-body">
-          <form id="newPlaceForm">
+          <form id="new-place-form">
             <div class="form-group">
               <label for="placeName">Nazwa</label>
               <input name="placeName" type="text" class="form-control" required/>
@@ -161,7 +161,7 @@
             </div>
             <div class="form-group">
               <label for="placeCategories">Kategoria</label>
-              <select id="placeCategoriesSelect" name="placeCategories" class="form-control" required>
+              <select id="place-categories-select" name="placeCategories" class="form-control" required>
 
               </select>
             </div>
@@ -177,14 +177,14 @@
               <label for="placeLon">Szerokość geograficzna</label>
               <input name="placeLon" type="text" class="form-control" />
             </div>
-            <button id="newPlaceSubmitBtn" type="submit" class="btn">Zatwierdź</button>
+            <button id="new-place-submit-btn" type="submit" class="btn">Zatwierdź</button>
           </form>
         </section>
       </section>
     </div>
   </div>
 
-  <div id="loginModal" class="modal fade" role="dialog">
+  <div id="login-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <section class="modal-content modal-binar-places">
         <header class="modal-header">
@@ -192,23 +192,23 @@
           <h1>Zaloguj się</h1>
         </header>
         <section class="modal-body">
-          <form id="loginForm">
+          <form id="login-form">
             <div class="form-group">
-              <label for="emailLoginInput">Email:</label>
-              <input id="emailLoginInput" name="email" class="form-control" type="text" required/>
+              <label for="email-login-input">Email:</label>
+              <input id="email-login-input" name="email" class="form-control" type="text" required/>
             </div>
             <div class="form-group">
-              <label for="passwordLoginInput">Hasło:</label>
-              <input id="passwordLoginInput" name="password" class="form-control" type="password" required/>
+              <label for="password-login-input">Hasło:</label>
+              <input id="password-login-input" name="password" class="form-control" type="password" required/>
             </div>
-            <button id="loginSubmitBtn" type="submit" class="btn">Zatwierdź</button>
+            <button id="loginsubmit-btn" type="submit" class="btn">Zatwierdź</button>
           </form>
         </section>
       </section>
     </div>
   </div>
 
-  <div id="registerModal" class="modal fade" role="dialog">
+  <div id="register-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <section class="modal-content modal-binar-places">
         <header class="modal-header">
@@ -216,22 +216,22 @@
           <h1>Zarejestruj się</h1>
         </header>
         <section class="modal-body">
-          <form id="registerForm">
+          <form id="register-form">
             <div class="form-group">
-              <label for="emailInput">Email:</label>
-              <input id="emailInput" name="email" class="form-control" type="text" required/>
+              <label for="email-input">Email:</label>
+              <input id="email-input" name="email" class="form-control" type="text" required/>
             </div>
             <div class="form-group">
-              <label for="loginInput">Login:</label>
-              <input id="loginInput" name="name" class="form-control" type="text" required/>
+              <label for="login-input">Login:</label>
+              <input id="login-input" name="name" class="form-control" type="text" required/>
             </div>
             <div class="form-group">
-              <label for="passwordInput">Hasło:</label>
-              <input id="passwordInput" name="password" class="form-control" type="password" required/>
+              <label for="password-input">Hasło:</label>
+              <input id="password-input" name="password" class="form-control" type="password" required/>
             </div>
             <div class="form-group">
-              <label for="passwordConfirmedInput">Powtórz hasło:</label>
-              <input id="passwordConfirmedInput" name="password_confirmation" class="form-control" type="password" required/>
+              <label for="password-confirmed-input">Powtórz hasło:</label>
+              <input id="password-confirmed-input" name="password_confirmation" class="form-control" type="password" required/>
             </div>
             <button type="submit" class="btn">Zatwierdź</button>
           </form>
@@ -240,7 +240,7 @@
     </div>
   </div>
 
-  <div id="ratesModal" class="modal fade" role="dialog">
+  <div id="rates-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <section class="modal-content modal-binar-places">
         <header class="modal-header">
@@ -252,15 +252,15 @@
 
           </div>
         </section>
-        <footer id="ratesModalFooter" class="modal-footer">
+        <footer id="rates-modal-footer" class="modal-footer">
           <button id="create-review-modal" class="btn btn-default modal-btn hidden"
-                  type="button" data-toggle="modal" data-target="#createRateModal">Dodaj opinię</button>
+                  type="button" data-toggle="modal" data-target="#create-rate-modal">Dodaj opinię</button>
         </footer>
       </section>
     </div>
   </div>
 
-  <div id="createRateModal" class="modal fade" role="dialog">
+  <div id="create-rate-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <section class="modal-content modal-binar-places">
         <header class="modal-header">
@@ -268,26 +268,26 @@
           <h2>Dodaj ocenę</h2>
         </header>
         <section class="modal-body">
-          <form id="createRateForm">
-            <input id="rateFormPlaceId" style="display: none">
+          <form id="create-rate-form">
+            <input id="rate-form-place-id" style="display: none">
             <div class="form-group">
               <label for="rateContent">Treść</label>
               <input style="color: black" type="text" id="rateContent" required/>
             </div>
-            <div id="rateSelect" class="form-group">
-              <label for="rateMark1">1</label>
-              <input id="rateMark1" type="radio" name="rateMark" value="1">
-              <label for="rateMark2">2</label>
-              <input id="rateMark2" type="radio" name="rateMark" value="2">
-              <label for="rateMark3">3</label>
-              <input id="rateMark3" type="radio" name="rateMark" value="3">
-              <label for="rateMark4">4</label>
-              <input id="rateMark4" type="radio" name="rateMark" value="4">
-              <label for="rateMark5">5</label>
-              <input id="rateMark5" type="radio" name="rateMark" value="5" required>
+            <div id="rate-select" class="form-group">
+              <label for="rate-mark1">1</label>
+              <input id="rate-mark1" type="radio" name="rateMark" value="1">
+              <label for="rate-mark2">2</label>
+              <input id="rate-mark2" type="radio" name="rateMark" value="2">
+              <label for="rate-mark3">3</label>
+              <input id="rate-mark3" type="radio" name="rateMark" value="3">
+              <label for="rate-mark4">4</label>
+              <input id="rate-mark4" type="radio" name="rateMark" value="4">
+              <label for="rate-mark5">5</label>
+              <input id="rate-mark5" type="radio" name="rateMark" value="5" required>
             </div>
             <div class="form-group">
-              <input type="submit" id="createRateSubmit" value="Potwierdź"/>
+              <input type="submit" id="create-rate-submit" value="Potwierdź"/>
             </div>
           </form>
         </section>

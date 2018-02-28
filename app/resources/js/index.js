@@ -6,7 +6,7 @@ const app = (function () {
 
   const setDateInFooter = function () {
     const date = new Date();
-    $("#copyrightInfo").text("Copyright " + date.getFullYear());
+    $("#copyright-info").text("Copyright " + date.getFullYear());
   };
 
   const hideElementOnStart = function () {
@@ -74,12 +74,12 @@ const app = (function () {
     showUserSessionElem();
     const user = userSession.getUser();
     apiClient.getUserData(user, saveUserData, logError);
-    hideModal("#loginModal");
+    hideModal("#login-modal");
   };
 
   const login = function () {
-    const data = $("#loginForm").serialize();
-    const email = $("#emailLoginInput").val();
+    const data = $("#login-form").serialize();
+    const email = $("#email-login-input").val();
     apiClient.login(data, function(response) {
       processAfterLogin(email, response);
     }, logError)
@@ -105,9 +105,9 @@ const app = (function () {
   };
 
   const register = function () {
-    const data = $("#registerForm").serialize();
+    const data = $("#register-form").serialize();
     apiClient.register(data, function(response) {
-      hideModal("#registerModal")
+      hideModal("#register-modal")
     }, logError)
   };
 
@@ -121,11 +121,11 @@ const app = (function () {
   };
 
   const initRegisterForm = function() {
-    formValidator.initForm("#registerForm", register);
+    formValidator.initForm("#register-form", register);
   };
 
   const initLoginForm = function() {
-    formValidator.initForm("#loginForm", login);
+    formValidator.initForm("#login-form", login);
   };
 
   const setOnClickListeners = function() {
