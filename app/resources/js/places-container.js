@@ -38,6 +38,7 @@ const placesContainer = (function () {
   };
 
   const refreshContent = function(callback) {
+    console.log("TRAtatata")
     apiClient.fetchPlaces(app.savePlacesInStorage, app.logError);
     apiClient.fetchCategories(callback, app.logError)
   };
@@ -251,7 +252,7 @@ const placesContainer = (function () {
 
   const prepareReview = function() {
     return {
-      content: $("#rate-content").val(),
+      content: $("#rateContent").val(),
       rate: $("input[name=rateMark]:checked").val(),
       placeId: $("#rate-form-place-id").attr("val")
     };
@@ -259,7 +260,7 @@ const placesContainer = (function () {
 
   const prepareReviewForEdit = function(reviewId) {
     return {
-      content: $("#rate-content").val(),
+      content: $("#rateContent").val(),
       rate: $("input[name=rateMark]:checked").val(),
       id: reviewId
     }
@@ -271,6 +272,7 @@ const placesContainer = (function () {
   };
 
   const sendReview = function(review, create) {
+    console.log(review);
     const user = userSession.getUser();
     if(create) {
       apiClient.addReview(review, user, processAfterReviewUpload, app.logError);

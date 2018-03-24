@@ -63,6 +63,8 @@ const app = (function () {
 
   const init = function () {
     initLocalStorage(initUI);
+
+    formValidator.initValidatorMessages();
   };
 
   const saveUserData = function(response) {
@@ -141,7 +143,6 @@ const app = (function () {
   const setTabsClickListener = function() {
     $(".nav-tabs-link").click(function() {
       const $tab = $(this);
-      console.log($tab.closest("ul").find(".nav-tabs-link--active"));
       $tab.closest("ul").find(".nav-tabs-link--active").removeClass("nav-tabs-link--active").addClass("nav-tabs-link");
       $tab.addClass("nav-tabs-link--active").removeClass("nav-tabs-link");
     })

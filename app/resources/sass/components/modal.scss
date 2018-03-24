@@ -5,3 +5,23 @@
 .modal-btn {
   float: right;
 }
+
+.modal-submit-button {
+  font-size: 16px;
+  font-weight: bold;
+  background-color: $white;
+  color: $orange-main;
+  transition: 0.5s;
+}
+
+.modal-submit-button:hover {
+  color: $white;
+  background-color: $bright-orange;
+}
+
+.create-rate-form-input {
+  min-width: 50%;
+  max-width: 50%;
+  max-height: 150px;
+  min-height: 150px;
+}

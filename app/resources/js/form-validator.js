@@ -38,14 +38,22 @@ const formValidator = (function() {
           label.remove();
           $(input).removeClass('error');
         },
-        submitHandler: function(form) {
+        submitHandler: function(form, event) {
           callback();
         }
       });
     });
   };
 
+  const initValidatorMessages = () => {
+    $.extend($.validator.messages, {
+      required: "To pole jest wymagane",
+      email: "Wprowadź poprawny adres email",
+    });
+  };
+
   return {
-    initForm: initForm
+    initForm: initForm,
+    initValidatorMessages: initValidatorMessages
   }
 })();
