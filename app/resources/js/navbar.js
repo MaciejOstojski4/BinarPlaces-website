@@ -31,9 +31,9 @@ const navbar = (function () {
 
   const createColor = function() {
     return {
-      red: parseInt(Math.random() * (255 - 160) + 160),
-      green: parseInt(Math.random() * (155 - 55) + 55),
-      blue: parseInt(Math.random() * 80)
+      red: parseInt(Math.random() * (255 - 50) + 50),
+      green: parseInt(Math.random() * (200 - 10) + 10),
+      blue: parseInt(Math.random() * 100)
     }
   };
 

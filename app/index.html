@@ -2,6 +2,7 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Binar Places</title>
 
   <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,500,600,700" rel="stylesheet">
@@ -18,6 +19,9 @@
 
   <link rel="stylesheet" href="resources/css/main.css"/>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/locale/pl.js"></script>
+
 </head>
 <body>
 <div id="home">
@@ -31,39 +35,43 @@
         </div>
         <div class="nav navbar-nav navbar-right">
           <span class="header-loginRegister">
-            <div id="login-register" class="hidden">
+            <div id="login-register" class="session-links">
               <a href="" data-toggle="modal" data-target="#login-modal">Zaloguj</a>
               /
               <a href="" data-toggle="modal" data-target="#register-modal">Zarejestruj</a>
             </div>
-            <div id="logout" class="hidden">
+            <div id="logout" class="session-links">
               <a href="">Wyloguj się</a>
             </div>
           </span>
         </div>
-        <div class="navbar header-nav" role="navigation">
+      </header>
+      <nav class="navbar header-nav" role="navigation">
+        <div class="container">
           <button type="button" class="navbar-toggle collapsed navbar-burger"
                   data-toggle="collapse" data-target="#navbar">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <nav id="navbar" class="navbar-left collapse navbar-collapse">
+          <div id="navbar" class="navbar-left collapse navbar-collapse">
 
-          </nav>
-        </div>
-      </header>
+          </div>
+          </div>
+      </nav>
     </section>
 
     <section class="container">
       <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12">
-          <h1 class="intro-text">
-            Katalog restauracji Binar Places
-          </h1>
-          <h3 class="intro-text intro-link-text">
-            Binar::Apps
-          </h3>
+          <div class="intro-title-container">
+            <h1 class="intro-title">
+              Katalog restauracji Binar Places
+            </h1>
+            <h3 class="intro-title intro-link-text">
+              Binar::Apps
+            </h3>
+          </div>
         </div>
       </div>
     </section>
@@ -201,7 +209,7 @@
               <label for="password-login-input">Hasło:</label>
               <input id="password-login-input" name="password" class="form-control" type="password" required/>
             </div>
-            <button id="loginsubmit-btn" type="submit" class="btn">Zatwierdź</button>
+            <button id="login-submit-btn" type="submit" class="btn">Zatwierdź</button>
           </form>
         </section>
       </section>

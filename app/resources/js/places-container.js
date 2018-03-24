@@ -156,8 +156,10 @@ const placesContainer = (function () {
   };
 
   const addRateHolder = function ($card, place) {
-    const $rateHolder = $('<div data-toggle="modal" data-target="#rates-modal">');
+    const id = place.id;
+    const $rateHolder = $('<div data-toggle="modal" data-target="#rates-modal" data-placeid="'+place.id+'">');
     $rateHolder.attr("id", "rate-holder" + place.id);
+    $rateHolder.data("placeid", place.id);
     const $rates = $('<select>').appendTo($rateHolder);
     for (var i = 0; i < 5; i++) {
       $('<option value=' + (i + 1) + '>').text(i + 1).appendTo($rates);
@@ -168,6 +170,10 @@ const placesContainer = (function () {
       readonly: true
     });
     $rateHolder.click(showPlaceReviewsModal).appendTo($card);
+  };
+
+  const formatDate = function(date) {
+    return moment(date).format("dddd, d MMMM YYYY HH:mm");
   };
 
   const showReviews = function(reviews) {
@@ -183,7 +189,7 @@ const placesContainer = (function () {
       $revRate.text(rev.rate);
       $revContent.text(rev.content);
       $revAuthor.text(rev.username);
-      $revDate.text(rev.created_at);
+      $revDate.text(formatDate(rev.created_at));
 
       const currentUsername = userSession.getObject("username");
       if(currentUsername === rev.username) {
@@ -229,7 +235,7 @@ const placesContainer = (function () {
   };
 
   const showPlaceReviewsModal = function (event) {
-    const placeId = event.currentTarget.id.slice(10);
+    const placeId = $(event.currentTarget).data("placeid");
     userSession.saveObject(placeId, "placeId");
     apiClient.fetchPlaceReviews(placeId, showReviews, app.logError);
 

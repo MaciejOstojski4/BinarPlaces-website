@@ -46,6 +46,7 @@ const apiClient = (function () {
   };
 
   const fetchPlaceReviews = function (placeID, callback, errCallback) {
+    console.log(API_URL + PLACES_PATH + placeID + "/" + REVIEWS_PATH);
     $.ajax({
       type: "GET",
       url: API_URL + PLACES_PATH + placeID + "/" + REVIEWS_PATH

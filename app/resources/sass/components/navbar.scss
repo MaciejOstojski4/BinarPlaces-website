@@ -1,16 +1,13 @@
 .header-nav {
   background-color: $orange-main;
   border-radius: 0;
-  height: 55px;
-  margin-top: 70px;
+  height: 52px;
 }
 
 .navbar-burger {
-  border: 1px solid $orange-main;
+  border: 2px solid $orange-main;
   border-radius: 23px;
   float: none;
-  margin-left: 15px;
-  margin-top: 20px;
   color: $orange-main;
 }
 
@@ -30,6 +27,7 @@
 }
 
 .navbar-list-element-link {
+  font-size: 16px;
   display: block;
   color: $white;
   text-align: center;
@@ -38,7 +36,6 @@
 }
 
 .navbar-list-element-link:hover {
-  text-decoration: none;
   color: $white;
 }
 
@@ -53,7 +50,11 @@
 
   .navbar-list-element {
     display: block;
-    float: none;
     border: none;
+  }
+
+  .navbar-list-element-link {
+    font-weight: 700;
+    font-size: 18px;
   }
 }

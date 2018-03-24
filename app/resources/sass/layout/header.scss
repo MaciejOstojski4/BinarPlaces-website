@@ -9,6 +9,10 @@
   float: right;
 }
 
+.session-links a {
+  color: $white;
+}
+
 @media(max-width: $screen-xs-max) {
   .header-loginRegister {
     float: none;

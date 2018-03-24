@@ -2,7 +2,12 @@
   text-align: center;
   background: url("../images/index-background.jpeg") no-repeat;
   background-size: cover;
+  box-shadow: inset 100vw 100vh 1px rgba(0, 0, 0, 0.3);
   height: 100vh;
+}
+
+.intro-title-container {
+  margin-top: 100px;
 }
 
 .intro-text {
@@ -20,7 +25,7 @@
 }
 
 @media (max-width: $screen-xs-max) {
-  .intro-text {
-    margin-top: 400px;
+  .intro-title-container {
+    margin-top: 140px;
   }
 }
