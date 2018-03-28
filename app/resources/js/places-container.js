@@ -126,29 +126,23 @@ const placesContainer = (function () {
   };
 
   const addImageToPlaceCard = function($placeCard, place) {
-    const imgURL = "https://img.grouponcdn.com/deal/nhjcKdKnuawjKX427U9F/GK-2048x1229/v1/c700x420.jpg";
-    const $lightBox = $("<a>").attr("href", imgURL);
+    const imgSrc = ROOT_URL + place.picture_url;
+    const $lightBox = $("<a>").attr("href", imgSrc);
     $lightBox.addClass("img-thumbnail");
     $lightBox.attr("data-lightbox", place.name);
     $lightBox.attr("data-title", place.name);
-    $lightBox.appendTo($placeCard);
+    $lightBox.appendTo($placeCard);    
 
-    const $img = $("<img>").attr("src", imgURL);
+    const $img = $("<img>").attr("src", imgSrc);
     $img.addClass("gallery-place-img");
     $img.appendTo($lightBox);
-
-    // apiClient.fetchPlaceImage(place, function(response) {
-    //   const imgURL = ROOT_URL + place.picture_url;
-    //   const $img = $("<img>").attr("src", imgURL);
-    //   $img.addClass("gallery-place-img");
-    //   $img.appendTo($placeCard);
-    // }, function(){});
   };
 
   const addPlaceInfoToCard = function ($card, place) {
     const placeImgSrc = resolveCardImgSrc(place.category_id);
+    const imgSrc = ROOT_URL + place.picture_url;
     const category = getCategoryById(place.category_id);
-    $("<img>", {src: placeImgSrc, width: "100px", height: "100px"})
+    $("<img>", {src: imgSrc, width: "100px", height: "100px"})
       .addClass("img-circle").appendTo($card);
     $("<h2>").text(place.name).appendTo($card);
     $("<small>").text(category.name).appendTo($card);

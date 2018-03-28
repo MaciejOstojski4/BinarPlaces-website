@@ -67,15 +67,6 @@ const apiClient = (function () {
       .catch(errCallback);
   };
 
-  const fetchPlaceImage = function (place, callback, errCallback) {
-    return $.ajax({
-      type: "GET",
-      url: ROOT_URL + place.picture_url
-    })
-      .then(callback)
-      .catch(errCallback);
-  };
-
   const login = function (user, callback, errCallback) {
     $.ajax({
       type: "POST",
@@ -154,7 +145,6 @@ const apiClient = (function () {
     login: login,
     register: register,
     addReview: addReview,
-    fetchPlaceImage: fetchPlaceImage,
     uploadNewPlace: uploadNewPlace,
     getUserData: getUserData,
     removeReview: removeReview,
