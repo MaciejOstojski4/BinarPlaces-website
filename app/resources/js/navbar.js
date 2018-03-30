@@ -101,15 +101,24 @@ const navbar = (function () {
     $("#loader-section").hide();
   };
 
+  const renderChoosenPlaces = (elem) => {
+    $("#main-content").show();
+    $("#loader-section").show();
+    const categoryID = parseInt($(elem).find("span").text());
+    userSession.saveObject(categoryID, "choosenCategory");
+    displayPlaces();
+    window.location = "#main-content";
+  }
+
   const addOnClickToNavbarElem = function ($navbar) {
-    $navbar.find("li:not(last)").click(function (e) {
+    $navbar.find("li:not(:last)").click(function (e) {
       e.preventDefault();
-      $("#main-content").show();
-      $("#loader-section").show();
-      const categoryID = parseInt($(this).find("span").text());
-      userSession.saveObject(categoryID, "choosenCategory");
-      displayPlaces();
-      window.location = "#main-content";
+      renderChoosenPlaces(this);
+    })
+
+    $navbar.find("li").last().find("div a").click(function (e) {
+      e.preventDefault();
+      renderChoosenPlaces(this);
     })
   };
 
