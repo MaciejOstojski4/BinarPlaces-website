@@ -38,7 +38,6 @@ const placesContainer = (function () {
   };
 
   const refreshContent = function(callback) {
-    console.log("TRAtatata")
     apiClient.fetchPlaces(app.savePlacesInStorage, app.logError);
     apiClient.fetchCategories(callback, app.logError)
   };
@@ -171,36 +170,43 @@ const placesContainer = (function () {
     return moment(date).format("dddd, d MMMM YYYY HH:mm");
   };
 
+  const addRemoveReviewBtn = ($revBox, rev) => {
+    const $revRemove = $("<div>").addClass("rev-btn").appendTo($revBox);
+    $revRemove.text("Usuń");
+    $revRemove.click(function() {
+      removeReview(rev.id);
+    });
+  }
+
+  const addEditReviewBtn = ($revBox, rev) => {
+    const $revEdit = $("<div>").addClass("rev-btn").text("Edytuj").appendTo($revBox);
+    $revEdit.attr("data-toggle", "modal");
+    $revEdit.attr("data-target", "#create-rate-modal");
+    $revEdit.click(function() {
+      editReview(rev);
+    })
+  }
+
+  const addReviewUserBtn = ($revBox, rev) => {
+    addRemoveReviewBtn($revBox, rev);
+    addEditReviewBtn($revBox, rev);
+  }
+
+  const addReviewBox = (rev) => {
+    const $revBox = $("<div>").addClass("review-box");
+    $("<div>").addClass("review-rate").text(rev.rate).appendTo($revBox);
+    $("<div>").addClass("review-content").text(rev.content).appendTo($revBox);
+    $("<div>").addClass("review-author").text(rev.username).appendTo($revBox);
+    $("<div>").addClass("review-date").text(formatDate(rev.created_at)).appendTo($revBox);
+    return $revBox;
+  }
+
   const showReviews = function(reviews) {
-    const $container = $("#reviews-container");
-    $container.empty();
+    const $container = $("#reviews-container").empty();
     reviews.forEach(function (rev) {
-      const $revBox = $("<div>").addClass("review-box");
-      const $revRate = $("<div>").addClass("review-rate").appendTo($revBox);
-      const $revContent = $("<div>").addClass("review-content").appendTo($revBox);
-      const $revAuthor = $("<div>").addClass("review-author").appendTo($revBox);
-      const $revDate = $("<div>").addClass("review-date").appendTo($revBox);
-
-      $revRate.text(rev.rate);
-      $revContent.text(rev.content);
-      $revAuthor.text(rev.username);
-      $revDate.text(formatDate(rev.created_at));
-
-      const currentUsername = userSession.getObject("username");
-      if(currentUsername === rev.username) {
-        const $revRemove = $("<div>").addClass("rev-btn").appendTo($revBox);
-        $revRemove.text("Usuń");
-        $revRemove.click(function() {
-          removeReview(rev.id);
-        });
-
-        const $revEdit = $("<div>").addClass("rev-btn").appendTo($revBox);
-        $revEdit.text("Edytuj");
-        $revEdit.attr("data-toggle", "modal");
-        $revEdit.attr("data-target", "#create-rate-modal");
-        $revEdit.click(function() {
-          editReview(rev);
-        })
+      const $revBox = addReviewBox(rev);
+      if(userSession.getObject("username") === rev.username) {
+        addReviewUserBtn($revBox, rev);
       }
       $revBox.appendTo($container);
     })
@@ -214,8 +220,7 @@ const placesContainer = (function () {
       }
     });
     formValidator.initForm("#create-rate-form", function() {
-      const rev = prepareReviewForEdit(review.id);
-      sendReview(rev, false);
+      sendReview(prepareReviewForEdit(review.id), false);
     });
   };
 
@@ -238,8 +243,7 @@ const placesContainer = (function () {
       $("#rate-form-place-id").attr("val", placeId);
       showAddRateBtnAttr();
       formValidator.initForm("#create-rate-form", function() {
-        const review = prepareReview();
-        sendReview(review, true);
+        sendReview(prepareReview(), true);
       });
     }
   };
@@ -266,12 +270,10 @@ const placesContainer = (function () {
   };
 
   const sendReview = function(review, create) {
-    console.log(review);
-    const user = userSession.getUser();
     if(create) {
-      apiClient.addReview(review, user, processAfterReviewUpload, app.logError);
+      apiClient.addReview(review, userSession.getUser(), processAfterReviewUpload, app.logError);
     } else {
-      apiClient.editReview(review, user, app.logError, processAfterReviewUpload);
+      apiClient.editReview(review, userSession.getUser(), app.logError, processAfterReviewUpload);
     }
   };
 
