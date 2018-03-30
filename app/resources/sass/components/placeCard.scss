@@ -1,7 +1,12 @@
+.tab-content>.active {
+  display: flex;
+}
+
 .place-card {
   @include font-properties(normal, $orange-main);
   @include width-range(230px,  230px);
   @include height-range(272px, 272px);
+  flex: 1;
   margin: 20px 0;
   padding: 10px;
   border: 1px solid $orange-main;
@@ -21,6 +26,7 @@
 }
 
 .content-place-cards {
+  @include flex-container(wrap, row, space-around);
   border-top: 1px solid $orange-main;
   margin-bottom: 30px;
 }

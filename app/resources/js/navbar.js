@@ -39,21 +39,16 @@ const navbar = (function () {
 
   const prepareDataForCategoriesChart = function() {
     const categories = userSession.getObject("categories");
-
     const labels = categories.map(function(category) {
       return category.name
     });
-
     const numbers =  categories.map(function(category) {
       return category.places_count;
     });
-
     const colors = categories.map(function(category) {
       const color = createColor();
-
       return "rgba(" + color.red + "," + color.green + "," + color.blue + ", 0.5)";
     });
-
     return {
       labels: labels,
       numbers: numbers,
@@ -63,9 +58,7 @@ const navbar = (function () {
 
   const prepareDataForPlacesChart = function() {
     const places = userSession.getObject("places");
-
     const labels = ["brak", "1", "2", "3", "4", "5"];
-
     var numbers = [0, 0, 0, 0, 0];
     places.forEach(function(place) {
       const rate = parseInt(place.rate);
@@ -75,13 +68,10 @@ const navbar = (function () {
         numbers[rate] += 1;
       }
     });
-
     const colors = places.map(function(places) {
       const color = createColor();
-
       return "rgba(" + color.red + "," + color.green + "," + color.blue + ", 0.5)";
     });
-
     return {
       labels: labels,
       numbers: numbers,
@@ -90,8 +80,8 @@ const navbar = (function () {
   };
 
   const displayPlaces = function () {
-    placesContainer.removeCardsWithPlaces("#place-card-container");
-    placesContainer.removeCardsWithPlaces("#gallery-card-container");
+    // placesContainer.removeCardsWithPlaces("#place-card-container");
+    // placesContainer.removeCardsWithPlaces("#gallery-card-container");
     placesContainer.prepareCardsWithPlaces($("#place-card-container"));
     placesContainer.prepareCardsWithImages($("#gallery-card-container"));
     const categoriesChartData = prepareDataForCategoriesChart();

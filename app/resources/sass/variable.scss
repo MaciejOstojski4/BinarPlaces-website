@@ -30,6 +30,13 @@ $screen-xs-max: ($screen-sm-min - 1);
 $screen-sm-max: ($screen-md-min - 1);
 $screen-md-max: ($screen-lg-min - 1);
 
+@mixin flex-container($flex-wrap: nowrap, $flex-direction: row, $justify-content: flex-start) {
+  display: flex;
+  flex-wrap: $flex-wrap;
+  flex-direction: $flex-direction;
+  justify-content: $justify-content;
+}
+
 @mixin font-properties($font-weight: normal, $color: $black, $font-size: 16px, $text-align: center) {
   font-weight: $font-weight;
   color: $color;

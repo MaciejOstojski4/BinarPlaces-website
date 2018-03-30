@@ -33,8 +33,7 @@ const placesContainer = (function () {
 
   const refreshPlacesContainer = function(response) {
     app.saveCategoriesInStorage(response);
-    const choosenCategoryId = userSession.getObject("choosenCategory");
-    navbar.displayPlaces(response, choosenCategoryId);
+    navbar.displayPlaces();
   };
 
   const refreshContent = function(callback) {
@@ -43,8 +42,7 @@ const placesContainer = (function () {
   };
 
   const uploadNewPlace = function(imgB64){
-    const place = preparePlaceObject(imgB64);
-    apiClient.uploadNewPlace(place, app.logError, function(response) {
+    apiClient.uploadNewPlace(preparePlaceObject(imgB64), app.logError, function(response) {
       app.hideModal("#new-place-modal");
       refreshContent(refreshPlacesContainer);
     });
@@ -89,38 +87,29 @@ const placesContainer = (function () {
     $(id).children().remove();
   };
 
+  const createPlaceCard = function () {
+    return $("<div>").addClass("place-card text-center");
+  };
+
   const prepareCardsWithPlaces = function ($placeContainer) {
     removeCardsWithPlaces("#place-card-container");
     var places = getPlacesByCategory();
     var $row;
     places.forEach(function (place, index) {
-      if ((index % CARDS_IN_ROW) === 0) {
-        $row = createRowForCard();
-      }
-      const $column = createColumnForCard();
       const $placeCard = createPlaceCard();
       addPlaceInfoToCard($placeCard, place);
-      $column.appendTo($row);
-      $placeCard.appendTo($column);
-      $row.appendTo($placeContainer);
+      $placeCard.appendTo($placeContainer);
     });
   };
 
   const prepareCardsWithImages = function($imageContainer) {
     removeCardsWithPlaces("#gallery-card-container");
     var places = getPlacesByCategory();
-    var $row;
     places.forEach(function (place, index) {
-      if ((index % CARDS_IN_ROW) === 0) {
-        $row = createRowForCard();
-      }
-      const $column = createColumnForCard();
       const $placeCard = createPlaceCard();
       $("<h4>").text(place.name).appendTo($placeCard);
       addImageToPlaceCard($placeCard, place);
-      $column.appendTo($row);
-      $placeCard.appendTo($column);
-      $row.appendTo($imageContainer);
+      $placeCard.appendTo($imageContainer);
     });
   };
 
@@ -296,34 +285,19 @@ const placesContainer = (function () {
     }
   };
 
-  const createRowForCard = function () {
-    return $("<div/>").addClass("row");
-  };
-
-  const createColumnForCard = function () {
-    return $("<div>").addClass("col-md-4");
-  };
-
-  const createPlaceCard = function () {
-    return $("<div>").addClass("place-card text-center");
-  };
-
   const getPlacesByCategory = function() {
-    var places = userSession.getObject("places");
-    const choosenCategoryId = userSession.getObject("choosenCategory");
-    if (choosenCategoryId === -1) {
-      return places;
+    if (userSession.getObject("choosenCategory") === -1) {
+      return  userSession.getObject("places");
     }
-    return places.filter(function (place) {
-      if (place.category_id === choosenCategoryId) {
+    return userSession.getObject("places").filter(function (place) {
+      if (place.category_id === userSession.getObject("choosenCategory")) {
         return place;
       }
     });
   };
 
   const getCategoryById = function (categoryID) {
-    const categories = userSession.getObject("categories");
-    return categories.filter(function (c) {
+    return userSession.getObject("categories").filter(function (c) {
       if (c.id === categoryID) {
         return c;
       }

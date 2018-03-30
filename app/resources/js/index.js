@@ -63,7 +63,6 @@ const app = (function () {
 
   const init = function () {
     initLocalStorage(initUI);
-
     formValidator.initValidatorMessages();
   };
 
