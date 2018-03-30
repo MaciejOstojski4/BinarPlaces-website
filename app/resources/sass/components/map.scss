@@ -3,3 +3,18 @@
   width: 100%;
   margin-top: 10px;
 }
+
+.map-marker-container {
+  @include width-range(200px, 200px);
+}
+
+.map-marker-img-container {
+  @include width-range(100px, 100px);
+  @include height-range(100px, 100px);
+}
+
+.map-marker-img {
+  @include width-range(100px, 100px);
+  @include height-range(100px, 100px);
+  object-fit: contain;
+}

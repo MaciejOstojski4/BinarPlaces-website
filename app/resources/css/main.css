@@ -211,6 +211,23 @@ a.nav-tabs-link:hover {
   width: 100%;
   margin-top: 10px; }
 
+.map-marker-container {
+  min-width: 200px;
+  max-width: 200px; }
+
+.map-marker-img-container {
+  min-width: 100px;
+  max-width: 100px;
+  min-height: 100px;
+  max-height: 100px; }
+
+.map-marker-img {
+  min-width: 100px;
+  max-width: 100px;
+  min-height: 100px;
+  max-height: 100px;
+  object-fit: contain; }
+
 .new-place-button {
   text-align: center;
   margin: 50px 0px;
