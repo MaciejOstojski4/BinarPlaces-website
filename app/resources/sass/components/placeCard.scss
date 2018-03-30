@@ -1,14 +1,12 @@
 .place-card {
-  color: $orange-main;
+  @include font-properties(normal, $orange-main);
+  @include width-range(230px,  230px);
+  @include height-range(272px, 272px);
   margin: 20px 0;
   padding: 10px;
   border: 1px solid $orange-main;
   transition: 0.5s;
   border-radius: 23px;
-  max-width: 230px;
-  min-width: 230px;
-  max-height: 272px;
-  min-height: 272px;
 }
 
 .place-card:hover {
@@ -30,10 +28,7 @@
 .br-theme-fontawesome-stars-o .br-widget a::after {
   color: $orange-main !important;
   transition: 0.5s;
-}
-
-.br-widget:hover a {
- cursor: pointer;
+  cursor: pointer;
 }
 
 .img-circle {

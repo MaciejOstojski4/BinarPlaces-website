@@ -16,10 +16,11 @@ h1 {
   float: right; }
 
 .modal-submit-button {
-  font-size: 16px;
   font-weight: bold;
-  background-color: #ffffff;
   color: #D2691E;
+  font-size: 16px;
+  text-align: center;
+  background-color: #ffffff;
   transition: 0.5s; }
 
 .modal-submit-button:hover {
@@ -29,20 +30,23 @@ h1 {
 .create-rate-form-input {
   min-width: 50%;
   max-width: 50%;
-  max-height: 150px;
-  min-height: 150px; }
+  min-height: 150px;
+  max-height: 150px; }
 
 .place-card {
+  font-weight: normal;
   color: #D2691E;
+  font-size: 16px;
+  text-align: center;
+  min-width: 230px;
+  max-width: 230px;
+  min-height: 272px;
+  max-height: 272px;
   margin: 20px 0;
   padding: 10px;
   border: 1px solid #D2691E;
   transition: 0.5s;
-  border-radius: 23px;
-  max-width: 230px;
-  min-width: 230px;
-  max-height: 272px;
-  min-height: 272px; }
+  border-radius: 23px; }
 
 .place-card:hover {
   background-color: #D2691E;
@@ -59,9 +63,7 @@ h1 {
 
 .br-theme-fontawesome-stars-o .br-widget a::after {
   color: #D2691E !important;
-  transition: 0.5s; }
-
-.br-widget:hover a {
+  transition: 0.5s;
   cursor: pointer; }
 
 .img-circle {
@@ -95,10 +97,11 @@ h1 {
   border-right: 1px solid #FF7F50; }
 
 .navbar-list-element-link {
-  font-size: 16px;
-  display: block;
+  font-weight: normal;
   color: #ffffff;
+  font-size: 16px;
   text-align: center;
+  display: block;
   padding: 14px;
   text-decoration: none; }
 
@@ -116,7 +119,9 @@ h1 {
     border: none; }
   .navbar-list-element-link {
     font-weight: 700;
-    font-size: 18px; } }
+    color: #ffffff;
+    font-size: 18px;
+    text-align: center; } }
 
 .content-loader {
   padding: 20px; }
@@ -129,7 +134,6 @@ h1 {
   display: inline-block; }
 
 .header-loginRegister {
-  display: inline-block;
   padding-top: 35px;
   padding-right: 17px;
   float: right; }

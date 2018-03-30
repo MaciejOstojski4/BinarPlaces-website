@@ -27,10 +27,8 @@
 }
 
 .navbar-list-element-link {
-  font-size: 16px;
+  @include font-properties(normal, $white);
   display: block;
-  color: $white;
-  text-align: center;
   padding: 14px;
   text-decoration: none;
 }
@@ -54,7 +52,6 @@
   }
 
   .navbar-list-element-link {
-    font-weight: 700;
-    font-size: 18px;
+    @include font-properties(700, $white, 18px);
   }
 }

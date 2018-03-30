@@ -29,3 +29,20 @@ $screen-lg-desktop: $screen-lg-min;
 $screen-xs-max: ($screen-sm-min - 1);
 $screen-sm-max: ($screen-md-min - 1);
 $screen-md-max: ($screen-lg-min - 1);
+
+@mixin font-properties($font-weight: normal, $color: $black, $font-size: 16px, $text-align: center) {
+  font-weight: $font-weight;
+  color: $color;
+  font-size: $font-size;
+  text-align: $text-align;
+}
+
+@mixin width-range($min-width: 0, $max-width: 100%) {
+  min-width: $min-width;
+  max-width: $max-width;
+}
+
+@mixin height-range($min-height: 0, $max-height: 100%) {
+  min-height: $min-height;
+  max-height: $max-height;
+}

@@ -7,10 +7,8 @@
 }
 
 .modal-submit-button {
-  font-size: 16px;
-  font-weight: bold;
+  @include font-properties(bold, $orange-main, 16px);
   background-color: $white;
-  color: $orange-main;
   transition: 0.5s;
 }
 
@@ -20,8 +18,6 @@
 }
 
 .create-rate-form-input {
-  min-width: 50%;
-  max-width: 50%;
-  max-height: 150px;
-  min-height: 150px;
+  @include width-range(50%, 50%);
+  @include height-range(150px, 150px);
 }
