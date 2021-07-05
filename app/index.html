@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Binar Places</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,500,600,700" rel="stylesheet">
+
+  <link rel="stylesheet" href="resources/css/reset.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <link href="http://antenna.io/demo/jquery-bar-rating/dist/themes/fontawesome-stars-o.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.css" />
+
+  <link rel="stylesheet" href="resources/css/main.css"/>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/locale/pl.js"></script>
+
+</head>
+<body>
+<div id="home">
+  <section class="intro">
+    <section class="container">
+      <header class="navbar">
+        <div class="navbar-header">
+          <div class="navbar-logo">
+            <h1 class="header-pageName">Binar Places</h1>
+          </div>
+        </div>
+        <div class="nav navbar-nav navbar-right">
+          <span class="header-loginRegister">
+            <div id="login-register" class="session-links">
+              <a href="" data-toggle="modal" data-target="#login-modal">Zaloguj</a>
+              /
+              <a href="" data-toggle="modal" data-target="#register-modal">Zarejestruj</a>
+            </div>
+            <div id="logout" class="session-links">
+              <a href="">Wyloguj się</a>
+            </div>
+          </span>
+        </div>
+      </header>
+      <nav class="navbar header-nav" role="navigation">
+        <div class="container">
+          <button type="button" class="navbar-toggle collapsed navbar-burger"
+                  data-toggle="collapse" data-target="#navbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div id="navbar" class="navbar-left collapse navbar-collapse">
+
+          </div>
+          </div>
+      </nav>
+    </section>
+
+    <section class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <div class="intro-title-container">
+            <h1 class="intro-title">
+              Katalog restauracji Binar Places
+            </h1>
+            <h3 class="intro-title intro-link-text">
+              Binar::Apps
+            </h3>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section id="loader-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+          <div id="loader" class="content-loader">
+            <img src="resources/images/loader.gif">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="main-content" class="container main-content-container" style="color: black">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-8">
+        <div id="content">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <ul class="nav nav-tabs content-tabs">
+                <li>
+                  <a id="tabs-restaurant" class="nav-tabs-link--active"
+                     data-toggle="tab" href="#place-card-container">Restauracje</a>
+                </li>
+                <li>
+                  <a id="tabs-gallery" class="nav-tabs-link" data-toggle="tab" href="#gallery-card-container">Galeria</a>
+                </li>
+                <li>
+                  <a id="tabs-map" class="nav-tabs-link" data-toggle="tab" href="#place-map">Mapa</a>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <section id="place-card-container" class="tab-pane active content-place-cards">
+                </section>
+                <section id="gallery-card-container" class="tab-pane content-place-cards">
+                </section>
+                <section id="place-map" class="tab-pane content-place-cards">
+                  <div id="map" class="place-map">
+
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-4">
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <canvas id="categories-chart" height="400"></canvas>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <canvas id="places-chart" height="400"></canvas>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div id="add-new-place" class="new-place-button" data-toggle="modal" data-target="#new-place-modal">
+              Dodaj miejsce
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container-fluid text-center">
+    <footer class="row footer">
+      <span id="copyright-info">Footer</span>
+    </footer>
+  </div>
+
+  <div id="new-place-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <section class="modal-content modal-binar-places">
+        <header class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">Zamknij</button>
+          <h1>Dodaj nowe miejsce</h1>
+        </header>
+        <section class="modal-body">
+          <form id="newPlaceForm">
+            <div class="form-group">
+              <label for="placeName">Nazwa</label>
+              <input name="placeName" type="text" class="form-control" required/>
+            </div>
+            <div class="form-group">
+              <label for="placeAddress">Adres</label>
+              <input name="placeAddress" type="text" class="form-control" required/>
+            </div>
+            <div class="form-group">
+              <label for="placeCategories">Kategoria</label>
+              <select id="place-categories-select" name="placeCategories" class="form-control" required>
+
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="placeImage">Zdjęcia</label>
+              <input name="placeImage" type="file" accept="image/*" />
+            </div>
+            <div class="form-group">
+              <label for="placeLat">Długość geograficzna</label>
+              <input name="placeLat" type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="placeLon">Szerokość geograficzna</label>
+              <input name="placeLon" type="text" class="form-control" />
+            </div>
+            <button id="new-place-submit-btn" type="submit" class="btn modal-submit-button">Zatwierdź</button>
+          </form>
+        </section>
+      </section>
+    </div>
+  </div>
+
+  <div id="login-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <section class="modal-content modal-binar-places">
+        <header class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">Zamknij</button>
+          <h1>Zaloguj się</h1>
+        </header>
+        <section class="modal-body">
+          <form id="login-form">
+            <div class="form-group">
+              <label for="email-login-input">Email:</label>
+              <input id="email-login-input" name="email" class="form-control" type="text" required/>
+            </div>
+            <div class="form-group">
+              <label for="password-login-input">Hasło:</label>
+              <input id="password-login-input" name="password" class="form-control" type="password" required/>
+            </div>
+            <button id="login-submit-btn" type="submit" class="btn">Zatwierdź</button>
+          </form>
+        </section>
+      </section>
+    </div>
+  </div>
+
+  <div id="register-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <section class="modal-content modal-binar-places">
+        <header class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">Zamknij</button>
+          <h1>Zarejestruj się</h1>
+        </header>
+        <section class="modal-body">
+          <form id="register-form">
+            <div class="form-group">
+              <label for="email-input">Email:</label>
+              <input id="email-input" name="email" class="form-control" type="email" required/>
+            </div>
+            <div class="form-group">
+              <label for="login-input">Login:</label>
+              <input id="login-input" name="name" class="form-control" type="text" required/>
+            </div>
+            <div class="form-group">
+              <label for="password-input">Hasło:</label>
+              <input id="password-input" name="password" class="form-control" type="password" required/>
+            </div>
+            <div class="form-group">
+              <label for="password-confirmed-input">Powtórz hasło:</label>
+              <input id="password-confirmed-input" name="password_confirmation" class="form-control" type="password" required/>
+            </div>
+            <button type="submit" class="btn modal-submit-button">Zatwierdź</button>
+          </form>
+        </section>
+      </section>
+    </div>
+  </div>
+
+  <div id="rates-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <section class="modal-content modal-binar-places">
+        <header class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">Zamknij</button>
+          <h1>Oceny</h1>
+        </header>
+        <section class="modal-body">
+          <div id="reviews-container">
+
+          </div>
+        </section>
+        <footer id="rates-modal-footer" class="modal-footer">
+          <button id="create-review-modal" class="btn btn-default modal-btn hidden"
+                  type="button" data-toggle="modal" data-target="#create-rate-modal">Dodaj opinię</button>
+        </footer>
+      </section>
+    </div>
+  </div>
+
+  <div id="create-rate-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <section class="modal-content modal-binar-places">
+        <header class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">Zamknij</button>
+          <h2>Dodaj ocenę</h2>
+        </header>
+        <section class="modal-body">
+          <form id="create-rate-form">
+            <input id="rate-form-place-id" style="display: none">
+            <div class="form-group">
+              <label for="rateContent">Treść</label>
+              <textarea class="form-control create-rate-form-input" style="color: black" type="text" id="rateContent" required ></textarea>
+            </div>
+            <div id="rate-select" class="form-group">
+              <label for="rate-mark1">1</label>
+              <input id="rate-mark1" type="radio" name="rateMark" value="1">
+              <label for="rate-mark2">2</label>
+              <input id="rate-mark2" type="radio" name="rateMark" value="2">
+              <label for="rate-mark3">3</label>
+              <input id="rate-mark3" type="radio" name="rateMark" value="3">
+              <label for="rate-mark4">4</label>
+              <input id="rate-mark4" type="radio" name="rateMark" value="4">
+              <label for="rate-mark5">5</label>
+              <input id="rate-mark5" type="radio" name="rateMark" value="5" required>
+            </div>
+            <div class="form-group">
+              <input type="submit" id="create-rate-submit" value="Potwierdź" class="btn modal-submit-button"/>
+            </div>
+          </form>
+        </section>
+      </section>
+    </div>
+  </div>
+</div>
+<script src="http://antenna.io/demo/jquery-bar-rating/jquery.barrating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.min.js"></script>
+
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo2nzz0NxEixW89wBU7dD0Cm134QAJvwo">
+</script>
+
+<script src="resources/js/api-client.js"></script>
+<script src="resources/js/form-validator.js"></script>
+<script src="resources/js/charts.js"></script>
+<script src="resources/js/map.js"></script>
+<script src="resources/js/user-session.js"></script>
+<script src="resources/js/navbar.js"></script>
+<script src="resources/js/places-container.js"></script>
+<script src="resources/js/index.js"></script>
+</body>
+</html>

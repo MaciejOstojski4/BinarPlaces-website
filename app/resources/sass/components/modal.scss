@@ -1,0 +1,23 @@
+.modal-binar-places {
+  background-color: $orange-main;
+}
+
+.modal-btn {
+  float: right;
+}
+
+.modal-submit-button {
+  @include font-properties(bold, $orange-main, 16px);
+  background-color: $white;
+  transition: 0.5s;
+}
+
+.modal-submit-button:hover {
+  color: $white;
+  background-color: $bright-orange;
+}
+
+.create-rate-form-input {
+  @include width-range(50%, 50%);
+  @include height-range(150px, 150px);
+}

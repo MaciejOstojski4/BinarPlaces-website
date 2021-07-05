@@ -1,0 +1,20 @@
+.header-pageName {
+  display: inline-block;
+}
+
+.header-loginRegister {
+  padding-top: 35px;
+  padding-right: 17px;
+  float: right;
+}
+
+.session-links a {
+  color: $white;
+}
+
+@media(max-width: $screen-xs-max) {
+  .header-loginRegister {
+    float: none;
+    padding-top: 0px;
+  }
+}

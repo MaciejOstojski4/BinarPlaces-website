@@ -1,0 +1,24 @@
+.content-tabs {
+  border: none;
+}
+
+.content-tabs-item {
+  border: none;
+  margin-right: 2px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.nav-tabs-link {
+  color: $orange-main;
+}
+
+a.nav-tabs-link:hover {
+  background-color: $bright-orange !important;
+  color: $white !important;
+}
+
+.nav-tabs-link--active {
+  background-color: $orange-main !important;
+  color: $white !important;
+}

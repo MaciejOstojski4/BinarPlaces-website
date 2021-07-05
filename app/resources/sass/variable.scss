@@ -1,0 +1,55 @@
+$orange-main: #D2691E;
+$light-orange: #FF7F50;
+$white: #ffffff;
+$bright-orange: #ffbb83;
+
+// ----------- SCREEN SIZE ----------------------------------------
+
+// Extra small screen / phone
+$screen-xs: 480px;
+$screen-xs-min: $screen-xs;
+$screen-phone: $screen-xs-min;
+
+// Small screen / tablet
+$screen-sm: 768px;
+$screen-sm-min: $screen-sm;
+$screen-tablet: $screen-sm-min;
+
+// Medium screen / desktop
+$screen-md: 992px;
+$screen-md-min: $screen-md;
+$screen-desktop: $screen-md-min;
+
+// Large screen / wide desktop
+$screen-lg: 1200px;
+$screen-lg-min: $screen-lg;
+$screen-lg-desktop: $screen-lg-min;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max: ($screen-sm-min - 1);
+$screen-sm-max: ($screen-md-min - 1);
+$screen-md-max: ($screen-lg-min - 1);
+
+@mixin flex-container($flex-wrap: nowrap, $flex-direction: row, $justify-content: flex-start) {
+  display: flex;
+  flex-wrap: $flex-wrap;
+  flex-direction: $flex-direction;
+  justify-content: $justify-content;
+}
+
+@mixin font-properties($font-weight: normal, $color: $black, $font-size: 16px, $text-align: center) {
+  font-weight: $font-weight;
+  color: $color;
+  font-size: $font-size;
+  text-align: $text-align;
+}
+
+@mixin width-range($min-width: 0, $max-width: 100%) {
+  min-width: $min-width;
+  max-width: $max-width;
+}
+
+@mixin height-range($min-height: 0, $max-height: 100%) {
+  min-height: $min-height;
+  max-height: $max-height;
+}

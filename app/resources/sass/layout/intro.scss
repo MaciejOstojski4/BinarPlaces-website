@@ -1,0 +1,31 @@
+.intro {
+  text-align: center;
+  background: url("../images/index-background.jpeg") no-repeat;
+  background-size: cover;
+  box-shadow: inset 100vw 100vh 1px rgba(0, 0, 0, 0.3);
+  height: 100vh;
+}
+
+.intro-title-container {
+  margin-top: 100px;
+}
+
+.intro-text {
+  margin-top: 250px;
+  display: inline-block;
+  font-size: 50px;
+}
+
+.intro-link-text {
+  padding: 5px;
+  font-size: 40px;
+  font-weight: 700;
+  display: block;
+  margin: 0 auto;
+}
+
+@media (max-width: $screen-xs-max) {
+  .intro-title-container {
+    margin-top: 140px;
+  }
+}
